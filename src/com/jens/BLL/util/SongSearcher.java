@@ -1,4 +1,4 @@
 package com.jens.BLL.util;
 
-public class SongSearch {
+public class SongSearcher {
 }
