@@ -1,14 +1,17 @@
 package com.jens.GUI.Controller;
 
-
 import com.jens.BE.Song;
+import com.jens.DAL.SongDAO;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class MainWindowController implements Initializable {
@@ -19,16 +22,24 @@ public class MainWindowController implements Initializable {
     public TableColumn songTimeColumn;
     public TableView songTable;
 
+    private SongDAO test = new SongDAO();
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         songTitleColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("Title"));
         songArtistColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("Title"));
         songCategoryColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("Title"));
         songTimeColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("Title"));
-        songTable.setItems(getSongs());
+        try {
+            songTable.setItems((ObservableList) test.getAllSongs());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
-    public MainWindowController() {
+    public MainWindowController() throws IOException {
 
     }
 

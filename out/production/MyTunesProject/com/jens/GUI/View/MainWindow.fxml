@@ -6,6 +6,7 @@
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -16,11 +17,11 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jens.GUI.Controller.MainWindowController">
    <children>
-      <TableView layoutX="14.0" layoutY="170.0" prefHeight="359.0" prefWidth="229.0">
+      <TableView fx:id="playlistTable" layoutX="14.0" layoutY="170.0" prefHeight="359.0" prefWidth="229.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="Name" />
-          <TableColumn prefWidth="75.0" text="Songs" />
-            <TableColumn prefWidth="75.0" text="Time" />
+          <TableColumn fx:id="playlistNameColumn" prefWidth="103.0" text="Name" />
+          <TableColumn fx:id="playlistSongsColumn" prefWidth="47.0" text="Songs" />
+            <TableColumn fx:id="playlistTimeColumn" prefWidth="78.0" text="Time" />
         </columns>
       </TableView>
       <ButtonBar buttonMinWidth="50.0" layoutX="14.0" layoutY="529.0" prefHeight="40.0" prefWidth="229.0">
@@ -36,27 +37,27 @@
             <Insets left="-20.0" />
          </padding>
       </ButtonBar>
-      <ListView layoutX="250.0" layoutY="170.0" prefHeight="359.0" prefWidth="200.0" />
-      <TableView layoutX="505.0" layoutY="170.0" prefHeight="359.0" prefWidth="381.0">
+      <ListView fx:id="songsInPlaylistListView" layoutX="250.0" layoutY="170.0" prefHeight="359.0" prefWidth="200.0" />
+      <TableView fx:id="songTable" layoutX="505.0" layoutY="170.0" prefHeight="359.0" prefWidth="381.0">
         <columns>
-          <TableColumn prefWidth="123.0" text="Title" />
-          <TableColumn prefWidth="118.0" text="Artist" />
-            <TableColumn prefWidth="83.0" text="Category" />
-            <TableColumn prefWidth="56.0" text="Time" />
+          <TableColumn fx:id="songTitleColumn" prefWidth="123.0" text="Title" />
+          <TableColumn fx:id="songArtistColumn" prefWidth="118.0" text="Artist" />
+            <TableColumn fx:id="songCategoryColumn" prefWidth="83.0" text="Category" />
+            <TableColumn fx:id="songTimeColumn" prefWidth="56.0" text="Time" />
         </columns>
       </TableView>
       <ButtonBar layoutX="505.0" layoutY="529.0" prefHeight="40.0" prefWidth="200.0">
         <buttons>
-          <Button fx:id="songNew" mnemonicParsing="false" text="New" />
-            <Button fx:id="songEdit" mnemonicParsing="false" text="Edit" />
-            <Button fx:id="songDelete" mnemonicParsing="false" text="Delete" />
+          <Button fx:id="songNew" mnemonicParsing="false" onAction="#newSong" text="New" />
+            <Button fx:id="songEdit" mnemonicParsing="false" onAction="#editSong" text="Edit" />
+            <Button fx:id="songDelete" mnemonicParsing="false" onAction="#deleteSong" text="Delete" />
         </buttons>
          <padding>
             <Insets left="-20.0" />
          </padding>
       </ButtonBar>
       <ButtonBar layoutX="802.0" layoutY="529.0" prefHeight="40.0" prefWidth="84.0" />
-      <TextField layoutX="687.0" layoutY="125.0" prefHeight="25.0" prefWidth="200.0" />
+      <TextField fx:id="searchTextField" layoutX="687.0" layoutY="125.0" prefHeight="25.0" prefWidth="200.0" />
       <Label layoutX="14.0" layoutY="150.0" text="Playlists" />
       <Label layoutX="250.0" layoutY="150.0" text="Songs on Playlist" />
       <Label layoutX="505.0" layoutY="150.0" text="Songs" />
@@ -65,7 +66,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Button fx:id="directAddSongToPlaylist" layoutX="450.0" layoutY="170.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0">
+      <Button fx:id="directAddSongToPlaylist" layoutX="456.0" layoutY="170.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0">
          <graphic>
             <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -92,5 +93,38 @@
          </graphic>
       </Button>
       <Button fx:id="playlistSongDelete" layoutX="399.0" layoutY="537.0" mnemonicParsing="false" text="Delete" />
+      <Slider fx:id="volumeSlider" layoutX="63.0" layoutY="113.0" prefHeight="14.0" prefWidth="187.0" />
+      <Button fx:id="playButton" layoutX="126.0" layoutY="47.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" style="-fx-background-radius: 300;">
+         <graphic>
+            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../Icons/play.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <ImageView fitHeight="28.0" fitWidth="28.0" layoutX="28.0" layoutY="106.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../Icons/volume.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="forwardButton" layoutX="196.0" layoutY="57.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="52.0" style="-fx-background-radius: 200;">
+         <graphic>
+            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../Icons/forward.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="rewindButton" layoutX="64.0" layoutY="57.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="52.0" style="-fx-background-radius: 200;">
+         <graphic>
+            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../Icons/rewind.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
    </children>
 </AnchorPane>
