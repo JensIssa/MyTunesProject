@@ -7,7 +7,6 @@ import java.sql.SQLException;
 
 public class JDBCConnectionPool extends ObjectPool<Connection>
 {
-
     private static JDBCConnectionPool INSTANCE;
     private final DatabaseConnector connectionProvider;
 
@@ -18,7 +17,7 @@ public class JDBCConnectionPool extends ObjectPool<Connection>
         return INSTANCE;
     }
 
-    private JDBCConnectionPool() throws IOException
+    JDBCConnectionPool() throws IOException
     {
         connectionProvider = new DatabaseConnector();
     }
