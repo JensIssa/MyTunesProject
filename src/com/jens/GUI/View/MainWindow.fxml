@@ -9,6 +9,8 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -57,7 +59,15 @@
       <ButtonBar layoutX="802.0" layoutY="529.0" prefHeight="40.0" prefWidth="84.0" />
       <ButtonBar buttonMinWidth="50.0" layoutX="250.0" layoutY="529.0" prefHeight="40.0" prefWidth="200.0">
         <buttons>
-          <Button fx:id="moveUp" mnemonicParsing="false" prefHeight="25.0" prefWidth="116.0" />
+          <Button fx:id="moveUp" mnemonicParsing="false" prefHeight="25.0" prefWidth="116.0">
+               <graphic>
+                  <ImageView fitHeight="18.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="file:/D:/GitShit/MyTunesProject/Icons/arrowUp.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
             <Button fx:id="moveDown" mnemonicParsing="false" />
             <Button fx:id="playlistSongDelete" mnemonicParsing="false" text="Delete" />
         </buttons>

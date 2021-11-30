@@ -4,6 +4,8 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.util.Objects;
+
 public class MainWindowController {
 
     public Button moveUp;
@@ -11,9 +13,6 @@ public class MainWindowController {
     public Button directAddSongToPlaylist;
 
     public MainWindowController() {
-        Image img = new Image("");
-        ImageView view = new ImageView(img);
 
-        moveUp.setGraphic(view);
     }
 }
