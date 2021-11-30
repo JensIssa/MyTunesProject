@@ -1,19 +1,18 @@
 package com.jens.BE;
 
 public class Song {
-
+    private int id;
     private String title;
     private String artistName;
     private float songLength;
     private String catergory;
-    private int id;
 
-    public Song(String title, String artistName, float lentgh, String catergory, int id){
+    public Song(int id, String title, String artistName, float lentgh, String catergory){
+        this.id = id;
         this.title = title;
         this.artistName = artistName;
         this.songLength = lentgh;
         this.catergory = catergory;
-        this.id = id;
     }
 
     public int getId()

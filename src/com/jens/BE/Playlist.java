@@ -3,15 +3,14 @@ package com.jens.BE;
 import javafx.collections.ObservableList;
 
 public class Playlist {
-
+    private int id;
     private String playlistName;
     private float totalTime;
-    private int id;
 
-    public Playlist(String playlistName, float totalTime, int id){
+    public Playlist(int id, String playlistName, float totalTime){
+        this.id = id;
         this.playlistName = playlistName;
         this.totalTime = totalTime;
-        this.id = id;
     }
 
     public float getTotalTime()
@@ -27,5 +26,13 @@ public class Playlist {
     public String getPlaylistName()
     {
         return playlistName;
+    }
+
+    public int getId(){
+        return id;
+    }
+    public void setId(int id)
+    {
+        this.id = id;
     }
 }
