@@ -42,6 +42,7 @@ public class SongDAO {
         }
         return songs;
     }
+
     public Song createSong(String title, String artistName, float songLength, String category, String url ) throws SQLException {
         String sql = "INSERT INTO SONG(Title, ArtistName, SongLength, Category, Url) values (?,?,?,?,?);";
         Connection connection = connectionPool.checkOut();
@@ -64,6 +65,36 @@ public class SongDAO {
             throwables.printStackTrace();
         }
         return null;
+    }
+
+    public void updateSong(Song song) throws SQLException {
+        try(Connection connection = connectionPool.checkOut()){
+            String sql = "UPDATE SONG SET Title=?, ArtistName=?, SongLength=?, Category=?, Url=?;";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, song.getTitle());
+            preparedStatement.setString(2, song.getArtistName());
+            preparedStatement.setFloat(3, song.getsongLength());
+            preparedStatement.setString(4, song.getCategory());
+            preparedStatement.setString(5, song.getUrl());
+            if(preparedStatement.executeUpdate() != 1){
+                throw new Exception("Could not delete Song");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteSong(Song song){
+        try(Connection connection = connectionPool.checkOut()){
+            String sql = "DELETE FROM SONG WHERE Id =?;";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, song.getId());
+            if(preparedStatement.executeUpdate() != 1){
+                throw new Exception("Could not delete Song");
+            }
+        } catch (Exception throwables) {
+            throwables.printStackTrace();
+        }
     }
 
 }
