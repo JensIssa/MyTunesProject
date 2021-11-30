@@ -6,12 +6,19 @@ public class Song {
     private String artistName;
     private float songLength;
     private String catergory;
+    private int id;
 
-    public Song(String title, String artistName, float lentgh, String catergory){
+    public Song(String title, String artistName, float lentgh, String catergory, int id){
         this.title = title;
         this.artistName = artistName;
         this.songLength = lentgh;
         this.catergory = catergory;
+        this.id = id;
+    }
+
+    public int getId()
+    {
+        return id;
     }
 
     public String getTitle()

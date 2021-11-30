@@ -6,12 +6,12 @@ public class Playlist {
 
     private String playlistName;
     private float totalTime;
-    private ObservableList<Song> songsInPlaylist;
+    private int id;
 
-    public Playlist(String playlistName, float totalTime, ObservableList<Song> songsInPlaylist){
+    public Playlist(String playlistName, float totalTime, int id){
         this.playlistName = playlistName;
         this.totalTime = totalTime;
-        this.songsInPlaylist = songsInPlaylist;
+        this.id = id;
     }
 
     public float getTotalTime()
@@ -27,10 +27,5 @@ public class Playlist {
     public String getPlaylistName()
     {
         return playlistName;
-    }
-
-    public ObservableList<Song> getSongsInPlaylist()
-    {
-        return songsInPlaylist;
     }
 }
