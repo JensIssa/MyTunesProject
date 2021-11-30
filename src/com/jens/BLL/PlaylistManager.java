@@ -29,4 +29,12 @@ public class PlaylistManager implements Manager{
         }
         return totaltime;
     }
+
+    public Song addSong(Song song){
+        return song;
+    }
+
+    public Song removeSong(Song song){
+        return song;
+    }
 }
