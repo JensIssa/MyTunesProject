@@ -4,13 +4,13 @@ public class Song {
 
     private String title;
     private String artistName;
-    private float lentgh;
+    private float songLength;
     private String catergory;
 
     public Song(String title, String artistName, float lentgh, String catergory){
         this.title = title;
         this.artistName = artistName;
-        this.lentgh = lentgh;
+        this.songLength = lentgh;
         this.catergory = catergory;
     }
 
@@ -34,14 +34,14 @@ public class Song {
         this.artistName = artistName;
     }
 
-    public float getLentgh()
+    public float getsongLength()
     {
-        return lentgh;
+        return songLength;
     }
 
-    public void setLentgh(float lentgh)
+    public void setsongLength(float songLength)
     {
-        this.lentgh = lentgh;
+        this.songLength = songLength;
     }
 
     public String getCatergory()
@@ -59,7 +59,7 @@ public class Song {
         return "Song{" +
                 "title='" + title + '\'' +
                 ", artistName='" + artistName + '\'' +
-                ", lentgh=" + lentgh +
+                ", lentgh=" + songLength +
                 ", catergory='" + catergory + '\'' +
                 '}';
     }
