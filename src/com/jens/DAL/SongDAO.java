@@ -42,6 +42,29 @@ public class SongDAO {
         }
         return songs;
     }
+    public Song createSong(String title, String artistName, float songLength, String category, String url ) throws SQLException {
+        String sql = "INSERT INTO SONG(Title, ArtistName, SongLength, Category, Url) values (?,?,?,?,?);";
+        Connection connection = connectionPool.checkOut();
+        try(PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
+            preparedStatement.setString(1, title);
+            preparedStatement.setString(2, artistName);
+            preparedStatement.setFloat(3, songLength);
+            preparedStatement.setString(4, category);
+            preparedStatement.setString(5, url);
+            preparedStatement.executeUpdate();
+            ResultSet resultSet = preparedStatement.getGeneratedKeys();
+            int id = 0;
+            if(resultSet.next()){
+                id = resultSet.getInt(1);
+            }
+            Song song = new Song(id, title, artistName, songLength, category, url);
+            return song;
+        }
+        catch (SQLException throwables){
+            throwables.printStackTrace();
+        }
+        return null;
+    }
 
 }
 
