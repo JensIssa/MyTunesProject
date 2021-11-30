@@ -1,14 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.jens.GUI.Controller.Add_EditSongController"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="274.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jens.GUI.Controller.Add_EditSongController">
+   <children>
+      <TextField fx:id="songTitle" layoutX="97.0" layoutY="26.0" prefHeight="26.0" prefWidth="210.0" />
+      <TextField fx:id="songArtist" layoutX="98.0" layoutY="64.0" prefHeight="26.0" prefWidth="210.0" />
+      <TextField fx:id="songLength" layoutX="98.0" layoutY="140.0" prefHeight="26.0" prefWidth="84.0" />
+      <ComboBox fx:id="categoryChoice" layoutX="98.0" layoutY="104.0" prefHeight="26.0" prefWidth="84.0" />
+      <Button fx:id="moreCategories" layoutX="194.0" layoutY="105.0" mnemonicParsing="false" text="More..." />
+      <TextField fx:id="filePath" layoutX="98.0" layoutY="178.0" prefHeight="26.0" prefWidth="210.0" />
+      <Button fx:id="chooseFile" layoutX="321.0" layoutY="178.0" mnemonicParsing="false" onAction="#chooseSongFile" text="Choose..." />
+      <ButtonBar layoutX="203.0" layoutY="220.0" prefHeight="40.0" prefWidth="182.0">
+        <buttons>
+          <Button fx:id="cancel" mnemonicParsing="false" onAction="#CancelNew_Edit" text="Cancel" />
+            <Button fx:id="saveSong" mnemonicParsing="false" onAction="#addSong" text="Save" />
+        </buttons>
+      </ButtonBar>
+      <Label layoutX="47.0" layoutY="30.0" text="Title:" />
+      <Label layoutX="41.0" layoutY="68.0" text="Artist:" />
+      <Label layoutX="22.0" layoutY="108.0" text="Category:" />
+      <Label layoutX="43.0" layoutY="144.0" text="Time:" />
+      <Label layoutX="51.0" layoutY="182.0" text="File:" />
+   </children>
 </AnchorPane>
