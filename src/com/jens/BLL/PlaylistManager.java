@@ -25,7 +25,7 @@ public class PlaylistManager implements Manager{
         float totaltime = 0;
         //for loop for songs in database JENS PLEASE FIX
         for(Song song : songList){
-            totaltime = totaltime + song.getLentgh();
+            totaltime = totaltime + song.getsongLength();
         }
         return totaltime;
     }
@@ -36,5 +36,9 @@ public class PlaylistManager implements Manager{
 
     public Song removeSong(Song song){
         return song;
+    }
+
+    public List<Song> updatePlaylists(List<Song> songPlaylist){
+        return songPlaylist;
     }
 }
