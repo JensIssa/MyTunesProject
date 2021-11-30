@@ -5,14 +5,16 @@ public class Song {
     private String title;
     private String artistName;
     private float songLength;
-    private String catergory;
+    private String category;
+    private String url;
 
-    public Song(int id, String title, String artistName, float lentgh, String catergory){
+    public Song(int id, String title, String artistName, float songLength, String category, String url){
         this.id = id;
         this.title = title;
         this.artistName = artistName;
-        this.songLength = lentgh;
-        this.catergory = catergory;
+        this.songLength = songLength;
+        this.category = category;
+        this.url = url;
     }
 
     public int getId()
@@ -50,14 +52,21 @@ public class Song {
         this.songLength = songLength;
     }
 
-    public String getCatergory()
+    public String getCategory()
     {
-        return catergory;
+        return category;
     }
 
-    public void setCatergory(String catergory)
+    public void setCategory(String category)
     {
-        this.catergory = catergory;
+        this.category = category;
+    }
+
+    public String getUrl(){
+        return url;
+    }
+    public void setUrl(String url){
+        this.url = url;
     }
 
     @Override public String toString()
@@ -66,7 +75,7 @@ public class Song {
                 "title='" + title + '\'' +
                 ", artistName='" + artistName + '\'' +
                 ", lentgh=" + songLength +
-                ", catergory='" + catergory + '\'' +
+                ", catergory='" + category + '\'' +
                 '}';
     }
 }
