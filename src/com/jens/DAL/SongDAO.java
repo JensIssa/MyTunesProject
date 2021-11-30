@@ -29,7 +29,7 @@ public class SongDAO {
                 while (rs.next()){
                     int id = rs.getInt("Id");
                     String title = rs.getString("Title");
-                    String artistName = rs.getString("AristName");
+                    String artistName = rs.getString("ArtistName");
                     float songLength = rs.getFloat("SongLength");
                     String category = rs.getString("Category");
                     String url = rs.getString("Url");

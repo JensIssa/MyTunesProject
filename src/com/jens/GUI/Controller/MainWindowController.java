@@ -2,6 +2,7 @@ package com.jens.GUI.Controller;
 
 import com.jens.BE.Song;
 import com.jens.DAL.SongDAO;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -27,16 +28,18 @@ public class MainWindowController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         songTitleColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("Title"));
-        songArtistColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("Title"));
-        songCategoryColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("Title"));
-        songTimeColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("Title"));
-        try {
-            songTable.setItems((ObservableList) test.getAllSongs());
+        songArtistColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("ArtistName"));
+        songCategoryColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("Category"));
+        songTimeColumn.setCellValueFactory(new PropertyValueFactory<Song, Float>("SongLength"));
+        ; try {
+            ObservableList<Song> observableList = FXCollections.observableArrayList(test.getAllSongs());
+            songTable.setItems(observableList);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
     }
 
     public MainWindowController() throws IOException {
