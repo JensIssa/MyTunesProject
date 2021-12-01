@@ -6,11 +6,11 @@ public class Playlist {
     private int id;
     private String playlistName;
     private float totalTime;
+    private int totalSongs;
 
-    public Playlist(int id, String playlistName, float totalTime){
+    public Playlist(int id, String playlistName,){
         this.id = id;
         this.playlistName = playlistName;
-        this.totalTime = totalTime;
     }
 
     public float getTotalTime()
@@ -34,5 +34,12 @@ public class Playlist {
     public void setId(int id)
     {
         this.id = id;
+    }
+    public int getTotalSongs(){
+        return totalSongs;
+    }
+    public void setTotalSongs()
+    {
+        this.totalSongs = totalSongs;
     }
 }
