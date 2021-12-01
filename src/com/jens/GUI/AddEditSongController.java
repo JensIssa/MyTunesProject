@@ -1,8 +1,8 @@
-package com.jens.GUI.Controller;
+package com.jens.GUI;
 
 import javafx.event.ActionEvent;
 
-public class Add_EditSongController {
+public class AddEditSongController {
     
     
     public void CancelNew_Edit(ActionEvent actionEvent) {
