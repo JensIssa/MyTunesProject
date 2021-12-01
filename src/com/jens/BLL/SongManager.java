@@ -2,9 +2,13 @@ package com.jens.BLL;
 
 import com.jens.BE.Song;
 import com.jens.DAL.SongDAO;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SongManager implements Manager{
 
@@ -43,8 +47,15 @@ public class SongManager implements Manager{
         songDAO.deleteSong(song);
     }
 
-    public void getAllSongs() throws SQLException, IOException
+    public ObservableList<Song> getAllSongs() throws SQLException, IOException
     {
-        songDAO.getAllSongs();
+        List<Song> tempSong = new ArrayList<>();
+        ObservableList<Song> songs = FXCollections.observableArrayList();
+        tempSong = songDAO.getAllSongs();
+        for (Song song : tempSong)
+        {
+            songs.add(song);
+        }
+        return songs;
     }
 }
