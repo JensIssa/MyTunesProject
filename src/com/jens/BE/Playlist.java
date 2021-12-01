@@ -8,7 +8,7 @@ public class Playlist {
     private float totalTime;
     private int totalSongs;
 
-    public Playlist(int id, String playlistName,){
+    public Playlist(int id, String playlistName){
         this.id = id;
         this.playlistName = playlistName;
     }
