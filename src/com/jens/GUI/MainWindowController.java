@@ -1,4 +1,4 @@
-package com.jens.GUI.Controller;
+package com.jens.GUI;
 
 import com.jens.BE.Song;
 import com.jens.DAL.SongDAO;
@@ -19,6 +19,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+
 public class MainWindowController implements Initializable {
 
     public TableColumn songTitleColumn;
@@ -29,10 +30,13 @@ public class MainWindowController implements Initializable {
 
     private SongDAO test = new SongDAO();
 
+    public MainWindowController() throws IOException {
+    }
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        /*
+
         songTitleColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("Title"));
         songArtistColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("ArtistName"));
         songCategoryColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("Category"));
@@ -45,25 +49,53 @@ public class MainWindowController implements Initializable {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        */
-    }
-
-    public MainWindowController() throws IOException {
 
     }
 
     public void newSong(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("Add_EditSong.fxml"));
+
+        Parent root = FXMLLoader.load(getClass().getResource("View/AddEditSong.fxml"));
         Stage stage = new Stage();
-        stage.setTitle("New/Edit Song");
+        stage.setTitle("Add/Edit Song");
         stage.setScene(new Scene(root));
         stage.show();
     }
 
-    public void editSong(ActionEvent actionEvent) {
+    public void editSong(ActionEvent actionEvent) throws IOException {
+
+        Parent root = FXMLLoader.load(getClass().getResource("View/AddEditSong.fxml"));
+        Stage stage = new Stage();
+        stage.setTitle("Add/Edit Song");
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 
     public void deleteSong(ActionEvent actionEvent) {
     }
 
+
+
+    public void newPlaylist(ActionEvent actionEvent) throws IOException {
+
+        Parent root = FXMLLoader.load(getClass().getResource("View/AddEditPlaylist.fxml"));
+        Stage stage = new Stage();
+        stage.setTitle("Add/Edit Playlist");
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
+    public void editPlaylist(ActionEvent actionEvent) throws IOException {
+
+        Parent root = FXMLLoader.load(getClass().getResource("View/AddEditPlaylist.fxml"));
+        Stage stage = new Stage();
+        stage.setTitle("Add/Edit Playlist");
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
+    public void deletePlaylist(ActionEvent actionEvent) {
+    }
+
+    public void deletePlaylistSong(ActionEvent actionEvent) {
+    }
 }
