@@ -47,15 +47,8 @@ public class SongManager implements Manager{
         songDAO.deleteSong(song);
     }
 
-    public ObservableList<Song> getAllSongs() throws SQLException, IOException
+    public List<Song> getAllSongs() throws SQLException, IOException
     {
-        List<Song> tempSong = new ArrayList<>();
-        ObservableList<Song> songs = FXCollections.observableArrayList();
-        tempSong = songDAO.getAllSongs();
-        for (Song song : tempSong)
-        {
-            songs.add(song);
-        }
-        return songs;
+        return songDAO.getAllSongs();
     }
 }
