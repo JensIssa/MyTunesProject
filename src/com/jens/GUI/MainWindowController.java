@@ -47,7 +47,7 @@ public class MainWindowController implements Initializable {
         songTitleColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("Title"));
         songArtistColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("ArtistName"));
         songCategoryColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("Category"));
-        songTimeColumn.setCellValueFactory(new PropertyValueFactory<Song, Float>("Time"));
+        songTimeColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("Time"));
         try {
             ObservableList<Song> observableList = songModel.listToObservableList();
             songTable.setItems(observableList);
