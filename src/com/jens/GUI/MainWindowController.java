@@ -1,7 +1,9 @@
 package com.jens.GUI;
 
 import com.jens.BE.Song;
+import com.jens.BLL.SongManager;
 import com.jens.DAL.SongDAO;
+import com.jens.GUI.Model.SongModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -28,9 +30,14 @@ public class MainWindowController implements Initializable {
     public TableColumn songTimeColumn;
     public TableView songTable;
 
-    private SongDAO test = new SongDAO();
+    private SongModel songModel = new SongModel();
 
     public MainWindowController() throws IOException {
+
+        songTitleColumn = new TableColumn<SongManager, String>();
+        songArtistColumn = new TableColumn<SongManager, String>();
+        songCategoryColumn = new TableColumn<SongManager, String>();
+        songTimeColumn = new TableColumn<SongManager, Float>();
     }
 
 
@@ -40,13 +47,11 @@ public class MainWindowController implements Initializable {
         songTitleColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("Title"));
         songArtistColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("ArtistName"));
         songCategoryColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("Category"));
-        songTimeColumn.setCellValueFactory(new PropertyValueFactory<Song, Float>("SongLength"));
+        songTimeColumn.setCellValueFactory(new PropertyValueFactory<Song, Float>("Time"));
         try {
-            ObservableList<Song> observableList = FXCollections.observableArrayList(test.getAllSongs());
+            ObservableList<Song> observableList = songModel.listToObservableList();
             songTable.setItems(observableList);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
+        } catch (IOException | SQLException e) {
             e.printStackTrace();
         }
 
@@ -71,6 +76,7 @@ public class MainWindowController implements Initializable {
     }
 
     public void deleteSong(ActionEvent actionEvent) {
+
     }
 
 
