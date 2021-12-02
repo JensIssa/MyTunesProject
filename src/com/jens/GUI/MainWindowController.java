@@ -3,6 +3,8 @@ package com.jens.GUI;
 import com.jens.BE.Song;
 import com.jens.BLL.SongManager;
 import com.jens.GUI.Model.SongModel;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -33,6 +35,7 @@ public class MainWindowController implements Initializable {
     public TableColumn songTimeColumn;
     public TableView songTable;
     public Slider volumeSlider;
+    public MediaPlayer mediaPlayer;
 
     private double volume = 0;
 
@@ -52,6 +55,10 @@ public class MainWindowController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        String bip = "src/com/jens/GUI/2nd_song.wav";
+        Media hit = new Media(new File(bip).toURI().toString());
+        mediaPlayer = new MediaPlayer(hit);
+
         songTitleColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("Title"));
         songArtistColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("ArtistName"));
         songCategoryColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("Category"));
@@ -62,6 +69,13 @@ public class MainWindowController implements Initializable {
         } catch (IOException | SQLException e) {
             e.printStackTrace();
         }
+        volumeSlider.valueProperty().addListener(new InvalidationListener()
+        {
+            @Override public void invalidated(Observable observable)
+            {
+                mediaPlayer.setVolume(volume);
+            }
+        });
 
     }
 
@@ -114,11 +128,7 @@ public class MainWindowController implements Initializable {
     }
 
     public void playSong(){
-        String bip = "src/com/jens/GUI/2nd_song.wav";
-        Media hit = new Media(new File(bip).toURI().toString());
-        MediaPlayer mediaPlayer = new MediaPlayer(hit);
         mediaPlayer.play();
-        mediaPlayer.setVolume(volume);
         System.out.println(mediaPlayer.getVolume());
     }
 
