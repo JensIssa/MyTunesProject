@@ -2,13 +2,21 @@ package com.jens.BLL;
 
 import com.jens.BE.Playlist;
 import com.jens.BE.Song;
+import com.jens.DAL.PlaylistDAO;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PlaylistManager implements Manager{
 
+    PlaylistDAO playlistDAO = new PlaylistDAO();
     List<Song> songList = new ArrayList<>();
+
+    public PlaylistManager() throws IOException
+    {
+    }
 
     @Override public String setName(String name)
     {
@@ -38,7 +46,22 @@ public class PlaylistManager implements Manager{
         return song;
     }
 
-    public List<Song> updatePlaylists(List<Song> songPlaylist){
-        return songPlaylist;
+    public void updatePlaylists(Playlist playlist) throws SQLException
+    {
+        playlistDAO.updatePlaylist(playlist);
+    }
+
+    public void createPlaylist(String playlistName) throws SQLException
+    {
+        playlistDAO.createPlaylist(playlistName);
+    }
+
+    public void deletePlaylist(Playlist playlist){
+        playlistDAO.deletePlaylist(playlist);
+    }
+
+    public void getAllPlaylist() throws SQLException, IOException
+    {
+        playlistDAO.getAllPlaylists();
     }
 }
