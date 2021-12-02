@@ -47,7 +47,7 @@ public class Song {
         return songLength;
     }
 
-    public void setsongLength(int songLength)
+    public void setSongLength(int songLength)
     {
         this.songLength = songLength;
     }
