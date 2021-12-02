@@ -3,6 +3,8 @@ package com.jens.GUI;
 import com.jens.BE.Song;
 import com.jens.BLL.SongManager;
 import com.jens.GUI.Model.SongModel;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -43,6 +45,7 @@ public class MainWindowController implements Initializable {
         songCategoryColumn = new TableColumn<SongManager, String>();
         songTimeColumn = new TableColumn<SongManager, Float>();
         volumeSlider = new Slider();
+        songTimeColumn = new TableColumn<SongManager, Integer>();
     }
 
 
@@ -52,7 +55,7 @@ public class MainWindowController implements Initializable {
         songTitleColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("Title"));
         songArtistColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("ArtistName"));
         songCategoryColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("Category"));
-        songTimeColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("Time"));
+        songTimeColumn.setCellValueFactory(new PropertyValueFactory<Song, Integer>("SongLength"));
         try {
             ObservableList<Song> observableList = songModel.listToObservableList();
             songTable.setItems(observableList);

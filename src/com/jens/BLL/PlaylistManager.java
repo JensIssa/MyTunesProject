@@ -33,7 +33,7 @@ public class PlaylistManager implements Manager{
         float totaltime = 0;
         //for loop for songs in database JENS PLEASE FIX
         for(Song song : songList){
-            totaltime = totaltime + song.getsongLength();
+            totaltime = totaltime + song.getSongLength();
         }
         return totaltime;
     }
