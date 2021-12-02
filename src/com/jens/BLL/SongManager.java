@@ -33,7 +33,7 @@ public class SongManager implements Manager{
         return time;
     }
 
-    public void createSong(String title, String artistName, float songLength, String category, String url) throws SQLException
+    public void createSong(String title, String artistName, int songLength, String category, String url) throws SQLException
     {
         songDAO.createSong(title, artistName, songLength, category, url);
     }

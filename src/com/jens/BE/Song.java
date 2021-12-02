@@ -4,11 +4,11 @@ public class Song {
     private int id;
     private String title;
     private String artistName;
-    private float songLength;
+    private int songLength;
     private String category;
     private String url;
 
-    public Song(int id, String title, String artistName, float songLength, String category, String url){
+    public Song(int id, String title, String artistName, int songLength, String category, String url){
         this.id = id;
         this.title = title;
         this.artistName = artistName;
@@ -42,12 +42,12 @@ public class Song {
         this.artistName = artistName;
     }
 
-    public float getsongLength()
+    public int getsongLength()
     {
         return songLength;
     }
 
-    public void setsongLength(float songLength)
+    public void setsongLength(int songLength)
     {
         this.songLength = songLength;
     }

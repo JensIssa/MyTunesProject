@@ -30,7 +30,7 @@ public class SongDAO {
                     int id = rs.getInt("Id");
                     String title = rs.getString("Title");
                     String artistName = rs.getString("ArtistName");
-                    float songLength = rs.getFloat("SongLength");
+                    int songLength = rs.getInt("SongLength");
                     String category = rs.getString("Category");
                     String url = rs.getString("Url");
                     Song song = new Song(id, title, artistName, songLength, category, url);
@@ -43,13 +43,13 @@ public class SongDAO {
         return songs;
     }
 
-    public Song createSong(String title, String artistName, float songLength, String category, String url ) throws SQLException {
+    public Song createSong(String title, String artistName, int songLength, String category, String url ) throws SQLException {
         String sql = "INSERT INTO SONG(Title, ArtistName, SongLength, Category, Url) values (?,?,?,?,?);";
         Connection connection = connectionPool.checkOut();
         try(PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
             preparedStatement.setString(1, title);
             preparedStatement.setString(2, artistName);
-            preparedStatement.setFloat(3, songLength);
+            preparedStatement.setInt(3, songLength);
             preparedStatement.setString(4, category);
             preparedStatement.setString(5, url);
             preparedStatement.executeUpdate();
@@ -73,7 +73,7 @@ public class SongDAO {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, song.getTitle());
             preparedStatement.setString(2, song.getArtistName());
-            preparedStatement.setFloat(3, song.getsongLength());
+            preparedStatement.setInt(3, song.getsongLength());
             preparedStatement.setString(4, song.getCategory());
             preparedStatement.setString(5, song.getUrl());
             if(preparedStatement.executeUpdate() != 1){
