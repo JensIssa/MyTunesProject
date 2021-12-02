@@ -17,6 +17,10 @@ public class Playlist {
     {
         return totalTime;
     }
+    public void setTotalTime(float totalTime)
+    {
+        this.totalTime = totalTime;
+    }
 
     public void setPlaylistName(String playlistName)
     {
@@ -38,8 +42,9 @@ public class Playlist {
     public int getTotalSongs(){
         return totalSongs;
     }
-    public void setTotalSongs()
+    public void setTotalSongs( int totalSongs)
     {
         this.totalSongs = totalSongs;
     }
+
 }

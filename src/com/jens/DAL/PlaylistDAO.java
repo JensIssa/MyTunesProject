@@ -2,6 +2,7 @@ package com.jens.DAL;
 
 import com.jens.BE.Playlist;
 import com.jens.BE.Song;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 
 import java.io.IOException;
 import java.sql.*;
@@ -15,27 +16,37 @@ public class PlaylistDAO {
     public PlaylistDAO() throws IOException {
         connectionPool = new JDBCConnectionPool();
     }
-    public List<Playlist> getAllPlaylists() throws IOException, SQLException {
-        ArrayList<Playlist> playlists = new ArrayList<>();
-
-        try(Connection connection = connectionPool.checkOut())
-        {
-            String sql = "SELECT * FROM Playlist;";
+    public List<Playlist> getAllPlaylists()
+    {
+        //Opretter en arraylist til alle vores playliste
+        ArrayList<Playlist> allPlaylists = new ArrayList<>();
+        //Skaber forbindelse til vores database
+        try (Connection connection = connectionPool.checkOut()) {
+            //Anvendelse af SQL kommando SELECT * FROM som siger, at man skal vælge fra Playlist database og som også vælger count og numberofsongs
+            String sql = "SELECT p.*, \n" +
+                    "(select count(songId) FROM PlaylistSong pls where pls.playlistid = p.id) totalSongs, \n" +
+                    "(select sum(songlength) from song s inner join playlistsong pls on pls.songId = s.id where pls.playlistId = p.id) totalTime FROM Playlist p\n";
             Statement statement = connection.createStatement();
+            //If-sætning til at execute forbindelsen
 
-            if(statement.execute(sql)){
-                ResultSet rs = statement.getResultSet();
-                while (rs.next()){
-                    int id = rs.getInt("Id");
-                    String name = rs.getString("Name");
+            if (statement.execute(sql)) {
+                ResultSet resultSet = statement.getResultSet();
+                while (resultSet.next()) {
+                    //Sætter alle parametre
+                    String name = resultSet.getString("name");
+                    int id = resultSet.getInt("id");
+                    //Opretter ny playlist objekt i databasen
                     Playlist playlist = new Playlist(id, name);
-                    playlists.add(playlist);
+                    playlist.setTotalSongs(resultSet.getInt("numberOfSongs"));
+                    playlist.setTotalTime(resultSet.getFloat("playListLength"));
+                    //adder playlist objektet til arrayliste  all playlister
+                    allPlaylists.add(playlist);
                 }
             }
-        } catch (SQLException throwable) {
-            throwable.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
-        return playlists;
+        return allPlaylists;
     }
 
     public Playlist createPlaylist(String name) throws SQLException {
@@ -83,4 +94,22 @@ public class PlaylistDAO {
             throwables.printStackTrace();
         }
     }
+
+    public void addSongToPlaylist(int playlistId, int songId)
+    {
+        //Insert into SQL kommando, hvori at playlistID og songID bliver smidt ind
+        String sql = "INSERT INTO PlaylistSong(playlistId, songId) VALUES (?, ?)";
+        try (Connection connection = connectionPool.checkOut()) {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            //Sætter parametre
+            preparedStatement.setInt(1, playlistId);
+            preparedStatement.setInt(2, songId);
+            preparedStatement.execute();
+        } catch (SQLServerException ex) {
+            System.out.println(ex);
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    }
+
 }
