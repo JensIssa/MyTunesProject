@@ -73,7 +73,7 @@ public class SongDAO {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, song.getTitle());
             preparedStatement.setString(2, song.getArtistName());
-            preparedStatement.setInt(3, song.getsongLength());
+            preparedStatement.setInt(3, song.getSongLength());
             preparedStatement.setString(4, song.getCategory());
             preparedStatement.setString(5, song.getUrl());
             if(preparedStatement.executeUpdate() != 1){

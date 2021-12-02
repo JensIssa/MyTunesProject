@@ -20,7 +20,7 @@ public class SongSearcher {
     }
 
     private boolean compareToMovieYear(String query, Song song) {
-        return Float.toString(song.getsongLength()).contains(query);
+        return Float.toString(song.getSongLength()).contains(query);
     }
 
     private boolean compareToMovieTitle(String query, Song song) {

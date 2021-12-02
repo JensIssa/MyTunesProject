@@ -42,7 +42,7 @@ public class Song {
         this.artistName = artistName;
     }
 
-    public int getsongLength()
+    public int getSongLength()
     {
         return songLength;
     }
