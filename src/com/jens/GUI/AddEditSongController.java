@@ -2,7 +2,9 @@ package com.jens.GUI;
 
 import com.jens.BE.Song;
 import com.jens.GUI.Model.SongModel;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
@@ -16,10 +18,12 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.sql.SQLException;
 import java.util.Map;
+import java.util.ResourceBundle;
 
-public class AddEditSongController {
+public class AddEditSongController implements Initializable{
 
     public TextField songTitle;
     public TextField songArtist;
@@ -28,15 +32,21 @@ public class AddEditSongController {
     public TextField filePath;
     public Button cancel;
     private MediaPlayer mediaPlayer;
+    private String genres[];
 
     private SongModel songModel = new SongModel();
 
-    public AddEditSongController() throws IOException {
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        genres = new String[]{"Pop", "Rock", "Electric"};
 
-
+        for (int i = 0; i < genres.length; i++){
+            categoryChoice.getItems().add(genres[i]);
+        }
     }
 
-
+    public AddEditSongController() throws IOException {
+    }
 
     public void CancelNew_Edit(ActionEvent actionEvent) {
         Stage stage = (Stage) cancel.getScene().getWindow();
@@ -59,16 +69,14 @@ public class AddEditSongController {
         if (file != null){
             filePath.setText(file.getAbsolutePath());
 
-
-            //mediaPlayer = new MediaPlayer(new Media(new File(file.getAbsolutePath()).toURI().toString()));
             Media hit = new Media(new File(file.getAbsolutePath()).toURI().toString());
             mediaPlayer = new MediaPlayer(hit);
 
-            setMediaPlayerTime();
+            getSongTime();
         }
     }
 
-    private void setMediaPlayerTime() {
+    private void getSongTime() {
         mediaPlayer.setOnReady(() -> {
             String averageSeconds = String.format("%1.0f", mediaPlayer.getMedia().getDuration().toSeconds());
             int minutes = Integer.parseInt(averageSeconds) / 60;
