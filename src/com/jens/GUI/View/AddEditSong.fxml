@@ -19,7 +19,7 @@
       <ButtonBar layoutX="203.0" layoutY="220.0" prefHeight="40.0" prefWidth="182.0">
         <buttons>
           <Button fx:id="cancel" mnemonicParsing="false" onAction="#CancelNew_Edit" text="Cancel" />
-            <Button fx:id="saveSong" mnemonicParsing="false" onAction="#addSong" text="Save" />
+            <Button fx:id="saveSong" mnemonicParsing="false" onAction="#createSong" text="Save" />
         </buttons>
       </ButtonBar>
       <Label layoutX="47.0" layoutY="30.0" text="Title:" />

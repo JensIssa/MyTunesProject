@@ -28,4 +28,9 @@ public class SongModel {
         }
         return songs;
     }
+
+    public void createSong(String title, String artistName, int songLength, String category, String url) throws SQLException {
+        songManager.createSong(title, artistName, songLength, category, url);
+    }
+
 }
