@@ -40,7 +40,7 @@ public class MainWindowController implements Initializable {
     private double volume = 0;
 
     private SongModel songModel = new SongModel();
-    private MusicPlayer musicPlayer = new MusicPlayer();
+    private MusicPlayer musicPlayer;
 
     public MainWindowController() throws IOException {
 
@@ -130,6 +130,7 @@ public class MainWindowController implements Initializable {
     }
 
     public void playSong(){
+        musicPlayer = new MusicPlayer((Song) songTable.getSelectionModel().getSelectedItem());
         musicPlayer.playSong();
     }
 }
