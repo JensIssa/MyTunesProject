@@ -2,6 +2,7 @@ package com.jens.GUI;
 
 import com.jens.BE.Song;
 import com.jens.BLL.SongManager;
+import com.jens.BLL.util.MusicPlayer;
 import com.jens.GUI.Model.SongModel;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
@@ -35,11 +36,11 @@ public class MainWindowController implements Initializable {
     public TableColumn songTimeColumn;
     public TableView songTable;
     public Slider volumeSlider;
-    public MediaPlayer mediaPlayer;
 
     private double volume = 0;
 
     private SongModel songModel = new SongModel();
+    private MusicPlayer musicPlayer = new MusicPlayer();
 
     public MainWindowController() throws IOException {
 
@@ -55,10 +56,6 @@ public class MainWindowController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        String bip = "src/com/jens/GUI/2nd_song.wav";
-        Media hit = new Media(new File(bip).toURI().toString());
-        mediaPlayer = new MediaPlayer(hit);
-
         songTitleColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("Title"));
         songArtistColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("ArtistName"));
         songCategoryColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("Category"));
@@ -73,7 +70,7 @@ public class MainWindowController implements Initializable {
         {
             @Override public void invalidated(Observable observable)
             {
-                mediaPlayer.setVolume(volume);
+                musicPlayer.mediaPlayer.setVolume(volume);
             }
         });
 
@@ -127,13 +124,12 @@ public class MainWindowController implements Initializable {
     public void deletePlaylistSong(ActionEvent actionEvent) {
     }
 
-    public void playSong(){
-        mediaPlayer.play();
-        System.out.println(mediaPlayer.getVolume());
-    }
-
     public void adjustVolume(){
         volume = volumeSlider.getValue() / 100;
         System.out.println(volume);
+    }
+
+    public void playSong(){
+        musicPlayer.playSong();
     }
 }
