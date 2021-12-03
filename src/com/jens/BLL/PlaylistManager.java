@@ -28,8 +28,8 @@ public class PlaylistManager{
         return totaltime;
     }
 
-    public Song addSong(Song song){
-        return song;
+    public void addSong(int playlistID, int songID){
+        playlistDAO.addSongToPlaylist(playlistID, songID);
     }
 
     public Song removeSong(Song song){
