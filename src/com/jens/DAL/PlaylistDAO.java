@@ -71,7 +71,7 @@ public class PlaylistDAO {
 
     public void updatePlaylist(Playlist playlist) throws SQLException {
         try(Connection connection = connectionPool.checkOut()){
-            String sql = "UPDATE SONG SET Name=? WHERE Id=?;";
+            String sql = "UPDATE PLAYLIST SET Name=? WHERE Id=?;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, playlist.getPlaylistName());
             if(preparedStatement.executeUpdate() != 1){
@@ -110,6 +110,11 @@ public class PlaylistDAO {
         } catch (SQLException ex) {
             System.out.println(ex);
         }
+    }
+
+    public void deleteSongFromPlaylist(int playlistId, int songId){
+        String sql;
+
     }
 
 }
