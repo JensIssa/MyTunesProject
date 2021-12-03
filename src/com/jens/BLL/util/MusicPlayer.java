@@ -1,5 +1,6 @@
 package com.jens.BLL.util;
 
+import com.jens.BE.Song;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
@@ -9,9 +10,9 @@ public class MusicPlayer
 {
     public MediaPlayer mediaPlayer;
 
-    public MusicPlayer()
+    public MusicPlayer(Song song)
     {
-        String bip = "src/com/jens/GUI/2nd_song.wav";
+        String bip = song.getUrl();
         Media hit = new Media(new File(bip).toURI().toString());
         mediaPlayer = new MediaPlayer(hit);
     }
