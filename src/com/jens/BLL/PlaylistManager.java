@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlaylistManager implements Manager{
+public class PlaylistManager{
 
     PlaylistDAO playlistDAO = new PlaylistDAO();
     List<Song> songList = new ArrayList<>();
@@ -18,17 +18,7 @@ public class PlaylistManager implements Manager{
     {
     }
 
-    @Override public String setName(String name)
-    {
-        return name;
-    }
-
-    @Override public String getName(String name)
-    {
-        return name;
-    }
-
-    @Override public float time(float time)
+    public float time(float time)
     {
         float totaltime = 0;
         //for loop for songs in database JENS PLEASE FIX

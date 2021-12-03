@@ -10,27 +10,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SongManager implements Manager{
+public class SongManager{
 
     SongDAO songDAO = new SongDAO();
 
     public SongManager() throws IOException
     {
-    }
-
-    @Override public String setName(String name)
-    {
-        return name;
-    }
-
-    @Override public String getName(String name)
-    {
-        return name;
-    }
-
-    @Override public float time(float time)
-    {
-        return time;
     }
 
     public void createSong(String title, String artistName, int songLength, String category, String url) throws SQLException
