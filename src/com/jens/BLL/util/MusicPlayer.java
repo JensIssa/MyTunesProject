@@ -17,9 +17,13 @@ public class MusicPlayer
         mediaPlayer = new MediaPlayer(hit);
     }
 
-
     public void playSong(){
         mediaPlayer.play();
-        System.out.println(mediaPlayer.getVolume());
+    }
+    public void pauseSong(){
+        mediaPlayer.pause();
+    }
+    public void autoPlay(){
+        mediaPlayer.isAutoPlay();
     }
 }
