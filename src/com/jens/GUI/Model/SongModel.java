@@ -17,7 +17,7 @@ public class SongModel {
     public SongModel() throws IOException {
     }
 
-    public ObservableList<Song> listToObservableList() throws SQLException, IOException {
+    public ObservableList<Song> listToObservablelist() throws SQLException, IOException {
 
         List<Song> tempSong = new ArrayList<>();
         ObservableList<Song> songs = FXCollections.observableArrayList();

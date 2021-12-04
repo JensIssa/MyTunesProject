@@ -1,8 +1,6 @@
 package com.jens.GUI;
 
-import com.jens.BE.Song;
 import com.jens.GUI.Model.SongModel;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -13,14 +11,10 @@ import javafx.scene.media.MediaPlayer;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import javax.sound.sampled.AudioFileFormat;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.Map;
 import java.util.ResourceBundle;
 
 public class AddEditSongController implements Initializable{
@@ -48,7 +42,7 @@ public class AddEditSongController implements Initializable{
     public AddEditSongController() throws IOException {
     }
 
-    public void CancelNew_Edit(ActionEvent actionEvent) {
+    public void cancelNewEdit(ActionEvent actionEvent) {
         Stage stage = (Stage) cancel.getScene().getWindow();
         stage.close();
     }
@@ -60,7 +54,7 @@ public class AddEditSongController implements Initializable{
         stage.close();
     }
 
-    public void chooseSongFile(ActionEvent actionEvent) throws UnsupportedAudioFileException, IOException {
+    public void chooseSongFile(ActionEvent actionEvent){
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Music Files", "*.mp3", "*.wav"));
         File file = fileChooser.showOpenDialog(null);

@@ -61,7 +61,7 @@ public class MainWindowController implements Initializable {
         songCategoryColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("Category"));
         songTimeColumn.setCellValueFactory(new PropertyValueFactory<Song, Integer>("SongLength"));
         try {
-            ObservableList<Song> observableList = songModel.listToObservableList();
+            ObservableList<Song> observableList = songModel.listToObservablelist();
             songTable.setItems(observableList);
         } catch (IOException | SQLException e) {
             e.printStackTrace();
@@ -121,9 +121,18 @@ public class MainWindowController implements Initializable {
     public void deletePlaylist(ActionEvent actionEvent) {
     }
 
-    public void deletePlaylistSong(ActionEvent actionEvent) {
+    public void addSongToPlaylist(ActionEvent actionEvent) {
     }
 
+    public void moveSongDown(ActionEvent actionEvent) {
+    }
+
+    public void moveSongUp(ActionEvent actionEvent) {
+    }
+    
+    public void deletePlaylistSong(ActionEvent actionEvent) {
+    }
+    
     public void adjustVolume(){
         volume = volumeSlider.getValue() / 100;
         System.out.println(volume);
@@ -132,5 +141,11 @@ public class MainWindowController implements Initializable {
     public void playSong(){
         musicPlayer = new MusicPlayer((Song) songTable.getSelectionModel().getSelectedItem());
         musicPlayer.playSong();
+    }
+
+    public void nextSong(ActionEvent actionEvent) {
+    }
+
+    public void previousSong(ActionEvent actionEvent) {
     }
 }
