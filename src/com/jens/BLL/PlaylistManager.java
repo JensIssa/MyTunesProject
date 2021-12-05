@@ -50,8 +50,8 @@ public class PlaylistManager{
         playlistDAO.deletePlaylist(playlist);
     }
 
-    public void getAllPlaylist() throws SQLException, IOException
+    public List<Playlist> getAllPlaylist() throws SQLException, IOException
     {
-        playlistDAO.getAllPlaylists();
+        return playlistDAO.getAllPlaylists();
     }
 }

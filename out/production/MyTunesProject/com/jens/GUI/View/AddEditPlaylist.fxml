@@ -13,7 +13,7 @@
       <Label layoutX="41.0" layoutY="42.0" text="Name:" />
       <ButtonBar layoutX="141.0" layoutY="83.0" prefHeight="40.0" prefWidth="200.0">
         <buttons>
-          <Button fx:id="cancel" mnemonicParsing="false" onAction="#playlistAdd_EditCancel" text="Cancel" />
+          <Button fx:id="cancel" mnemonicParsing="false" onAction="#cancelNewEdit" text="Cancel" />
             <Button fx:id="savePlaylist" mnemonicParsing="false" onAction="#addPlaylist" text="Save" />
         </buttons>
       </ButtonBar>

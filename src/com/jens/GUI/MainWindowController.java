@@ -1,8 +1,11 @@
 package com.jens.GUI;
 
+import com.jens.BE.Playlist;
 import com.jens.BE.Song;
+import com.jens.BLL.PlaylistManager;
 import com.jens.BLL.SongManager;
 import com.jens.BLL.util.MusicPlayer;
+import com.jens.GUI.Model.PlaylistModel;
 import com.jens.GUI.Model.SongModel;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
@@ -35,11 +38,18 @@ public class MainWindowController implements Initializable {
     public TableColumn songCategoryColumn;
     public TableColumn songTimeColumn;
     public TableView songTable;
+
     public Slider volumeSlider;
+
+    public TableView playlistTable;
+    public TableColumn playlistNameColumn;
+    public TableColumn playlistSongsColumn;
+    public TableColumn playlistTimeColumn;
 
     private double volume = 0;
 
     private SongModel songModel = new SongModel();
+    private PlaylistModel playlistModel = new PlaylistModel();
     private MusicPlayer musicPlayer;
 
     public MainWindowController() throws IOException {
@@ -47,9 +57,13 @@ public class MainWindowController implements Initializable {
         songTitleColumn = new TableColumn<SongManager, String>();
         songArtistColumn = new TableColumn<SongManager, String>();
         songCategoryColumn = new TableColumn<SongManager, String>();
-        songTimeColumn = new TableColumn<SongManager, Float>();
-        volumeSlider = new Slider();
         songTimeColumn = new TableColumn<SongManager, Integer>();
+
+        volumeSlider = new Slider();
+
+        playlistNameColumn = new TableColumn<PlaylistManager, String>();
+        playlistSongsColumn = new TableColumn<PlaylistManager, Integer>();
+        playlistTimeColumn = new TableColumn<PlaylistManager, Integer>();
     }
 
 
@@ -66,6 +80,17 @@ public class MainWindowController implements Initializable {
         } catch (IOException | SQLException e) {
             e.printStackTrace();
         }
+
+        playlistNameColumn.setCellValueFactory(new PropertyValueFactory<Playlist, String>("PlaylistName"));
+        playlistSongsColumn.setCellValueFactory(new PropertyValueFactory<Playlist, Integer>("TotalSongs"));
+        playlistTimeColumn.setCellValueFactory(new PropertyValueFactory<Playlist, Integer>("TotalTime"));
+        try {
+            ObservableList<Playlist> observableList = playlistModel.listToObservablelist();
+            playlistTable.setItems(observableList);
+        } catch (IOException | SQLException e) {
+            e.printStackTrace();
+        }
+
         volumeSlider.valueProperty().addListener(new InvalidationListener()
         {
             @Override public void invalidated(Observable observable)
@@ -73,7 +98,6 @@ public class MainWindowController implements Initializable {
                 musicPlayer.mediaPlayer.setVolume(volume);
             }
         });
-
     }
 
     public void newSong(ActionEvent actionEvent) throws IOException {
@@ -95,10 +119,8 @@ public class MainWindowController implements Initializable {
     }
 
     public void deleteSong(ActionEvent actionEvent) {
-
+        songModel.deleteSong((Song)songTable.getSelectionModel().getSelectedItem());
     }
-
-
 
     public void newPlaylist(ActionEvent actionEvent) throws IOException {
 
@@ -119,6 +141,7 @@ public class MainWindowController implements Initializable {
     }
 
     public void deletePlaylist(ActionEvent actionEvent) {
+        playlistModel.deletePlaylist((Playlist) playlistTable.getSelectionModel().getSelectedItem());
     }
 
     public void addSongToPlaylist(ActionEvent actionEvent) {

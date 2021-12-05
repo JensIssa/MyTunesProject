@@ -33,4 +33,7 @@ public class SongModel {
         songManager.createSong(title, artistName, songLength, category, url);
     }
 
+    public void deleteSong(Song song){
+        songManager.deleteSong(song);
+    }
 }
