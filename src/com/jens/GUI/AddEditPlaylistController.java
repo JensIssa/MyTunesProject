@@ -26,5 +26,8 @@ public class AddEditPlaylistController {
 
     public void addPlaylist(ActionEvent actionEvent) throws SQLException {
         playlistModel.createPlaylist(playlistName.getText());
+
+        Stage stage = (Stage) cancel.getScene().getWindow();
+        stage.close();
     }
 }
