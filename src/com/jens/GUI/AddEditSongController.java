@@ -57,11 +57,12 @@ public class AddEditSongController implements Initializable{
     public void chooseSongFile(ActionEvent actionEvent){
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Music Files", "*.mp3", "*.wav"));
+        fileChooser.setInitialDirectory(new File("Music/" ));
         File file = fileChooser.showOpenDialog(null);
 
 
         if (file != null){
-            filePath.setText(file.getAbsolutePath());
+            filePath.setText("Music\\" + file.getName());
 
             Media hit = new Media(new File(file.getAbsolutePath()).toURI().toString());
             mediaPlayer = new MediaPlayer(hit);
