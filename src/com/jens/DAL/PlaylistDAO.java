@@ -112,9 +112,19 @@ public class PlaylistDAO {
         }
     }
 
-    public void deleteSongFromPlaylist(int playlistId, int songId){
-        String sql;
-
+    public void deleteSongFromPlaylist(int playlistId, int songId) throws SQLException {
+        try(Connection connection = connectionPool.checkOut()) {
+            String sql = "DELETE FROM PlaylistSong WHERE playlistId=? AND songId=?;";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, playlistId);
+            preparedStatement.setInt(2, songId);
+            preparedStatement.executeUpdate();
+        } catch (SQLServerException ex) {
+            System.out.println(ex);
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        }
     }
 
-}
+
