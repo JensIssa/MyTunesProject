@@ -35,8 +35,8 @@ public class PlaylistDAO {
                     int id = resultSet.getInt("id");
                     //Opretter ny playlist objekt i databasen
                     Playlist playlist = new Playlist(id, name);
-                    playlist.setTotalSongs(resultSet.getInt("numberOfSongs"));
-                    playlist.setTotalTime(resultSet.getFloat("playListLength"));
+                    playlist.setTotalSongs(resultSet.getInt("totalTime"));
+                    playlist.setTotalTime(resultSet.getInt("totalSongs"));
                     //adder playlist objektet til arrayliste  all playlister
                     allPlaylists.add(playlist);
                 }
