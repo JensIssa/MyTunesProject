@@ -23,7 +23,7 @@ public class PlaylistDAO {
         //Skaber forbindelse til vores database
         try (Connection connection = connectionPool.checkOut()) {
             //Anvendelse af SQL kommando SELECT * FROM som siger, at man skal vælge fra Playlist database og som også vælger count og numberofsongs
-            String sql = "SELECT FROM PLAYLIST;";
+            String sql = "SELECT * FROM PLAYLIST;";
             Statement statement = connection.createStatement();
             //If-sætning til at execute forbindelsen
 
