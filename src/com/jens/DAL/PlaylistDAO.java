@@ -23,9 +23,7 @@ public class PlaylistDAO {
         //Skaber forbindelse til vores database
         try (Connection connection = connectionPool.checkOut()) {
             //Anvendelse af SQL kommando SELECT * FROM som siger, at man skal vælge fra Playlist database og som også vælger count og numberofsongs
-            String sql = "SELECT p.*, \n" +
-                    "(select count(songId) FROM PlaylistSong pls where pls.playlistid = p.id) totalSongs, \n" +
-                    "(select sum(songlength) from song s inner join playlistsong pls on pls.songId = s.id where pls.playlistId = p.id) totalTime FROM Playlist p\n";
+            String sql = "SELECT FROM PLAYLIST;";
             Statement statement = connection.createStatement();
             //If-sætning til at execute forbindelsen
 
