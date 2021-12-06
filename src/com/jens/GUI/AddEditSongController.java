@@ -76,9 +76,9 @@ public class AddEditSongController implements Initializable{
             int minutes = Integer.parseInt(averageSeconds) / 60;
             int seconds = Integer.parseInt(averageSeconds) % 60;
             if (10 > seconds) {
-                songLength.setText(minutes + ":0" + seconds);
+                songLength.setText(minutes + "0" + seconds);
             } else {
-                songLength.setText(minutes + ":" + seconds);
+                songLength.setText(minutes + "" + seconds);
             }
         });
     }

@@ -12,6 +12,7 @@ import java.sql.SQLException;
 public class AddEditPlaylistController {
 
     PlaylistModel playlistModel = new PlaylistModel();
+    MainWindowController mainWindowController = new MainWindowController();
 
     public Button cancel;
     public TextField playlistName;
@@ -24,8 +25,9 @@ public class AddEditPlaylistController {
         stage.close();
     }
 
-    public void addPlaylist(ActionEvent actionEvent) throws SQLException {
+    public void addPlaylist(ActionEvent actionEvent) throws SQLException, IOException {
         playlistModel.createPlaylist(playlistName.getText());
+        mainWindowController.playlistTable.getItems().add(playlistName.getText());
 
         Stage stage = (Stage) cancel.getScene().getWindow();
         stage.close();

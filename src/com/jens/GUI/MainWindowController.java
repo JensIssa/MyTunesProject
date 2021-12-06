@@ -140,8 +140,9 @@ public class MainWindowController implements Initializable {
         stage.show();
     }
 
-    public void deletePlaylist(ActionEvent actionEvent) {
+    public void deletePlaylist(ActionEvent actionEvent) throws SQLException, IOException {
         playlistModel.deletePlaylist((Playlist) playlistTable.getSelectionModel().getSelectedItem());
+        playlistTable.getItems().remove(playlistTable.getSelectionModel().getSelectedItem());
     }
 
     public void addSongToPlaylist(ActionEvent actionEvent) {
