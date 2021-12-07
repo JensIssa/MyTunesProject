@@ -124,6 +124,7 @@ public class MainWindowController implements Initializable {
 
     public void deleteSong(ActionEvent actionEvent) {
         songModel.deleteSong((Song)songTable.getSelectionModel().getSelectedItem());
+        songTable.getItems().remove(playlistTable.getSelectionModel().getSelectedItem());
     }
 
     public void newPlaylist(ActionEvent actionEvent) throws IOException {
