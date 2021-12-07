@@ -46,6 +46,7 @@ public class PlaylistDAO {
         }
         return allPlaylists;
     }
+    
 
     public Playlist createPlaylist(String name) throws SQLException {
         String sql = "INSERT INTO PLAYLIST(Name) values (?);";
@@ -123,6 +124,8 @@ public class PlaylistDAO {
             System.out.println(ex);
         }
         }
+
+
     }
 
 

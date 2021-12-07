@@ -18,6 +18,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -54,7 +55,10 @@ public class MainWindowController implements Initializable {
     private MusicPlayer musicPlayer;
     private boolean isPlaying = false;
     private boolean isDone = true;
-    private Object currentSong = null;
+    private Object currentsong = null;
+    private Button upButton;
+    private Button downButton;
+
 
     public MainWindowController() throws IOException {
 
@@ -215,5 +219,9 @@ public class MainWindowController implements Initializable {
     }
 
     public void previousSong(ActionEvent actionEvent) {
+    }
+
+    private void moveSongUp(){
+
     }
 }
