@@ -126,5 +126,6 @@
             </ImageView>
          </graphic>
       </Button>
+      <ImageView fx:id="songImage" fitHeight="64.0" fitWidth="64.0" layoutX="289.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>
