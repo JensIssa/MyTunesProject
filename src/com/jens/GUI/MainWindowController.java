@@ -5,6 +5,7 @@ import com.jens.BE.Song;
 import com.jens.BLL.PlaylistManager;
 import com.jens.BLL.SongManager;
 import com.jens.BLL.util.MusicPlayer;
+import com.jens.BLL.util.SongSearcher;
 import com.jens.GUI.Model.PlaylistModel;
 import com.jens.GUI.Model.SongModel;
 import javafx.beans.InvalidationListener;
@@ -51,6 +52,9 @@ public class MainWindowController implements Initializable {
     private SongModel songModel = new SongModel();
     private PlaylistModel playlistModel = new PlaylistModel();
     private MusicPlayer musicPlayer;
+    private boolean isPlaying = false;
+    private boolean isDone = true;
+    private Object currentsong = null;
 
     public MainWindowController() throws IOException {
 
@@ -162,9 +166,43 @@ public class MainWindowController implements Initializable {
         System.out.println(volume);
     }
 
+    private void playMedia(){
+        isDone = false;
+    }
+    private void  endOfMedia(){
+        isPlaying = false;
+        isDone = true;
+    }
+    private boolean sameSong(){
+        if(musicPlayer.mediaPlayer.getMedia() != null) {
+            return musicPlayer.mediaPlayer.getMedia() == songTable.getSelectionModel().getSelectedItem();
+        }
+        return true;
+    }
+
     public void playSong(){
-        musicPlayer = new MusicPlayer((Song) songTable.getSelectionModel().getSelectedItem());
-        musicPlayer.playSong();
+        if (!isPlaying && isDone || !(currentsong == songTable.getSelectionModel().getSelectedItem())){
+            musicPlayer = new MusicPlayer((Song) songTable.getSelectionModel().getSelectedItem());
+            currentsong = songTable.getSelectionModel().getSelectedItem();
+            musicPlayer.mediaPlayer.stop();
+            musicPlayer.mediaPlayer.setOnPlaying(this::playMedia);
+            musicPlayer.mediaPlayer.setOnEndOfMedia(this::endOfMedia);
+            musicPlayer.playSong();
+            isPlaying = true;
+            System.out.println("Work playing");
+        } else if (isPlaying){
+            pauseSong();
+            System.out.println("Paused");
+        } else {
+            musicPlayer.playSong();
+            isPlaying = true;
+            System.out.println("Should play again");
+        }
+    }
+
+    public void pauseSong(){
+        musicPlayer.pauseSong();
+        isPlaying = false;
     }
 
     public void nextSong(ActionEvent actionEvent) {
