@@ -24,6 +24,7 @@ public class AddEditSongController implements Initializable{
     public TextField songLength;
     public ComboBox categoryChoice;
     public TextField filePath;
+    public TextField filePathImage;
     public Button cancel;
     private MediaPlayer mediaPlayer;
     private String genres[];
@@ -48,7 +49,7 @@ public class AddEditSongController implements Initializable{
     }
 
     public void createSong(ActionEvent actionEvent) throws SQLException {
-        songModel.createSong(songTitle.getText(), songArtist.getText(), Integer.parseInt(songLength.getText()), categoryChoice.getSelectionModel().getSelectedItem().toString(), filePath.getText());
+        songModel.createSong(songTitle.getText(), songArtist.getText(), Integer.parseInt(songLength.getText()), categoryChoice.getSelectionModel().getSelectedItem().toString(), filePath.getText(), filePathImage.getText());
 
         Stage stage = (Stage) cancel.getScene().getWindow();
         stage.close();

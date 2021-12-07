@@ -33,7 +33,8 @@ public class SongDAO {
                     int songLength = rs.getInt("SongLength");
                     String category = rs.getString("Category");
                     String url = rs.getString("Url");
-                    Song song = new Song(id, title, artistName, songLength, category, url);
+                    String urlImg = rs.getString("urlImg");
+                    Song song = new Song(id, title, artistName, songLength, category, url, urlImg);
                     songs.add(song);
                 }
             }
@@ -43,7 +44,7 @@ public class SongDAO {
         return songs;
     }
 
-    public Song createSong(String title, String artistName, int songLength, String category, String url ) throws SQLException {
+    public Song createSong(String title, String artistName, int songLength, String category, String url, String urlImg ) throws SQLException {
         String sql = "INSERT INTO SONG(Title, ArtistName, SongLength, Category, Url) values (?,?,?,?,?);";
         Connection connection = connectionPool.checkOut();
         try(PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
@@ -52,13 +53,14 @@ public class SongDAO {
             preparedStatement.setInt(3, songLength);
             preparedStatement.setString(4, category);
             preparedStatement.setString(5, url);
+            preparedStatement.setString(6, urlImg);
             preparedStatement.executeUpdate();
             ResultSet resultSet = preparedStatement.getGeneratedKeys();
             int id = 0;
             if(resultSet.next()){
                 id = resultSet.getInt(1);
             }
-            Song song = new Song(id, title, artistName, songLength, category, url);
+            Song song = new Song(id, title, artistName, songLength, category, url, urlImg);
             return song;
         }
         catch (SQLException throwables){

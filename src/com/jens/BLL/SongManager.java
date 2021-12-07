@@ -22,9 +22,9 @@ public class SongManager{
         songDAO = new SongDAO();
     }
 
-    public void createSong(String title, String artistName, int songLength, String category, String url) throws SQLException
+    public void createSong(String title, String artistName, int songLength, String category, String url, String urlImg) throws SQLException
     {
-        songDAO.createSong(title, artistName, songLength, category, url);
+        songDAO.createSong(title, artistName, songLength, category, url, urlImg);
     }
 
     public void updateSong(Song song) throws SQLException

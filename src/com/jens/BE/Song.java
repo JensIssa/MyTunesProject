@@ -7,14 +7,16 @@ public class Song {
     private int songLength;
     private String category;
     private String url;
+    private String urlImg;
 
-    public Song(int id, String title, String artistName, int songLength, String category, String url){
+    public Song(int id, String title, String artistName, int songLength, String category, String url, String urlImg){
         this.id = id;
         this.title = title;
         this.artistName = artistName;
         this.songLength = songLength;
         this.category = category;
         this.url = url;
+        this.urlImg = urlImg;
     }
 
     public int getId()
@@ -67,6 +69,13 @@ public class Song {
     }
     public void setUrl(String url){
         this.url = url;
+    }
+
+    public String getUrlImg(){
+        return urlImg;
+    }
+    public void setUrlImg(String urlImg){
+        this.urlImg = urlImg;
     }
 
     @Override public String toString()
