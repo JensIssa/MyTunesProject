@@ -18,12 +18,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Slider;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import java.io.File;
+
+import javafx.scene.input.MouseEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
@@ -47,6 +46,7 @@ public class MainWindowController implements Initializable {
     public TableColumn playlistNameColumn;
     public TableColumn playlistSongsColumn;
     public TableColumn playlistTimeColumn;
+    public ListView songsInPlaylistListView;
 
     private double volume = 0;
 
@@ -223,5 +223,15 @@ public class MainWindowController implements Initializable {
 
     private void moveSongUp(){
 
+    }
+
+    public void lookAtPlaylist(MouseEvent mouseEvent) {
+        Playlist playlist = (Playlist) playlistTable.getSelectionModel().getSelectedItem();
+        try {
+            ObservableList<Song> observableList = playlistModel.playlistSongsToObservablelist(playlist.getId());
+            songsInPlaylistListView.setItems(observableList);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

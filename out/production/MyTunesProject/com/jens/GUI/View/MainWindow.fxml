@@ -17,7 +17,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jens.GUI.MainWindowController">
    <children>
-      <TableView fx:id="playlistTable" layoutX="14.0" layoutY="170.0" prefHeight="359.0" prefWidth="229.0">
+      <TableView fx:id="playlistTable" layoutX="14.0" layoutY="170.0" onMouseClicked="#lookAtPlaylist" prefHeight="359.0" prefWidth="229.0">
         <columns>
           <TableColumn fx:id="playlistNameColumn" prefWidth="103.0" text="Name" />
           <TableColumn fx:id="playlistSongsColumn" prefWidth="47.0" text="Songs" />
@@ -76,7 +76,7 @@
       </Button>
       <Button fx:id="moveDown" layoutX="299.0" layoutY="533.0" mnemonicParsing="false" onAction="#moveSongDown">
          <graphic>
-            <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="downButton" fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../../Icons/arrowDown.png" />
                </image>
@@ -85,7 +85,7 @@
       </Button>
     <Button fx:id="moveUp" layoutX="250.0" layoutY="533.0" mnemonicParsing="false" onAction="#moveSongUp">
          <graphic>
-            <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="upButton" fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../../Icons/arrowUp.png" />
                </image>

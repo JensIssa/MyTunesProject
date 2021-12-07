@@ -50,7 +50,7 @@ public class PlaylistDAO {
     public List<Song> getAllPlaylistSongs(int playlistId) throws SQLException {
         ArrayList<Song> allSongs = new ArrayList<>();
         try(Connection connection = connectionPool.checkOut()){
-            String sql = "SELECT FROM Song s" +
+            String sql = "SELECT * FROM Song s" +
                     "inner join PlaylistSong ps ON ps.songId = s.id" +
                     "where ps.playlistId = ?;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);

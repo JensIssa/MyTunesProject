@@ -20,7 +20,7 @@ public class PlaylistModel {
 
     public ObservableList<Playlist> listToObservablelist() throws SQLException, IOException {
 
-        List<Playlist> tempPlaylist = new ArrayList<>();
+        List<Playlist> tempPlaylist;
         ObservableList<Playlist> playlists = FXCollections.observableArrayList();
         tempPlaylist = this.playlistManager.getAllPlaylist();
         for (Playlist playlist : tempPlaylist)
@@ -28,6 +28,17 @@ public class PlaylistModel {
             playlists.add(playlist);
         }
         return playlists;
+    }
+
+    public ObservableList<Song> playlistSongsToObservablelist(int id) throws SQLException {
+        List<Song> tempSongList;
+        ObservableList<Song> songs = FXCollections.observableArrayList();
+        tempSongList = this.playlistManager.getAllPlaylistSongs(id);
+        for (Song songList : tempSongList)
+        {
+            songs.add(songList);
+        }
+        return songs;
     }
 
     public void createPlaylist(String name) throws SQLException {
