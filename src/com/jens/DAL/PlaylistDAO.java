@@ -50,9 +50,9 @@ public class PlaylistDAO {
     public List<Song> getAllPlaylistSongs(int playlistId) throws SQLException {
         ArrayList<Song> allSongs = new ArrayList<>();
         try(Connection connection = connectionPool.checkOut()){
-            String sql = "SELECT FROM Song s" +
-                    "inner join PlaylistSong ps ON ps.songId = s.id" +
-                    "where ps.playlistId = ?;";
+            String sql = "SELECT * FROM Song s " +
+                    "     INNER JOIN PlaylistSongs ps ON ps.SongId = s.id" +
+                    "       WHERE ps.PlaylistId = ?;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, playlistId);
 
@@ -127,7 +127,7 @@ public class PlaylistDAO {
     public void addSongToPlaylist(int playlistId, int songId)
     {
         //Insert into SQL kommando, hvori at playlistID og songID bliver smidt ind
-        String sql = "INSERT INTO PlaylistSong(playlistId, songId) VALUES (?, ?)";
+        String sql = "INSERT INTO PlaylistSongs(playlistId, songId) VALUES (?, ?)";
         try (Connection connection = connectionPool.checkOut()) {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             //Sætter parametre
@@ -143,7 +143,7 @@ public class PlaylistDAO {
 
     public void deleteSongFromPlaylist(int playlistId, int songId) throws SQLException {
         try(Connection connection = connectionPool.checkOut()) {
-            String sql = "DELETE FROM PlaylistSong WHERE playlistId=? AND songId=?;";
+            String sql = "DELETE FROM PlaylistSongs WHERE playlistId=? AND songId=?;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, playlistId);
             preparedStatement.setInt(2, songId);
