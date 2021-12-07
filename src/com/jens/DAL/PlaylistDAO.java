@@ -4,6 +4,7 @@ import com.jens.BE.Playlist;
 import com.jens.BE.Song;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 
+import javax.xml.transform.Result;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
@@ -46,7 +47,36 @@ public class PlaylistDAO {
         }
         return allPlaylists;
     }
-    
+    public List<Song> getAllPlaylistSongs(int playlistId) throws SQLException {
+        ArrayList<Song> allSongs = new ArrayList<>();
+        try(Connection connection = connectionPool.checkOut()){
+            String sql = "SELECT FROM Song s" +
+                    "inner join PlaylistSong ps ON ps.songId = s.id" +
+                    "where ps.playlistId = ?;";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, playlistId);
+
+            if (preparedStatement.execute()){
+                ResultSet resultSet = preparedStatement.getResultSet();
+                while(resultSet.next()){
+                    int id = resultSet.getInt("Id");
+                    String title = resultSet.getString("Title");
+                    String artistName = resultSet.getString("ArtistName");
+                    int songLength = resultSet.getInt("SongLength");
+                    String category = resultSet.getString("Category");
+                    String url = resultSet.getString("Url");
+                    String urlImg = resultSet.getString("urlImg");
+                    Song song = new Song(id, title, artistName, songLength, category, url, urlImg);
+                    allSongs.add(song);
+
+                }
+            }
+        }
+        catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return allSongs;
+    }
 
     public Playlist createPlaylist(String name) throws SQLException {
         String sql = "INSERT INTO PLAYLIST(Name) values (?);";
