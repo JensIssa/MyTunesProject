@@ -59,6 +59,7 @@ public class MainWindowController implements Initializable {
     private Button upButton;
     private Button downButton;
 
+
     public MainWindowController() throws IOException {
 
         songTitleColumn = new TableColumn<SongManager, String>();
@@ -153,6 +154,9 @@ public class MainWindowController implements Initializable {
     }
 
     public void addSongToPlaylist(ActionEvent actionEvent) {
+        Playlist playlist = (Playlist) playlistTable.getSelectionModel().getSelectedItem();
+        Song song = (Song) songTable.getSelectionModel().getSelectedItem();
+        playlistModel.addSongToPlaylist(playlist.getId(), song.getId());
     }
 
     public void moveSongDown(ActionEvent actionEvent) {
@@ -184,10 +188,12 @@ public class MainWindowController implements Initializable {
     }
 
     public void playSong(){
-        if (!isPlaying && isDone || !(currentsong == songTable.getSelectionModel().getSelectedItem())){
+        if (!isPlaying && isDone || !(currentSong == songTable.getSelectionModel().getSelectedItem())){
+            if (musicPlayer != null){
+                musicPlayer.mediaPlayer.dispose();
+            }
             musicPlayer = new MusicPlayer((Song) songTable.getSelectionModel().getSelectedItem());
-            currentsong = songTable.getSelectionModel().getSelectedItem();
-            musicPlayer.mediaPlayer.stop();
+            currentSong = songTable.getSelectionModel().getSelectedItem();
             musicPlayer.mediaPlayer.setOnPlaying(this::playMedia);
             musicPlayer.mediaPlayer.setOnEndOfMedia(this::endOfMedia);
             musicPlayer.playSong();
