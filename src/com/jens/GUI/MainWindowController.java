@@ -55,7 +55,7 @@ public class MainWindowController implements Initializable {
     private MusicPlayer musicPlayer;
     private boolean isPlaying = false;
     private boolean isDone = true;
-    private Object currentsong = null;
+    private Object currentSong = null;
     private Button upButton;
     private Button downButton;
 
@@ -128,6 +128,7 @@ public class MainWindowController implements Initializable {
 
     public void deleteSong(ActionEvent actionEvent) {
         songModel.deleteSong((Song)songTable.getSelectionModel().getSelectedItem());
+        songTable.getItems().remove(playlistTable.getSelectionModel().getSelectedItem());
     }
 
     public void newPlaylist(ActionEvent actionEvent) throws IOException {
