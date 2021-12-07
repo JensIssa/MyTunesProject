@@ -52,7 +52,12 @@ public class PlaylistModel {
     public void addSongToPlaylist(int playlistId, int songId){
         playlistManager.addSong(playlistId, songId);
     }
+
     public void getAllPlaylistSongs(int playlistId) throws SQLException {
         playlistManager.getAllPlaylistSongs(playlistId);
+    }
+
+    public void removeSong(Song song){
+        playlistManager.removeSong(song);
     }
 }
