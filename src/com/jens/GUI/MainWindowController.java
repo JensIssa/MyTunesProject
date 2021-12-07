@@ -173,6 +173,7 @@ public class MainWindowController implements Initializable {
     
     public void deletePlaylistSong(ActionEvent actionEvent) {
         playlistModel.removeSong((Song)songsInPlaylistListView.getSelectionModel().getSelectedItem());
+        songsInPlaylistListView.getItems().remove(songsInPlaylistListView.getSelectionModel().getSelectedItem());
     }
     
     public void adjustVolume(){
