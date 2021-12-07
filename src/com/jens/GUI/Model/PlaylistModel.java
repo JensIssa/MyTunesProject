@@ -37,4 +37,8 @@ public class PlaylistModel {
     public void deletePlaylist(Playlist playlist){
         playlistManager.deletePlaylist(playlist);
     }
+
+    public void addSongToPlaylist(int playlistId, int songId){
+        playlistManager.addSong(playlistId, songId);
+    }
 }
