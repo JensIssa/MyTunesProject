@@ -54,4 +54,7 @@ public class PlaylistManager{
     {
         return playlistDAO.getAllPlaylists();
     }
+    public List<Song> getAllPlaylistSongs(int playlistId) throws SQLException {
+        return playlistDAO.getAllPlaylistSongs(playlistId);
+    }
 }
