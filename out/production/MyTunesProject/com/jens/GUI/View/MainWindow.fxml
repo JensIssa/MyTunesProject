@@ -76,7 +76,7 @@
       </Button>
       <Button fx:id="moveDown" layoutX="299.0" layoutY="533.0" mnemonicParsing="false" onAction="#moveSongDown">
          <graphic>
-            <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="downButton" fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../../Icons/arrowDown.png" />
                </image>
@@ -85,7 +85,7 @@
       </Button>
     <Button fx:id="moveUp" layoutX="250.0" layoutY="533.0" mnemonicParsing="false" onAction="#moveSongUp">
          <graphic>
-            <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="upButton" fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../../Icons/arrowUp.png" />
                </image>

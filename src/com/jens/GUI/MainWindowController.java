@@ -5,27 +5,18 @@ import com.jens.BE.Song;
 import com.jens.BLL.PlaylistManager;
 import com.jens.BLL.SongManager;
 import com.jens.BLL.util.MusicPlayer;
-import com.jens.BLL.util.SongSearcher;
 import com.jens.GUI.Model.PlaylistModel;
 import com.jens.GUI.Model.SongModel;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Slider;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import java.io.File;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
@@ -47,6 +38,7 @@ public class MainWindowController implements Initializable {
     public TableColumn playlistNameColumn;
     public TableColumn playlistSongsColumn;
     public TableColumn playlistTimeColumn;
+    public TextField searchTextField;
 
     private double volume = 0;
 
@@ -83,8 +75,7 @@ public class MainWindowController implements Initializable {
         songCategoryColumn.setCellValueFactory(new PropertyValueFactory<Song, String>("Category"));
         songTimeColumn.setCellValueFactory(new PropertyValueFactory<Song, Integer>("SongLength"));
         try {
-            ObservableList<Song> observableList = songModel.listToObservablelist();
-            songTable.setItems(observableList);
+            songTable.setItems(songModel.listToObservablelist());
         } catch (IOException | SQLException e) {
             e.printStackTrace();
         }
@@ -104,6 +95,14 @@ public class MainWindowController implements Initializable {
             @Override public void invalidated(Observable observable)
             {
                 musicPlayer.mediaPlayer.setVolume(volume);
+            }
+        });
+        searchTextField.textProperty().addListener((observable, oldValue, newValue)->{
+            try
+            {
+                songModel.searchSongs(newValue);
+            } catch (Exception e){
+                e.printStackTrace();
             }
         });
     }
