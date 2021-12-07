@@ -55,7 +55,7 @@ public class MainWindowController implements Initializable {
     private MusicPlayer musicPlayer;
     private boolean isPlaying = false;
     private boolean isDone = true;
-    private Object currentsong = null;
+    private Object currentSong = null;
     private Button upButton;
     private Button downButton;
 
