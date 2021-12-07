@@ -182,9 +182,11 @@ public class MainWindowController implements Initializable {
 
     public void playSong(){
         if (!isPlaying && isDone || !(currentsong == songTable.getSelectionModel().getSelectedItem())){
+            if (musicPlayer != null){
+                musicPlayer.mediaPlayer.dispose();
+            }
             musicPlayer = new MusicPlayer((Song) songTable.getSelectionModel().getSelectedItem());
             currentsong = songTable.getSelectionModel().getSelectedItem();
-            musicPlayer.mediaPlayer.stop();
             musicPlayer.mediaPlayer.setOnPlaying(this::playMedia);
             musicPlayer.mediaPlayer.setOnEndOfMedia(this::endOfMedia);
             musicPlayer.playSong();
