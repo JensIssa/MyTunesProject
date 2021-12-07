@@ -38,7 +38,7 @@
          </padding>
       </ButtonBar>
       <ListView fx:id="songsInPlaylistListView" layoutX="250.0" layoutY="170.0" prefHeight="359.0" prefWidth="200.0" />
-      <TableView fx:id="songTable" layoutX="505.0" layoutY="170.0" prefHeight="359.0" prefWidth="381.0" style="-fx-rotate: -20;">
+      <TableView fx:id="songTable" layoutX="505.0" layoutY="170.0" prefHeight="359.0" prefWidth="381.0">
         <columns>
           <TableColumn fx:id="songTitleColumn" prefWidth="123.0" text="Title" />
           <TableColumn fx:id="songArtistColumn" prefWidth="118.0" text="Artist" />
