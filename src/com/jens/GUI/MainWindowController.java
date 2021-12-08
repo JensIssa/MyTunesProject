@@ -228,7 +228,8 @@ public class MainWindowController implements Initializable {
                 musicPlayer.mediaPlayer.setOnPlaying(this::playMedia);
                 musicPlayer.mediaPlayer.setOnEndOfMedia(this::endOfMedia);
                 musicPlayer.playSong();
-                labelIsPlaying.setText(((Song) songTable.getSelectionModel().getSelectedItem()).getTitle());
+                String actualSong = (((Song) songTable.getSelectionModel().getSelectedItem()).getTitle());
+                labelIsPlaying.setText("(" + actualSong + ")" + " Is Playing");
                 isPlaying = true;
                 System.out.println("Work playing");
             } else if (isPlaying){
