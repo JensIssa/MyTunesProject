@@ -20,6 +20,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import java.io.File;
 
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -42,7 +43,7 @@ public class MainWindowController implements Initializable {
     public TableView songTable;
 
     public Slider volumeSlider;
-    public ImageView songImage;
+    public Image songImage;
 
     public TableView playlistTable;
     public TableColumn playlistNameColumn;
@@ -120,8 +121,13 @@ public class MainWindowController implements Initializable {
     }
 
     public void setSongImage(){
-        
-        songImage = new ImageView();
+        try
+        {
+            File songimage = new File(songModel.songImageUpdate((Song) songTable.getSelectionModel().getSelectedItem()));
+            songImage = new Image(songimage.toURI().toString());
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     public void newSong(ActionEvent actionEvent) throws IOException {

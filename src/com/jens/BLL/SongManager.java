@@ -47,4 +47,7 @@ public class SongManager{
         songsFound.addAll(songSearcher.search(searchBase, query));
         return songsFound;
     }
+    public String updateSongImage(Song song){
+        return song.getUrlImg();
+    }
 }

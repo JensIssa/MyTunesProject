@@ -44,4 +44,7 @@ public class SongModel {
         songList.clear();
         songList.addAll(seachedSongs);
     }
+    public String songImageUpdate(Song song){
+        return songManager.updateSongImage(song);
+    }
 }
