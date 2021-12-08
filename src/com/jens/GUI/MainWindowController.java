@@ -82,6 +82,8 @@ public class MainWindowController implements Initializable {
         playlistNameColumn = new TableColumn<PlaylistManager, String>();
         playlistSongsColumn = new TableColumn<PlaylistManager, Integer>();
         playlistTimeColumn = new TableColumn<PlaylistManager, Integer>();
+        songTable = new TableView();
+
     }
 
 
@@ -267,6 +269,7 @@ public class MainWindowController implements Initializable {
     public void refreshSongList() throws IOException, SQLException {
         songTable.getItems().clear();
         songTable.setItems(songModel.listToObservablelist());
+        songTable.refresh();
     }
 
     public void lookAtPlaylist(MouseEvent mouseEvent) {

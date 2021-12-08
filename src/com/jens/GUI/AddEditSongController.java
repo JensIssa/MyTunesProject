@@ -28,6 +28,7 @@ public class AddEditSongController implements Initializable{
     public Button cancel;
     private MediaPlayer mediaPlayer;
     private String genres[];
+    MainWindowController mainWindowController;
 
     private SongModel songModel = new SongModel();
 
@@ -40,17 +41,20 @@ public class AddEditSongController implements Initializable{
         }
     }
 
+
     public AddEditSongController() throws IOException {
+        mainWindowController = new MainWindowController();
     }
 
-    public void cancelNewEdit(ActionEvent actionEvent) {
+    public void cancelNewEdit(ActionEvent actionEvent) throws SQLException, IOException {
+        mainWindowController.refreshSongList();
         Stage stage = (Stage) cancel.getScene().getWindow();
         stage.close();
     }
 
-    public void createSong(ActionEvent actionEvent) throws SQLException {
+    public void createSong(ActionEvent actionEvent) throws SQLException, IOException {
         songModel.createSong(songTitle.getText(), songArtist.getText(), Integer.parseInt(songLength.getText()), categoryChoice.getSelectionModel().getSelectedItem().toString(), filePath.getText(), filePathImage.getText());
-
+        mainWindowController.refreshSongList();
         Stage stage = (Stage) cancel.getScene().getWindow();
         stage.close();
     }
