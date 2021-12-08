@@ -262,6 +262,11 @@ public class MainWindowController implements Initializable {
 
     }
 
+    public void refreshSongList() throws IOException, SQLException {
+        songTable.getItems().clear();
+        songTable.setItems(songModel.listToObservablelist());
+    }
+
     public void lookAtPlaylist(MouseEvent mouseEvent) {
         Playlist playlist = (Playlist) playlistTable.getSelectionModel().getSelectedItem();
         try {
