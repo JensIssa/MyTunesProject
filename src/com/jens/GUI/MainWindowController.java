@@ -11,6 +11,7 @@ import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -23,6 +24,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+import jdk.jfr.StackTrace;
+
+import javax.swing.text.html.ImageView;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -38,6 +42,7 @@ public class MainWindowController implements Initializable {
     public TableView songTable;
 
     public Slider volumeSlider;
+    public ImageView songImage;
 
     public TableView playlistTable;
     public TableColumn playlistNameColumn;
@@ -54,8 +59,9 @@ public class MainWindowController implements Initializable {
     private boolean isPlaying = false;
     private boolean isDone = true;
     private Object currentSong = null;
-    private Button upButton;
-    private Button downButton;
+    @FXML
+    public Button upButton;
+    public Button downButton;
 
 
     public MainWindowController() throws IOException {
@@ -111,6 +117,11 @@ public class MainWindowController implements Initializable {
                 e.printStackTrace();
             }
         });
+    }
+
+    public void setSongImage(){
+        
+        songImage = new ImageView();
     }
 
     public void newSong(ActionEvent actionEvent) throws IOException {
@@ -196,24 +207,30 @@ public class MainWindowController implements Initializable {
     }
 
     public void playSong(){
-        if (!isPlaying && isDone || !(currentSong == songTable.getSelectionModel().getSelectedItem())){
-            if (musicPlayer != null){
-                musicPlayer.mediaPlayer.dispose();
+        try{
+            if (!isPlaying && isDone || !(currentSong == songTable.getSelectionModel().getSelectedItem())){
+                if (musicPlayer != null){
+                    musicPlayer.mediaPlayer.dispose();
+                }
+                musicPlayer = new MusicPlayer((Song) songTable.getSelectionModel().getSelectedItem());
+                currentSong = songTable.getSelectionModel().getSelectedItem();
+                musicPlayer.mediaPlayer.setOnPlaying(this::playMedia);
+                musicPlayer.mediaPlayer.setOnEndOfMedia(this::endOfMedia);
+                musicPlayer.playSong();
+                isPlaying = true;
+                System.out.println("Work playing");
+            } else if (isPlaying){
+                pauseSong();
+                System.out.println("Paused");
+            } else {
+                musicPlayer.playSong();
+                isPlaying = true;
+                System.out.println("Should play again");
             }
-            musicPlayer = new MusicPlayer((Song) songTable.getSelectionModel().getSelectedItem());
-            currentSong = songTable.getSelectionModel().getSelectedItem();
-            musicPlayer.mediaPlayer.setOnPlaying(this::playMedia);
-            musicPlayer.mediaPlayer.setOnEndOfMedia(this::endOfMedia);
-            musicPlayer.playSong();
-            isPlaying = true;
-            System.out.println("Work playing");
-        } else if (isPlaying){
-            pauseSong();
-            System.out.println("Paused");
-        } else {
-            musicPlayer.playSong();
-            isPlaying = true;
-            System.out.println("Should play again");
+        } catch (Exception e){
+            e.printStackTrace();
+            isPlaying = false;
+            isDone = true;
         }
     }
 
