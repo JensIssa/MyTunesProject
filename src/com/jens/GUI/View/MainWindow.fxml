@@ -126,6 +126,11 @@
             </ImageView>
          </graphic>
       </Button>
-      <ImageView fx:id="songImage" fitHeight="64.0" fitWidth="64.0" layoutX="289.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="songImage" fitHeight="64.0" fitWidth="64.0" layoutX="272.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="labelIsPlaying" alignment="CENTER" layoutX="341.0" layoutY="65.0" prefHeight="17.0" prefWidth="218.0" text="(Nothing) Is Playing">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

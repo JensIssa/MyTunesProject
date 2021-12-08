@@ -54,6 +54,7 @@ public class MainWindowController implements Initializable {
     public TableColumn playlistTimeColumn;
     public TextField searchTextField;
     public ListView songsInPlaylistListView;
+    public Label labelIsPlaying;
 
     private double volume = 0;
 
@@ -227,6 +228,7 @@ public class MainWindowController implements Initializable {
                 musicPlayer.mediaPlayer.setOnPlaying(this::playMedia);
                 musicPlayer.mediaPlayer.setOnEndOfMedia(this::endOfMedia);
                 musicPlayer.playSong();
+                labelIsPlaying.setText(((Song) songTable.getSelectionModel().getSelectedItem()).getTitle());
                 isPlaying = true;
                 System.out.println("Work playing");
             } else if (isPlaying){
