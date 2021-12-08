@@ -30,7 +30,9 @@ import javafx.stage.Stage;
 import jdk.jfr.StackTrace;
 
 import javax.swing.text.Element;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -126,10 +128,10 @@ public class MainWindowController implements Initializable {
     public void setSongImage(){
         try
         {
-            File songimage = new File(songModel.songImageUpdate((Song) songTable.getSelectionModel().getSelectedItem()));
-            image = new Image(songimage.toURI().toString());
-            songImage = new ImageView();
-            songImage.setImage(image);
+            File img = new File(songModel.songImageUpdate((Song) songTable.getSelectionModel().getSelectedItem()));
+            InputStream isImage = (InputStream) new FileInputStream(img);
+            System.out.println(isImage);
+            songImage.setImage(new Image(isImage));
         } catch (Exception e){
             e.printStackTrace();
         }

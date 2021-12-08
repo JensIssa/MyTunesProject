@@ -38,7 +38,7 @@
          </padding>
       </ButtonBar>
       <ListView fx:id="songsInPlaylistListView" layoutX="250.0" layoutY="170.0" prefHeight="359.0" prefWidth="200.0" />
-      <TableView fx:id="songTable" layoutX="505.0" layoutY="170.0" onMouseClicked="#setSongImage" prefHeight="359.0" prefWidth="381.0">
+      <TableView fx:id="songTable" layoutX="505.0" layoutY="170.0" prefHeight="359.0" prefWidth="381.0">
         <columns>
           <TableColumn fx:id="songTitleColumn" prefWidth="123.0" text="Title" />
           <TableColumn fx:id="songArtistColumn" prefWidth="118.0" text="Artist" />
@@ -94,7 +94,7 @@
       </Button>
       <Button fx:id="playlistSongDelete" layoutX="399.0" layoutY="537.0" mnemonicParsing="false" onAction="#deletePlaylistSong" text="Delete" />
       <Slider fx:id="volumeSlider" layoutX="62.0" layoutY="104.0" max="110.0" min="-1.0" onMouseDragged="#adjustVolume" prefHeight="14.0" prefWidth="187.0" value="110.0" />
-      <Button fx:id="playButton" layoutX="126.0" layoutY="37.0" mnemonicParsing="false" onAction="#playSong" prefHeight="60.0" prefWidth="60.0" style="-fx-background-radius: 300;">
+      <Button fx:id="playButton" layoutX="126.0" layoutY="37.0" mnemonicParsing="false" onAction="#playSong" onMouseClicked="#setSongImage" prefHeight="60.0" prefWidth="60.0" style="-fx-background-radius: 300;">
          <graphic>
             <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -126,7 +126,10 @@
             </ImageView>
          </graphic>
       </Button>
-      <ImageView fx:id="songImage" fitHeight="64.0" fitWidth="64.0" layoutX="272.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="songImage" fitHeight="64.0" fitWidth="64.0" layoutX="272.0" layoutY="43.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../image/unnamed.png" />
+         </image></ImageView>
       <Label fx:id="labelIsPlaying" alignment="CENTER" layoutX="341.0" layoutY="65.0" prefHeight="17.0" prefWidth="218.0" text="(Nothing) Is Playing">
          <font>
             <Font size="13.0" />
