@@ -12,6 +12,8 @@ import javafx.beans.Observable;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -27,7 +29,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import jdk.jfr.StackTrace;
 
-import javax.swing.text.html.ImageView;
+import javax.swing.text.Element;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -43,7 +45,8 @@ public class MainWindowController implements Initializable {
     public TableView songTable;
 
     public Slider volumeSlider;
-    public Image songImage;
+    public Image image;
+    public ImageView songImage;
 
     public TableView playlistTable;
     public TableColumn playlistNameColumn;
@@ -60,9 +63,8 @@ public class MainWindowController implements Initializable {
     private boolean isPlaying = false;
     private boolean isDone = true;
     private Object currentSong = null;
-    @FXML
-    public Button upButton;
-    public Button downButton;
+    private Button upButton;
+    private Button downButton;
 
 
     public MainWindowController() throws IOException {
@@ -124,7 +126,9 @@ public class MainWindowController implements Initializable {
         try
         {
             File songimage = new File(songModel.songImageUpdate((Song) songTable.getSelectionModel().getSelectedItem()));
-            songImage = new Image(songimage.toURI().toString());
+            image = new Image(songimage.toURI().toString());
+            songImage = new ImageView();
+            songImage.setImage(image);
         } catch (Exception e){
             e.printStackTrace();
         }
