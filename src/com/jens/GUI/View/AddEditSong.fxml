@@ -29,6 +29,6 @@
       <Label layoutX="51.0" layoutY="182.0" text="File:" />
       <TextField fx:id="filePathImage" layoutX="97.0" layoutY="220.0" prefHeight="26.0" prefWidth="210.0" />
       <Text layoutX="45.0" layoutY="238.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Image" />
-      <Button layoutX="321.0" layoutY="221.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="64.0" text="Choose..." />
+      <Button layoutX="321.0" layoutY="221.0" mnemonicParsing="false" onAction="#chooseImageFile" prefHeight="25.0" prefWidth="64.0" text="Choose..." />
    </children>
 </AnchorPane>

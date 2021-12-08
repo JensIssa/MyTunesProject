@@ -55,6 +55,18 @@ public class AddEditSongController implements Initializable{
         stage.close();
     }
 
+    public void chooseImageFile(){
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"));
+        fileChooser.setInitialDirectory(new File("image/" ));
+        File file = fileChooser.showOpenDialog(null);
+
+        if (file != null){
+            filePathImage.setText("image\\" + file.getName());
+
+        }
+    }
+
     public void chooseSongFile(ActionEvent actionEvent){
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Music Files", "*.mp3", "*.wav"));
