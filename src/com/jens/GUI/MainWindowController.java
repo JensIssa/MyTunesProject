@@ -63,7 +63,9 @@ public class MainWindowController implements Initializable {
     private boolean isPlaying = false;
     private boolean isDone = true;
     private Object currentSong = null;
+    @FXML
     private Button upButton;
+    @FXML
     private Button downButton;
 
 
