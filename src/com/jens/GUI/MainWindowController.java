@@ -157,9 +157,10 @@ public class MainWindowController implements Initializable {
         stage.show();
     }
 
-    public void deleteSong(ActionEvent actionEvent) {
+    public void deleteSong(ActionEvent actionEvent) throws SQLException, IOException {
         songModel.deleteSong((Song)songTable.getSelectionModel().getSelectedItem());
         songTable.getItems().remove(playlistTable.getSelectionModel().getSelectedItem());
+        refreshSongList();
     }
 
     public void newPlaylist(ActionEvent actionEvent) throws IOException {
@@ -270,8 +271,8 @@ public class MainWindowController implements Initializable {
         songTable.getItems().clear();
         songTable.setItems(songModel.listToObservablelist());
         songTable.refresh();
-    }
 
+    }
     public void lookAtPlaylist(MouseEvent mouseEvent) {
         Playlist playlist = (Playlist) playlistTable.getSelectionModel().getSelectedItem();
         try {
