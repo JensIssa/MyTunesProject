@@ -12,7 +12,7 @@
    <children>
       <TextField fx:id="songTitle" layoutX="97.0" layoutY="26.0" prefHeight="26.0" prefWidth="210.0" />
       <TextField fx:id="songArtist" layoutX="98.0" layoutY="64.0" prefHeight="26.0" prefWidth="210.0" />
-      <TextField fx:id="songLength" editable="false" layoutX="98.0" layoutY="140.0" prefHeight="26.0" prefWidth="84.0" />
+      <TextField fx:id="songLength" disable="true" editable="false" layoutX="98.0" layoutY="140.0" prefHeight="26.0" prefWidth="84.0" />
       <ComboBox fx:id="categoryChoice" layoutX="98.0" layoutY="104.0" prefHeight="26.0" prefWidth="84.0" />
       <Button fx:id="moreCategories" layoutX="194.0" layoutY="105.0" mnemonicParsing="false" text="More..." />
       <TextField fx:id="filePath" editable="false" layoutX="98.0" layoutY="178.0" prefHeight="26.0" prefWidth="210.0" />
