@@ -80,11 +80,6 @@ public class Song {
 
     @Override public String toString()
     {
-        return "Song{" +
-                "title='" + title + '\'' +
-                ", artistName='" + artistName + '\'' +
-                ", lentgh=" + songLength +
-                ", catergory='" + category + '\'' +
-                '}';
+        return title;
     }
 }

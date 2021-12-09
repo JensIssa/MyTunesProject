@@ -282,4 +282,9 @@ public class MainWindowController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    private void error(String text){
+        Alert alert = new Alert(Alert.AlertType.ERROR, text, ButtonType.YES);
+        alert.showAndWait();
+    }
 }
