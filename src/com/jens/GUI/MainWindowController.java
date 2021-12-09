@@ -11,7 +11,6 @@ import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.fxml.FXMLLoader;
@@ -22,14 +21,9 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import java.io.File;
 
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
-import jdk.jfr.StackTrace;
 
-import javax.swing.text.Element;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -141,7 +135,7 @@ public class MainWindowController implements Initializable {
 
     public void newSong(ActionEvent actionEvent) throws IOException {
 
-        Parent root = FXMLLoader.load(getClass().getResource("View/AddEditSong.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("View/AddSong.fxml"));
         Stage stage = new Stage();
         stage.setTitle("Add/Edit Song");
         stage.setScene(new Scene(root));
@@ -150,7 +144,7 @@ public class MainWindowController implements Initializable {
 
     public void editSong(ActionEvent actionEvent) throws IOException {
 
-        Parent root = FXMLLoader.load(getClass().getResource("View/AddEditSong.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("View/EditSong.fxml"));
         Stage stage = new Stage();
         stage.setTitle("Add/Edit Song");
         stage.setScene(new Scene(root));
@@ -165,7 +159,7 @@ public class MainWindowController implements Initializable {
 
     public void newPlaylist(ActionEvent actionEvent) throws IOException {
 
-        Parent root = FXMLLoader.load(getClass().getResource("View/AddEditPlaylist.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("View/AddPlaylist.fxml"));
         Stage stage = new Stage();
         stage.setTitle("Add/Edit Playlist");
         stage.setScene(new Scene(root));
@@ -174,7 +168,7 @@ public class MainWindowController implements Initializable {
 
     public void editPlaylist(ActionEvent actionEvent) throws IOException {
 
-        Parent root = FXMLLoader.load(getClass().getResource("View/AddEditPlaylist.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("View/EditPlaylist.fxml"));
         Stage stage = new Stage();
         stage.setTitle("Add/Edit Playlist");
         stage.setScene(new Scene(root));

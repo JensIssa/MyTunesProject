@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="329.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jens.GUI.AddEditSongController">
+<AnchorPane prefHeight="329.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jens.GUI.AddSongController">
    <children>
       <TextField fx:id="songTitle" layoutX="97.0" layoutY="26.0" prefHeight="26.0" prefWidth="210.0" />
       <TextField fx:id="songArtist" layoutX="98.0" layoutY="64.0" prefHeight="26.0" prefWidth="210.0" />

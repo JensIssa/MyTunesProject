@@ -17,7 +17,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class AddEditSongController implements Initializable{
+public class AddSongController implements Initializable{
 
     public TextField songTitle;
     public TextField songArtist;
@@ -42,7 +42,7 @@ public class AddEditSongController implements Initializable{
     }
 
 
-    public AddEditSongController() throws IOException {
+    public AddSongController() throws IOException {
         mainWindowController = new MainWindowController();
     }
 

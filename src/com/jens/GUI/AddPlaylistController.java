@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.SQLException;
 
-public class AddEditPlaylistController {
+public class AddPlaylistController {
 
     PlaylistModel playlistModel = new PlaylistModel();
     MainWindowController mainWindowController = new MainWindowController();
@@ -17,7 +17,7 @@ public class AddEditPlaylistController {
     public Button cancel;
     public TextField playlistName;
 
-    public AddEditPlaylistController() throws IOException {
+    public AddPlaylistController() throws IOException {
     }
 
     public void cancelNewEdit(ActionEvent actionEvent) {
