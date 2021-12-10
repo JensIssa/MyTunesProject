@@ -9,6 +9,7 @@ import com.jens.GUI.Model.PlaylistModel;
 import com.jens.GUI.Model.SongModel;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.image.Image;
@@ -33,6 +34,8 @@ import java.util.ResourceBundle;
 
 
 public class MainWindowController implements Initializable {
+
+    private ObservableList<Song> allSongs = FXCollections.observableArrayList();
 
     public TableColumn songTitleColumn;
     public TableColumn songArtistColumn;
@@ -140,6 +143,13 @@ public class MainWindowController implements Initializable {
         stage.setTitle("Add/Edit Song");
         stage.setScene(new Scene(root));
         stage.show();
+        stage.setOnHiding( event ->
+        {try {
+            allSongs = FXCollections.observableList(songModel.listToObservablelist());
+            tableViewLoad(allSongs);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } });
     }
 
     public void editSong(ActionEvent actionEvent) throws IOException {
@@ -291,5 +301,13 @@ public class MainWindowController implements Initializable {
     private void error(String text){
         Alert alert = new Alert(Alert.AlertType.ERROR, text, ButtonType.YES);
         alert.showAndWait();
+    }
+
+    public void tableViewLoad(ObservableList<Song> allSongs){
+        songTable.setItems(getSongData());
+    }
+
+    public ObservableList<Song> getSongData() {
+        return allSongs;
     }
 }
