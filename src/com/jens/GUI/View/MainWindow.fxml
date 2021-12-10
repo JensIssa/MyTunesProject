@@ -16,9 +16,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jens.GUI.MainWindowController">
+<AnchorPane prefHeight="600.0" prefWidth="900.0" styleClass="body-background" stylesheets="@../../../../../css/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jens.GUI.MainWindowController">
    <children>
-      <TableView fx:id="playlistTable" layoutX="14.0" layoutY="41.0" onMouseClicked="#lookAtPlaylist" prefHeight="306.0" prefWidth="228.0">
+      <TableView fx:id="playlistTable" layoutX="14.0" layoutY="41.0" onMouseClicked="#lookAtPlaylist" prefHeight="306.0" prefWidth="228.0" style="-fx-background-color: 0;">
         <columns>
           <TableColumn fx:id="playlistNameColumn" prefWidth="103.0" text="Name" />
           <TableColumn fx:id="playlistSongsColumn" prefWidth="47.0" text="Songs" />
@@ -38,8 +38,8 @@
             <Insets left="-20.0" />
          </padding>
       </ButtonBar>
-      <ListView fx:id="songsInPlaylistListView" layoutX="250.0" layoutY="42.0" prefHeight="484.0" prefWidth="200.0" />
-      <TableView fx:id="songTable" layoutX="505.0" layoutY="41.0" prefHeight="484.0" prefWidth="381.0">
+      <ListView fx:id="songsInPlaylistListView" layoutX="250.0" layoutY="42.0" prefHeight="484.0" prefWidth="200.0" styleClass="opacity-forground" />
+      <TableView fx:id="songTable" layoutX="505.0" layoutY="41.0" prefHeight="484.0" prefWidth="381.0" style="-fx-background-color: 0;">
         <columns>
           <TableColumn fx:id="songTitleColumn" prefWidth="123.0" text="Title" />
           <TableColumn fx:id="songArtistColumn" prefWidth="118.0" text="Artist" />
@@ -58,11 +58,11 @@
          </padding>
       </ButtonBar>
       <ButtonBar layoutX="802.0" layoutY="529.0" prefHeight="40.0" prefWidth="84.0" />
-      <TextField fx:id="searchTextField" layoutX="687.0" layoutY="11.0" prefHeight="25.0" prefWidth="200.0" />
-      <Label layoutX="14.0" layoutY="14.0" text="Playlists" />
-      <Label layoutX="249.0" layoutY="23.0" text="Songs on Playlist" />
-      <Label layoutX="505.0" layoutY="14.0" text="Songs" />
-      <Label layoutX="628.0" layoutY="14.0" text="Search:">
+      <TextField fx:id="searchTextField" layoutX="686.0" layoutY="10.0" prefHeight="25.0" prefWidth="200.0" />
+      <Label layoutX="14.0" layoutY="15.0" text="Playlists" textFill="WHITE" />
+      <Label layoutX="256.0" layoutY="14.0" text="Songs on Playlist" textFill="WHITE" />
+      <Label layoutX="506.0" layoutY="14.0" text="Songs" textFill="WHITE" />
+      <Label layoutX="628.0" layoutY="13.0" text="Search:" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font>
@@ -131,9 +131,9 @@
          <image>
             <Image url="@../../../../../image/unnamed.png" />
          </image></ImageView>
-      <Label fx:id="labelIsPlaying" alignment="CENTER" layoutX="19.0" layoutY="569.0" prefHeight="17.0" prefWidth="218.0" text="(Nothing) Is Playing">
+      <Label fx:id="labelIsPlaying" alignment="CENTER" layoutX="19.0" layoutY="566.0" prefHeight="17.0" prefWidth="218.0" text="(Nothing) Is Playing" textFill="WHITE">
          <font>
-            <Font size="13.0" />
+            <Font name="System Bold" size="16.0" />
          </font>
       </Label>
       <ProgressBar fx:id="songProgressBar" layoutX="246.0" layoutY="569.0" prefHeight="18.0" prefWidth="465.0" progress="0.0" />
