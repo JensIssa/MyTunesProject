@@ -31,6 +31,8 @@ import java.io.InputStream;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class MainWindowController implements Initializable {
@@ -44,6 +46,7 @@ public class MainWindowController implements Initializable {
     public TableView songTable;
 
     public Slider volumeSlider;
+    public ProgressBar songProgressBar;
     public Image image;
     public ImageView songImage;
 
@@ -65,6 +68,8 @@ public class MainWindowController implements Initializable {
     private Object currentSong = null;
     private Button upButton;
     private Button downButton;
+    private Timer timer;
+    private TimerTask timerTask;
 
 
     public MainWindowController() throws IOException {
@@ -214,8 +219,10 @@ public class MainWindowController implements Initializable {
 
     private void playMedia(){
         isDone = false;
+        beginTimer();
     }
     private void  endOfMedia(){
+        cancelTimer();
         isPlaying = false;
         musicPlayer.mediaPlayer.setAutoPlay(true);
         isDone = true;
@@ -230,6 +237,7 @@ public class MainWindowController implements Initializable {
             if (!isPlaying && isDone || !(currentSong == songTable.getSelectionModel().getSelectedItem())){
                 if (musicPlayer != null){
                     musicPlayer.mediaPlayer.dispose();
+                    cancelTimer();
                 }
                 if (songTable.isFocusTraversable()){
                     System.out.println("songs is focused");
@@ -266,6 +274,27 @@ public class MainWindowController implements Initializable {
     public void pauseSong(){
         musicPlayer.pauseSong();
         isPlaying = false;
+    }
+
+    private void beginTimer(){
+        timer = new Timer();
+        timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                double current = musicPlayer.mediaPlayer.getCurrentTime().toSeconds();
+                double end = musicPlayer.mediaPlayer.getMedia().getDuration().toSeconds();
+                songProgressBar.setProgress(current/end);
+
+                if(current/end == 1){
+                    cancelTimer();
+                }
+            }
+        };
+        timer.scheduleAtFixedRate(timerTask, 100, 100);
+    }
+
+    private void cancelTimer(){
+        timer.cancel();
     }
 
     public void nextSong(ActionEvent actionEvent) {
