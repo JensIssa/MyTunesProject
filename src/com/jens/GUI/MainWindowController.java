@@ -221,8 +221,16 @@ public class MainWindowController implements Initializable {
                 if (musicPlayer != null){
                     musicPlayer.mediaPlayer.dispose();
                 }
-                musicPlayer = new MusicPlayer((Song) songTable.getSelectionModel().getSelectedItem());
-                currentSong = songTable.getSelectionModel().getSelectedItem();
+                if (songTable.isFocusTraversable()){
+                    System.out.println("songs is focused");
+                    musicPlayer = new MusicPlayer((Song) songTable.getSelectionModel().getSelectedItem());
+                    currentSong = songTable.getSelectionModel().getSelectedItem();
+                }
+                else if(songsInPlaylistListView.isFocusTraversable()){
+                    System.out.println("playlist is focused");
+                    musicPlayer = new MusicPlayer((Song) songsInPlaylistListView.getSelectionModel().getSelectedItem());
+                    currentSong = songsInPlaylistListView.getSelectionModel().getSelectedItem();
+                }
                 musicPlayer.mediaPlayer.setOnPlaying(this::playMedia);
                 musicPlayer.mediaPlayer.setOnEndOfMedia(this::endOfMedia);
                 musicPlayer.playSong();
@@ -257,6 +265,10 @@ public class MainWindowController implements Initializable {
     }
 
     private void moveSongUp(){
+
+    }
+
+    public void test(){
 
     }
 
