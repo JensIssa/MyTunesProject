@@ -38,6 +38,7 @@ import java.util.TimerTask;
 public class MainWindowController implements Initializable {
 
     private ObservableList<Song> allSongs = FXCollections.observableArrayList();
+    private ObservableList<Playlist> allPlaylist = FXCollections.observableArrayList();
 
     public TableColumn songTitleColumn;
     public TableColumn songArtistColumn;
@@ -85,6 +86,7 @@ public class MainWindowController implements Initializable {
         playlistSongsColumn = new TableColumn<PlaylistManager, Integer>();
         playlistTimeColumn = new TableColumn<PlaylistManager, Integer>();
         songTable = new TableView();
+        playlistTable = new TableView();
 
     }
 
@@ -188,8 +190,8 @@ public class MainWindowController implements Initializable {
         stage.show();
         stage.setOnHiding( event ->
         {try {
-            allSongs = FXCollections.observableList(songModel.listToObservablelist());
-            tableViewLoad(allSongs);
+            allPlaylist = FXCollections.observableList(playlistModel.listToObservablelist());
+            tableViewLoadPlaylist(allPlaylist);
         } catch (Exception e) {
             e.printStackTrace();
         } });
@@ -217,8 +219,8 @@ public class MainWindowController implements Initializable {
     }
 
     public void addSongToPlaylist(ActionEvent actionEvent) {
-        Playlist playlist = (Playlist) playlistTable.getSelectionModel().getSelectedItem();
         Song song = (Song) songTable.getSelectionModel().getSelectedItem();
+        Playlist playlist = (Playlist) playlistTable.getSelectionModel().getSelectedItem();
         playlistModel.addSongToPlaylist(playlist.getId(), song.getId());
     }
 
@@ -233,9 +235,14 @@ public class MainWindowController implements Initializable {
         songsInPlaylistListView.getItems().remove(songsInPlaylistListView.getSelectionModel().getSelectedItem());
     }
     
-    public void adjustVolume(){
-        volume = volumeSlider.getValue() / 100;
-        System.out.println(volume);
+    public double adjustVolume(){
+        return volume = volumeSlider.getValue() / 100;
+    }
+
+    public void refreshPlaylist() throws SQLException, IOException {
+        playlistTable.getItems().clear();
+        playlistTable.setItems(playlistModel.listToObservablelist());
+        playlistTable.refresh();
     }
 
     private void playMedia(){
@@ -273,6 +280,7 @@ public class MainWindowController implements Initializable {
                 musicPlayer.mediaPlayer.setOnPlaying(this::playMedia);
                 musicPlayer.mediaPlayer.setOnEndOfMedia(this::endOfMedia);
                 musicPlayer.playSong();
+                musicPlayer.mediaPlayer.setVolume(adjustVolume());
                 String actualSong = (((Song) songTable.getSelectionModel().getSelectedItem()).getTitle());
                 labelIsPlaying.setText("(" + actualSong + ")" + " Is Playing");
                 isPlaying = true;
@@ -319,9 +327,13 @@ public class MainWindowController implements Initializable {
     }
 
     public void nextSong(ActionEvent actionEvent) {
+        songTable.getSelectionModel().selectNext();
+        playSong();
     }
 
     public void previousSong(ActionEvent actionEvent) {
+        songTable.getSelectionModel().selectAboveCell();
+        playSong();
     }
 
     private void moveSongUp(){
@@ -356,8 +368,14 @@ public class MainWindowController implements Initializable {
     public void tableViewLoad(ObservableList<Song> allSongs){
         songTable.setItems(getSongData());
     }
+    public void tableViewLoadPlaylist(ObservableList<Playlist> allPlaylist){
+        playlistTable.setItems(getPlaylistData());
+    }
 
     public ObservableList<Song> getSongData() {
         return allSongs;
+    }
+    public ObservableList<Playlist> getPlaylistData(){
+        return allPlaylist;
     }
 }

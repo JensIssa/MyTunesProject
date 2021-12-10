@@ -2,11 +2,14 @@ package com.jens.BE;
 
 import javafx.collections.ObservableList;
 
+import java.util.List;
+
 public class Playlist {
     private int id;
     private String playlistName;
     private float totalTime;
     private int totalSongs;
+    private List<Song> playlistSongs;
 
     public Playlist(int id, String playlistName){
         this.id = id;
@@ -47,4 +50,11 @@ public class Playlist {
         this.totalSongs = totalSongs;
     }
 
+    public List<Song> getPlaylistSongs() {
+        return playlistSongs;
+    }
+
+    public void setPlaylistSongs(List<Song> playlistSongs) {
+        this.playlistSongs = playlistSongs;
+    }
 }
