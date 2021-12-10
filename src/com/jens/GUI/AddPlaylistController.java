@@ -1,6 +1,7 @@
 package com.jens.GUI;
 
 import com.jens.GUI.Model.PlaylistModel;
+import com.jens.Main;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -18,6 +19,7 @@ public class AddPlaylistController {
     public TextField playlistName;
 
     public AddPlaylistController() throws IOException {
+        mainWindowController = new MainWindowController();
     }
 
     public void cancelNewEdit(ActionEvent actionEvent) {
@@ -27,7 +29,7 @@ public class AddPlaylistController {
 
     public void addPlaylist(ActionEvent actionEvent) throws SQLException, IOException {
         playlistModel.createPlaylist(playlistName.getText());
-
+        mainWindowController.refreshPlaylist();
         Stage stage = (Stage) cancel.getScene().getWindow();
         stage.close();
     }
