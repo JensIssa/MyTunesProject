@@ -58,6 +58,7 @@ public class MainWindowController implements Initializable {
     public TextField searchTextField;
     public ListView songsInPlaylistListView;
     public Label labelIsPlaying;
+    public Label labelArtist;
 
     private double volume = 0;
 
@@ -282,7 +283,9 @@ public class MainWindowController implements Initializable {
                 musicPlayer.playSong();
                 musicPlayer.mediaPlayer.setVolume(adjustVolume());
                 String actualSong = (((Song) songTable.getSelectionModel().getSelectedItem()).getTitle());
+                String currentArtist = (((Song) songTable.getSelectionModel().getSelectedItem()).getArtistName());
                 labelIsPlaying.setText("(" + actualSong + ")" + " Is Playing");
+                labelArtist.setText(currentArtist);
                 isPlaying = true;
                 System.out.println("Work playing");
             } else if (isPlaying){

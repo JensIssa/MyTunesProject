@@ -11,14 +11,17 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Bloom?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jens.GUI.MainWindowController">
+<AnchorPane prefHeight="600.0" prefWidth="900.0" styleClass="body-background" stylesheets="@../../../../../css/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jens.GUI.MainWindowController">
    <children>
-      <TableView fx:id="playlistTable" layoutX="14.0" layoutY="41.0" onMouseClicked="#lookAtPlaylist" prefHeight="306.0" prefWidth="228.0">
+      <TableView fx:id="playlistTable" layoutX="14.0" layoutY="41.0" onMouseClicked="#lookAtPlaylist" prefHeight="249.0" prefWidth="228.0">
         <columns>
           <TableColumn fx:id="playlistNameColumn" prefWidth="103.0" text="Name" />
           <TableColumn fx:id="playlistSongsColumn" prefWidth="47.0" text="Songs" />
@@ -38,8 +41,8 @@
             <Insets left="-20.0" />
          </padding>
       </ButtonBar>
-      <ListView fx:id="songsInPlaylistListView" layoutX="250.0" layoutY="42.0" prefHeight="484.0" prefWidth="200.0" />
-      <TableView fx:id="songTable" layoutX="505.0" layoutY="41.0" prefHeight="484.0" prefWidth="381.0">
+      <ListView fx:id="songsInPlaylistListView" layoutX="250.0" layoutY="42.0" prefHeight="462.0" prefWidth="200.0" styleClass="opacity-forground" />
+      <TableView fx:id="songTable" layoutX="505.0" layoutY="41.0" prefHeight="462.0" prefWidth="381.0">
         <columns>
           <TableColumn fx:id="songTitleColumn" prefWidth="123.0" text="Title" />
           <TableColumn fx:id="songArtistColumn" prefWidth="118.0" text="Artist" />
@@ -47,7 +50,7 @@
             <TableColumn fx:id="songTimeColumn" prefWidth="56.0" text="Time" />
         </columns>
       </TableView>
-      <ButtonBar layoutX="641.0" layoutY="520.0" prefHeight="40.0" prefWidth="200.0">
+      <ButtonBar layoutX="641.0" layoutY="502.0" prefHeight="40.0" prefWidth="200.0">
         <buttons>
           <Button fx:id="songNew" mnemonicParsing="false" onAction="#newSong" text="New" />
             <Button fx:id="songEdit" mnemonicParsing="false" onAction="#editSong" text="Edit" />
@@ -58,11 +61,11 @@
          </padding>
       </ButtonBar>
       <ButtonBar layoutX="802.0" layoutY="529.0" prefHeight="40.0" prefWidth="84.0" />
-      <TextField fx:id="searchTextField" layoutX="687.0" layoutY="11.0" prefHeight="25.0" prefWidth="200.0" />
-      <Label layoutX="14.0" layoutY="14.0" text="Playlists" />
-      <Label layoutX="249.0" layoutY="23.0" text="Songs on Playlist" />
-      <Label layoutX="505.0" layoutY="14.0" text="Songs" />
-      <Label layoutX="628.0" layoutY="14.0" text="Search:">
+      <TextField fx:id="searchTextField" layoutX="686.0" layoutY="10.0" prefHeight="25.0" prefWidth="200.0" />
+      <Label layoutX="14.0" layoutY="15.0" text="Playlists" textFill="WHITE" />
+      <Label layoutX="256.0" layoutY="14.0" text="Songs on Playlist" textFill="WHITE" />
+      <Label layoutX="506.0" layoutY="14.0" text="Songs" textFill="WHITE" />
+      <Label layoutX="628.0" layoutY="13.0" text="Search:" textFill="WHITE">
          <font>
             <Font size="14.0" />
          </font>
@@ -93,49 +96,68 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="playlistSongDelete" layoutX="250.0" layoutY="528.0" mnemonicParsing="false" onAction="#deletePlaylistSong" text="Delete" />
-      <Slider fx:id="volumeSlider" layoutX="755.0" layoutY="571.0" max="110.0" min="-1.0" onMouseDragged="#adjustVolume" prefHeight="14.0" prefWidth="131.0" value="110.0" />
-      <Button fx:id="playButton" layoutX="460.0" layoutY="531.0" mnemonicParsing="false" onAction="#playSong" onMouseClicked="#setSongImage" prefHeight="36.0" prefWidth="28.0" style="-fx-background-radius: 300;">
-         <graphic>
-            <ImageView fitHeight="31.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../../Icons/play.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <ImageView fitHeight="20.0" fitWidth="21.0" layoutX="735.0" layoutY="568.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../Icons/volume.png" />
-         </image>
-      </ImageView>
-      <Button fx:id="forwardButton" layoutX="504.0" layoutY="531.0" mnemonicParsing="false" onAction="#nextSong" prefHeight="36.0" prefWidth="36.0" style="-fx-background-radius: 200;">
-         <graphic>
-            <ImageView fitHeight="20.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../../Icons/forward.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Button fx:id="rewindButton" layoutX="414.0" layoutY="531.0" mnemonicParsing="false" onAction="#previousSong" prefHeight="36.0" prefWidth="21.0" style="-fx-background-radius: 200;">
-         <graphic>
-            <ImageView fitHeight="22.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../../Icons/rewind.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <ImageView fx:id="songImage" fitHeight="222.0" fitWidth="218.0" layoutX="19.0" layoutY="347.0" pickOnBounds="true" preserveRatio="true">
+      <Button fx:id="playlistSongDelete" layoutX="399.0" layoutY="510.0" mnemonicParsing="false" onAction="#deletePlaylistSong" text="Delete" />
+      <ImageView fx:id="songImage" fitHeight="249.0" fitWidth="274.0" layoutY="296.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../../image/unnamed.png" />
          </image></ImageView>
-      <Label fx:id="labelIsPlaying" alignment="CENTER" layoutX="19.0" layoutY="569.0" prefHeight="17.0" prefWidth="218.0" text="(Nothing) Is Playing">
-         <font>
-            <Font size="13.0" />
-         </font>
-      </Label>
-      <ProgressBar fx:id="songProgressBar" layoutX="246.0" layoutY="569.0" prefHeight="18.0" prefWidth="465.0" progress="0.0" />
+      <Pane layoutY="545.0" prefHeight="67.0" prefWidth="904.0" style="-fx-border-color: black; -fx-border-width: 2;" styleClass="opacity-forground" stylesheets="@../../../../../css/style.css">
+         <children>
+            <Label fx:id="labelIsPlaying" alignment="CENTER" layoutX="-7.0" layoutY="14.0" prefHeight="25.0" prefWidth="256.0" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <ProgressBar fx:id="songProgressBar" layoutX="251.0" layoutY="44.0" prefHeight="18.0" prefWidth="452.0" progress="0.0">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <effect>
+                  <Bloom threshold="0.46" />
+               </effect>
+            </ProgressBar>
+            <Slider fx:id="volumeSlider" layoutX="743.0" layoutY="44.0" max="110.0" min="-1.0" onMouseDragged="#adjustVolume" prefHeight="14.0" prefWidth="131.0" value="110.0" />
+            <ImageView fitHeight="20.0" fitWidth="21.0" layoutX="723.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../Icons/volume.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="forwardButton" layoutX="506.0" layoutY="14.0" mnemonicParsing="false" onAction="#nextSong" prefHeight="25.0" prefWidth="7.0" style="-fx-background-radius: 200;">
+               <graphic>
+                  <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../Icons/forward.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="playButton" layoutX="461.0" layoutY="14.0" mnemonicParsing="false" onAction="#playSong" onMouseClicked="#setSongImage" prefHeight="25.0" prefWidth="31.0" style="-fx-background-radius: 300;">
+               <graphic>
+                  <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../Icons/play.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="rewindButton" layoutX="421.0" layoutY="14.0" mnemonicParsing="false" onAction="#previousSong" prefHeight="25.0" prefWidth="31.0" style="-fx-background-radius: 200;">
+               <graphic>
+                  <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../Icons/rewind.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Label fx:id="labelArtist" alignment="CENTER" layoutX="-7.0" layoutY="32.0" prefHeight="25.0" prefWidth="256.0" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="10.0" />
+               </font>
+            </Label>
+         </children>
+         <effect>
+            <DropShadow />
+         </effect>
+      </Pane>
    </children>
 </AnchorPane>
