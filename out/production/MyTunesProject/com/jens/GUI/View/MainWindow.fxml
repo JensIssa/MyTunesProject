@@ -41,7 +41,7 @@
             <Insets left="-20.0" />
          </padding>
       </ButtonBar>
-      <ListView fx:id="songsInPlaylistListView" layoutX="250.0" layoutY="42.0" prefHeight="462.0" prefWidth="200.0" styleClass="opacity-forground" />
+      <ListView fx:id="songsInPlaylistListView" layoutX="250.0" layoutY="42.0" prefHeight="462.0" prefWidth="200.0" />
       <TableView fx:id="songTable" layoutX="505.0" layoutY="41.0" prefHeight="462.0" prefWidth="381.0">
         <columns>
           <TableColumn fx:id="songTitleColumn" prefWidth="123.0" text="Title" />
@@ -97,7 +97,7 @@
          </graphic>
       </Button>
       <Button fx:id="playlistSongDelete" layoutX="399.0" layoutY="11.0" mnemonicParsing="false" onAction="#deletePlaylistSong" text="Delete" />
-      <ImageView fx:id="songImage" fitHeight="249.0" fitWidth="274.0" layoutY="296.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="songImage" fitHeight="250.0" fitWidth="252.0" layoutY="295.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../../image/unnamed.png" />
          </image></ImageView>
