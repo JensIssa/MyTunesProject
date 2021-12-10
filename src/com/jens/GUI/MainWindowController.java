@@ -233,9 +233,8 @@ public class MainWindowController implements Initializable {
         songsInPlaylistListView.getItems().remove(songsInPlaylistListView.getSelectionModel().getSelectedItem());
     }
     
-    public void adjustVolume(){
-        volume = volumeSlider.getValue() / 100;
-        System.out.println(volume);
+    public double adjustVolume(){
+        return volume = volumeSlider.getValue() / 100;
     }
 
     private void playMedia(){
@@ -273,6 +272,7 @@ public class MainWindowController implements Initializable {
                 musicPlayer.mediaPlayer.setOnPlaying(this::playMedia);
                 musicPlayer.mediaPlayer.setOnEndOfMedia(this::endOfMedia);
                 musicPlayer.playSong();
+                musicPlayer.mediaPlayer.setVolume(adjustVolume());
                 String actualSong = (((Song) songTable.getSelectionModel().getSelectedItem()).getTitle());
                 labelIsPlaying.setText("(" + actualSong + ")" + " Is Playing");
                 isPlaying = true;
@@ -319,9 +319,13 @@ public class MainWindowController implements Initializable {
     }
 
     public void nextSong(ActionEvent actionEvent) {
+        songTable.getSelectionModel().selectNext();
+        playSong();
     }
 
     public void previousSong(ActionEvent actionEvent) {
+        songTable.getSelectionModel().selectAboveCell();
+        playSong();
     }
 
     private void moveSongUp(){
