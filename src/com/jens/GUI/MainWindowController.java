@@ -207,13 +207,12 @@ public class MainWindowController implements Initializable {
     }
     private void  endOfMedia(){
         isPlaying = false;
+        musicPlayer.mediaPlayer.setAutoPlay(true);
         isDone = true;
-    }
-    private boolean sameSong(){
-        if(musicPlayer.mediaPlayer.getMedia() != null) {
-            return musicPlayer.mediaPlayer.getMedia() == songTable.getSelectionModel().getSelectedItem();
+        if (musicPlayer.mediaPlayer.isAutoPlay()){
+            songTable.getSelectionModel().selectNext();
+            playSong();
         }
-        return true;
     }
 
     public void playSong(){
