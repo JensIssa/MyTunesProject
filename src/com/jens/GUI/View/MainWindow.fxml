@@ -131,7 +131,7 @@
          <image>
             <Image url="@../../../../../image/unnamed.png" />
          </image></ImageView>
-      <Label fx:id="labelIsPlaying" alignment="CENTER" layoutX="19.0" layoutY="578.0" prefHeight="17.0" prefWidth="218.0" text="(Nothing) Is Playing">
+      <Label fx:id="labelIsPlaying" alignment="CENTER" layoutX="19.0" layoutY="569.0" prefHeight="17.0" prefWidth="218.0" text="(Nothing) Is Playing">
          <font>
             <Font size="13.0" />
          </font>
