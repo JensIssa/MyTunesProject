@@ -164,6 +164,13 @@ public class MainWindowController implements Initializable {
         stage.setTitle("Add/Edit Song");
         stage.setScene(new Scene(root));
         stage.show();
+        stage.setOnHiding( event ->
+        {try {
+            allSongs = FXCollections.observableList(songModel.listToObservablelist());
+            tableViewLoad(allSongs);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } });
     }
 
     public void deleteSong(ActionEvent actionEvent) throws SQLException, IOException {
@@ -179,6 +186,13 @@ public class MainWindowController implements Initializable {
         stage.setTitle("Add/Edit Playlist");
         stage.setScene(new Scene(root));
         stage.show();
+        stage.setOnHiding( event ->
+        {try {
+            allSongs = FXCollections.observableList(songModel.listToObservablelist());
+            tableViewLoad(allSongs);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } });
     }
 
     public void editPlaylist(ActionEvent actionEvent) throws IOException {
@@ -188,6 +202,13 @@ public class MainWindowController implements Initializable {
         stage.setTitle("Add/Edit Playlist");
         stage.setScene(new Scene(root));
         stage.show();
+        stage.setOnHiding( event ->
+        {try {
+            allSongs = FXCollections.observableList(songModel.listToObservablelist());
+            tableViewLoad(allSongs);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } });
     }
 
     public void deletePlaylist(ActionEvent actionEvent) throws SQLException, IOException {
