@@ -96,7 +96,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="playlistSongDelete" layoutX="399.0" layoutY="510.0" mnemonicParsing="false" onAction="#deletePlaylistSong" text="Delete" />
+      <Button fx:id="playlistSongDelete" layoutX="399.0" layoutY="11.0" mnemonicParsing="false" onAction="#deletePlaylistSong" text="Delete" />
       <ImageView fx:id="songImage" fitHeight="249.0" fitWidth="274.0" layoutY="296.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../../image/unnamed.png" />
