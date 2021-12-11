@@ -158,6 +158,7 @@ public class MainWindowController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         } });
+
     }
 
     public void editSong(ActionEvent actionEvent) throws IOException {
