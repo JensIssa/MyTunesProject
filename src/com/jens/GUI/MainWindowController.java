@@ -72,6 +72,7 @@ public class MainWindowController implements Initializable {
     private Button downButton;
     private Timer timer;
     private TimerTask timerTask;
+    public SelectionModel selectionModel;
 
 
     public MainWindowController() throws IOException {
@@ -163,6 +164,8 @@ public class MainWindowController implements Initializable {
 
     public void editSong(ActionEvent actionEvent) throws IOException {
 
+        selectionModel = songTable.getSelectionModel();
+
         Parent root = FXMLLoader.load(getClass().getResource("View/EditSong.fxml"));
         Stage stage = new Stage();
         stage.setTitle("Add/Edit Song");
@@ -179,7 +182,7 @@ public class MainWindowController implements Initializable {
 
     public void deleteSong(ActionEvent actionEvent) throws SQLException, IOException {
         songModel.deleteSong((Song)songTable.getSelectionModel().getSelectedItem());
-        songTable.getItems().remove(playlistTable.getSelectionModel().getSelectedItem());
+        songTable.getItems().remove(songTable.getSelectionModel().getSelectedItem());
         refreshSongList();
     }
 

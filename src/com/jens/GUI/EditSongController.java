@@ -1,9 +1,12 @@
 package com.jens.GUI;
 
+import com.jens.BE.Song;
+import com.jens.GUI.Model.SongModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.SelectionModel;
 import javafx.scene.control.TextField;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -31,7 +34,7 @@ public class EditSongController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        genres = new String[]{"Pop", "Rock", "Electric"};
+        genres = new String[]{"Pop", "Hip-Hop", "Electric", "Rock", "R&B", "Latin", "K-Pop", "Country", "Classical", "Metal"};
 
         for (int i = 0; i < genres.length; i++){
             categoryChoice.getItems().add(genres[i]);
@@ -48,7 +51,14 @@ public class EditSongController implements Initializable {
         stage.close();
     }
 
-    public void createSong(ActionEvent actionEvent) {
+    public void editSong(ActionEvent actionEvent) {
+        Song selectedSong = (Song) mainWindowController.selectionModel.getSelectedItem();
+        selectedSong.setTitle(songTitle.getText());
+        selectedSong.setArtistName(songArtist.getText());
+        selectedSong.setCategory(categoryChoice.getSelectionModel().getSelectedItem().toString());
+        selectedSong.setUrl(filePath.getText());
+        selectedSong.setUrlImg(filePathImage.getText());
+        selectedSong.setSongLength(Integer.parseInt(songLength.getText()));
     }
 
     public void chooseSongFile(ActionEvent actionEvent) {
