@@ -10,7 +10,7 @@ import java.io.File;
 
 public class MusicPlayer
 {
-    private MediaPlayer mediaPlayer;
+    public MediaPlayer mediaPlayer;
     private MainWindowController mainWindowController;
     private SongModel songModel;
 
