@@ -30,9 +30,9 @@ public class EditSongController implements Initializable {
     public TextField filePath;
     public TextField filePathImage;
     public Button cancel;
+    public TextField updateIdTxt;
     private MediaPlayer mediaPlayer;
     private String genres[];
-    public TextField idSong;
     MainWindowController mainWindowController;
     SongModel songModel;
 
@@ -63,7 +63,7 @@ public class EditSongController implements Initializable {
         String updateUrl = filePath.getText();
         String updateUrlImg = filePathImage.getText();
         int updateLength = Integer.parseInt(songLength.getText());
-        int updateId = Integer.parseInt(idSong.getText());
+        int updateId = Integer.parseInt(updateIdTxt.getText());
         Song updatedSong = new Song(updateId, updateTitle, updateArtist, updateLength, updateCategory, updateUrl,updateUrlImg);
         songModel.updateSong(updatedSong);
     }
@@ -74,7 +74,7 @@ public class EditSongController implements Initializable {
         filePath.setText(song.getUrl());
         filePathImage.setText(song.getUrlImg());
         songLength.setText(Integer.toString(song.getSongLength()));
-        idSong.setText(Integer.toString(song.getId()));
+        updateIdTxt.setText(Integer.toString(song.getId()));
     }
 
     public void chooseSongFile(ActionEvent actionEvent) {

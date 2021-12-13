@@ -28,5 +28,6 @@
         <TextField fx:id="filePathImage" layoutX="97.0" layoutY="69.0" prefHeight="26.0" prefWidth="210.0" />
         <Button layoutX="321.0" layoutY="70.0" mnemonicParsing="false" onAction="#chooseImageFile" prefHeight="25.0" prefWidth="64.0" text="Choose..." />
         <Label layoutX="39.0" layoutY="74.0" text="Image:" />
+      <TextField fx:id="updateIdTxt" editable="false" layoutX="16.0" layoutY="283.0" prefHeight="26.0" prefWidth="45.0" visible="false" />
     </children>
 </AnchorPane>
