@@ -152,14 +152,6 @@ public class MainWindowController implements Initializable {
         stage.setTitle("Add/Edit Song");
         stage.setScene(new Scene(root));
         stage.show();
-        stage.setOnHiding( event ->
-        {try {
-            allSongs = FXCollections.observableList(songModel.listToObservablelist());
-            tableViewLoad(allSongs);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } });
-
     }
 
     public void editSong(ActionEvent actionEvent) throws IOException {
@@ -171,13 +163,6 @@ public class MainWindowController implements Initializable {
         stage.setTitle("Add/Edit Song");
         stage.setScene(new Scene(root));
         stage.show();
-        stage.setOnHiding( event ->
-        {try {
-            allSongs = FXCollections.observableList(songModel.listToObservablelist());
-            tableViewLoad(allSongs);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } });
     }
 
     public void deleteSong(ActionEvent actionEvent) throws SQLException, IOException {
@@ -193,13 +178,6 @@ public class MainWindowController implements Initializable {
         stage.setTitle("Add/Edit Playlist");
         stage.setScene(new Scene(root));
         stage.show();
-        stage.setOnHiding( event ->
-        {try {
-            allPlaylist = FXCollections.observableList(playlistModel.listToObservablelist());
-            tableViewLoadPlaylist(allPlaylist);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } });
     }
 
     public void editPlaylist(ActionEvent actionEvent) throws IOException {
@@ -209,13 +187,6 @@ public class MainWindowController implements Initializable {
         stage.setTitle("Add/Edit Playlist");
         stage.setScene(new Scene(root));
         stage.show();
-        stage.setOnHiding( event ->
-        {try {
-            allSongs = FXCollections.observableList(songModel.listToObservablelist());
-            tableViewLoad(allSongs);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } });
     }
 
     public void deletePlaylist(ActionEvent actionEvent) throws SQLException, IOException {
@@ -349,10 +320,6 @@ public class MainWindowController implements Initializable {
 
     }
 
-    public void test(){
-
-    }
-
     public void refreshSongList() throws IOException, SQLException {
         songTable.getItems().clear();
         songTable.setItems(songModel.listToObservablelist());
@@ -372,19 +339,5 @@ public class MainWindowController implements Initializable {
     private void error(String text){
         Alert alert = new Alert(Alert.AlertType.ERROR, text, ButtonType.YES);
         alert.showAndWait();
-    }
-
-    public void tableViewLoad(ObservableList<Song> allSongs){
-        songTable.setItems(getSongData());
-    }
-    public void tableViewLoadPlaylist(ObservableList<Playlist> allPlaylist){
-        playlistTable.setItems(getPlaylistData());
-    }
-
-    public ObservableList<Song> getSongData() {
-        return allSongs;
-    }
-    public ObservableList<Playlist> getPlaylistData(){
-        return allPlaylist;
     }
 }
