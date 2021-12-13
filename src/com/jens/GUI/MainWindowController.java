@@ -44,19 +44,19 @@ public class MainWindowController implements Initializable {
     public TableColumn songArtistColumn;
     public TableColumn songCategoryColumn;
     public TableColumn songTimeColumn;
-    public TableView songTable;
+    public TableView<Song> songTable;
 
     public Slider volumeSlider;
     public ProgressBar songProgressBar;
     public Image image;
     public ImageView songImage;
 
-    public TableView playlistTable;
+    public TableView<Playlist> playlistTable;
     public TableColumn playlistNameColumn;
     public TableColumn playlistSongsColumn;
     public TableColumn playlistTimeColumn;
     public TextField searchTextField;
-    public ListView songsInPlaylistListView;
+    public ListView<Song> songsInPlaylistListView;
     public Label labelIsPlaying;
     public Label labelArtist;
 
@@ -296,7 +296,11 @@ public class MainWindowController implements Initializable {
         playSong();
     }
 
-    private void moveSongUp(){
+    public void moveSongUp(){
+        System.out.println(songsInPlaylistListView.getId());
+    }
+
+    public void moveSongDown(){
 
     }
 

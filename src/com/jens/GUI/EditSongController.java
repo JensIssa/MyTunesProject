@@ -2,6 +2,7 @@ package com.jens.GUI;
 
 import com.jens.BE.Song;
 import com.jens.GUI.Model.SongModel;
+import javafx.collections.MapChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -75,6 +76,19 @@ public class EditSongController implements Initializable {
             filePath.setText("Music\\" + file.getName());
 
             Media hit = new Media(new File(file.getAbsolutePath()).toURI().toString());
+            hit.getMetadata().addListener((MapChangeListener.Change<? extends String, ? extends Object> c) -> {
+                if (c.wasAdded()) {
+                    if ("artist".equals(c.getKey())) {
+                        String artist = c.getValueAdded().toString();
+                        songArtist.setText(artist);
+                    }
+                    else if ("title".equals(c.getKey())) {
+                        String title = c.getValueAdded().toString();
+                        songTitle.setText(title);
+                    }
+                }
+            });
+
             mediaPlayer = new MediaPlayer(hit);
 
             getSongTime();
