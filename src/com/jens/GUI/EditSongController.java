@@ -12,6 +12,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.w3c.dom.Text;
 
 import java.io.File;
 import java.io.IOException;
@@ -30,6 +31,7 @@ public class EditSongController implements Initializable {
     public Button cancel;
     private MediaPlayer mediaPlayer;
     private String genres[];
+    public TextField idSong;
     MainWindowController mainWindowController;
     SongModel songModel;
 
@@ -54,14 +56,24 @@ public class EditSongController implements Initializable {
     }
 
     public void editSong(ActionEvent actionEvent) throws SQLException {
-        Song selectedSong = (Song) mainWindowController.selectionModel.getSelectedItem();
-        selectedSong.setTitle(songTitle.getText());
-        selectedSong.setArtistName(songArtist.getText());
-        selectedSong.setCategory(categoryChoice.getSelectionModel().getSelectedItem().toString());
-        selectedSong.setUrl(filePath.getText());
-        selectedSong.setUrlImg(filePathImage.getText());
-        selectedSong.setSongLength(Integer.parseInt(songLength.getText()));
-        songModel.updateSong(selectedSong);
+        String updateTitle = songTitle.getText();
+        String updateArtist = songArtist.getText();
+        String updateCategory = categoryChoice.getSelectionModel().getSelectedItem().toString();
+        String updateUrl = filePath.getText();
+        String updateUrlImg = filePathImage.getText();
+        int updateLength = Integer.parseInt(songLength.getText());
+        int updateId = Integer.parseInt(idSong.getText());
+        Song updatedSong = new Song(updateId, updateTitle, updateArtist, updateLength, updateCategory, updateUrl,updateUrlImg);
+        songModel.updateSong(updatedSong);
+    }
+
+    public void setSong(Song song){
+        songTitle.setText(song.getTitle());
+        songArtist.setText(song.getArtistName());
+        filePath.setText(song.getUrl());
+        filePathImage.setText(song.getUrlImg());
+        songLength.setText(Integer.toString(song.getSongLength()));
+        idSong.setText(Integer.toString(song.getId()));
     }
 
     public void chooseSongFile(ActionEvent actionEvent) {

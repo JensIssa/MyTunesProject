@@ -12,6 +12,7 @@ import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.fxml.FXMLLoader;
@@ -156,13 +157,23 @@ public class MainWindowController implements Initializable {
 
     public void editSong(ActionEvent actionEvent) throws IOException {
 
-        selectionModel = songTable.getSelectionModel();
+        Song selectedSong = (Song) songTable.getSelectionModel().getSelectedItem();
+        FXMLLoader root = new FXMLLoader(getClass().getResource("View/EditSong.fxml"));
+        Scene mainWindowScene = null;
 
-        Parent root = FXMLLoader.load(getClass().getResource("View/EditSong.fxml"));
-        Stage stage = new Stage();
-        stage.setTitle("Add/Edit Song");
-        stage.setScene(new Scene(root));
-        stage.show();
+        try{
+            mainWindowScene = new Scene(root.load());
+        }
+        catch (IOException ioException){
+            ioException.printStackTrace();
+        }
+        Stage editSongStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        editSongStage.setScene(mainWindowScene);
+        EditSongController editSongController = root.getController();
+        editSongController.setSong(selectedSong);
+        editSongStage.show();
+
+
     }
 
     public void deleteSong(ActionEvent actionEvent) throws SQLException, IOException {

@@ -7,7 +7,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="329.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jens.GUI.AddSongController">
+<AnchorPane prefHeight="329.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jens.GUI.EditSongController">
     <children>
         <TextField fx:id="songTitle" layoutX="98.0" layoutY="146.0" prefHeight="26.0" prefWidth="210.0" />
         <TextField fx:id="songArtist" layoutX="99.0" layoutY="184.0" prefHeight="26.0" prefWidth="210.0" />
@@ -17,7 +17,7 @@
         <Button fx:id="chooseFile" layoutX="321.0" layoutY="27.0" mnemonicParsing="false" onAction="#chooseSongFile" text="Choose..." />
         <ButtonBar layoutX="203.0" layoutY="263.0" prefHeight="40.0" prefWidth="182.0">
             <buttons>
-                <Button fx:id="saveSong" mnemonicParsing="false" onAction="#createSong" text="Save" />
+                <Button fx:id="saveSong" mnemonicParsing="false" onAction="#editSong" text="Save" />
                 <Button fx:id="cancel" mnemonicParsing="false" onAction="#cancelNewEdit" text="Cancel" />
             </buttons></ButtonBar>
         <Label layoutX="47.0" layoutY="150.0" text="Title:" />
