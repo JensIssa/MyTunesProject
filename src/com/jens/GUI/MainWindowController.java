@@ -340,4 +340,8 @@ public class MainWindowController implements Initializable {
         Alert alert = new Alert(Alert.AlertType.ERROR, text, ButtonType.YES);
         alert.showAndWait();
     }
+
+    public void refreshAction(ActionEvent event) throws SQLException, IOException {
+        refreshSongList();
+    }
 }
