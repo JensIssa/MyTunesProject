@@ -31,6 +31,7 @@ public class EditSongController implements Initializable {
     private MediaPlayer mediaPlayer;
     private String genres[];
     MainWindowController mainWindowController;
+    SongModel songModel;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -43,6 +44,7 @@ public class EditSongController implements Initializable {
 
     public EditSongController() throws IOException {
         mainWindowController = new MainWindowController();
+        songModel = new SongModel();
     }
 
     public void cancelNewEdit(ActionEvent actionEvent) throws SQLException, IOException {
@@ -51,7 +53,7 @@ public class EditSongController implements Initializable {
         stage.close();
     }
 
-    public void editSong(ActionEvent actionEvent) {
+    public void editSong(ActionEvent actionEvent) throws SQLException {
         Song selectedSong = (Song) mainWindowController.selectionModel.getSelectedItem();
         selectedSong.setTitle(songTitle.getText());
         selectedSong.setArtistName(songArtist.getText());
@@ -59,6 +61,7 @@ public class EditSongController implements Initializable {
         selectedSong.setUrl(filePath.getText());
         selectedSong.setUrlImg(filePathImage.getText());
         selectedSong.setSongLength(Integer.parseInt(songLength.getText()));
+        songModel.updateSong(selectedSong);
     }
 
     public void chooseSongFile(ActionEvent actionEvent) {

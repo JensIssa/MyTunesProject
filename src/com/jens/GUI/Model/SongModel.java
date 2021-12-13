@@ -47,4 +47,7 @@ public class SongModel {
     public String songImageUpdate(Song song){
         return songManager.updateSongImage(song);
     }
+    public void updateSong (Song song) throws SQLException {
+        songManager.updateSong(song);
+    }
 }
