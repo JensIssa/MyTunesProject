@@ -4,7 +4,11 @@ import com.jens.BE.Song;
 import com.jens.GUI.Model.SongModel;
 import javafx.collections.MapChangeListener;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.SelectionModel;
@@ -52,11 +56,20 @@ public class EditSongController implements Initializable {
 
     public void cancelNewEdit(ActionEvent actionEvent) throws SQLException, IOException {
         mainWindowController.refreshSongList();
-        Stage stage = (Stage) cancel.getScene().getWindow();
-        stage.close();
+
+        FXMLLoader parent = new FXMLLoader(getClass().getResource("View/MainWindow.fxml"));
+        Scene mainWindowScene = null;
+        try{
+            mainWindowScene = new Scene(parent.load());
+
+        }catch (IOException exception){
+            exception.printStackTrace();
+        }
+        Stage editSongStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        editSongStage.setScene(mainWindowScene);
     }
 
-    public void editSong(ActionEvent actionEvent) throws SQLException {
+    public void editSong(ActionEvent actionEvent) throws SQLException, IOException {
         String updateTitle = songTitle.getText();
         String updateArtist = songArtist.getText();
         String updateCategory = categoryChoice.getSelectionModel().getSelectedItem().toString();
@@ -66,6 +79,17 @@ public class EditSongController implements Initializable {
         int updateId = Integer.parseInt(updateIdTxt.getText());
         Song updatedSong = new Song(updateId, updateTitle, updateArtist, updateLength, updateCategory, updateUrl,updateUrlImg);
         songModel.updateSong(updatedSong);
+
+        FXMLLoader parent = new FXMLLoader(getClass().getResource("View/MainWindow.fxml"));
+        Scene mainWindowScene = null;
+        try{
+            mainWindowScene = new Scene(parent.load());
+
+        }catch (IOException exception){
+            exception.printStackTrace();
+        }
+        Stage editSongStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        editSongStage.setScene(mainWindowScene);
     }
 
     public void setSong(Song song){
