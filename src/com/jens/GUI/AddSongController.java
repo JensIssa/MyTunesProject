@@ -35,7 +35,7 @@ public class AddSongController implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        genres = new String[]{"Pop", "Rock", "Electric"};
+        genres = new String[]{"Pop", "Hip-Hop", "Electric", "Rock", "R&B", "Latin", "K-Pop", "Country", "Classical", "Metal"};
 
         for (int i = 0; i < genres.length; i++){
             categoryChoice.getItems().add(genres[i]);
