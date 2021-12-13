@@ -2,6 +2,7 @@ package com.jens.BLL.util;
 
 import com.jens.BE.Song;
 import com.jens.GUI.MainWindowController;
+import com.jens.GUI.Model.SongModel;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
@@ -9,8 +10,9 @@ import java.io.File;
 
 public class MusicPlayer
 {
-    public MediaPlayer mediaPlayer;
-    public MainWindowController mainWindowController;
+    private MediaPlayer mediaPlayer;
+    private MainWindowController mainWindowController;
+    private SongModel songModel;
 
     public MusicPlayer(Song song)
     {
@@ -30,16 +32,16 @@ public class MusicPlayer
     }
 
     public void playMedia(){
-        mainWindowController.isDone = false;
-        mainWindowController.beginTimer();
+        songModel.isDone(false);
+        songModel.beginTimer();
     }
     public void  endOfMedia(){
-        mainWindowController.cancelTimer();
-        mainWindowController.isPlaying = false;
+        songModel.cancelTimer();
+        songModel.isPlaying(false);
         mediaPlayer.setAutoPlay(true);
-        mainWindowController.isDone = true;
+        songModel.isDone(true);
         if (mediaPlayer.isAutoPlay()){
-            mainWindowController.songTable.getSelectionModel().selectNext();
+            songModel.selectNext();
             playSong();
         }
     }
