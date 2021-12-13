@@ -308,7 +308,7 @@ public class MainWindowController implements Initializable {
     }
 
     public void moveSongUp(){
-        System.out.println(songsInPlaylistListView.getId());
+
     }
 
     public void moveSongDown(){
