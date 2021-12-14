@@ -47,6 +47,8 @@ public class PlaylistDAO {
                     if (playlist != null) {
                         var totalLength = getTotalDuraton(playlist.getId());
                         playlist.setTotalTime(totalLength);
+                        var totalSongs = getAllPlaylistSongs(playlist.getId());
+                        playlist.setTotalSongs(totalSongs.size());
                     }
                 }
                 return allPlaylists;

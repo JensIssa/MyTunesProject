@@ -321,8 +321,9 @@ public class MainWindowController implements Initializable {
         songTable.refresh();
 
     }
+
     public void lookAtPlaylist(MouseEvent mouseEvent) {
-        Playlist playlist = (Playlist) playlistTable.getSelectionModel().getSelectedItem();
+        Playlist playlist = playlistTable.getSelectionModel().getSelectedItem();
         try {
             ObservableList<Song> observableList = playlistModel.playlistSongsToObservablelist(playlist.getId());
             songsInPlaylistListView.setItems(observableList);
@@ -338,5 +339,6 @@ public class MainWindowController implements Initializable {
 
     public void refreshAction(ActionEvent event) throws SQLException, IOException {
         refreshSongList();
+        refreshPlaylist();
     }
 }
