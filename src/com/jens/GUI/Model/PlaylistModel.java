@@ -61,4 +61,8 @@ public class PlaylistModel {
     public void removeSong(Song song){
         playlistManager.removeSong(song);
     }
+
+    public void updatePlaylist(Playlist playlist) throws SQLException {
+        playlistManager.updatePlaylists(playlist);
+    }
 }

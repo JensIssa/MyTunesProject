@@ -6,7 +6,6 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane prefHeight="150.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jens.GUI.EditPlaylistController">
     <children>
         <TextField fx:id="playlistName" layoutX="94.0" layoutY="38.0" prefHeight="26.0" prefWidth="247.0" />
@@ -17,5 +16,6 @@
                 <Button fx:id="savePlaylist" mnemonicParsing="false" onAction="#addPlaylist" text="Save" />
             </buttons>
         </ButtonBar>
+      <TextField fx:id="playlistIdTxt" editable="false" layoutX="7.0" layoutY="103.0" prefHeight="26.0" prefWidth="34.0" visible="false" />
     </children>
 </AnchorPane>

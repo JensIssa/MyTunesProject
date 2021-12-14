@@ -194,13 +194,23 @@ public class MainWindowController implements Initializable {
         stage.show();
     }
 
-    public void editPlaylist() throws IOException {
+    public void editPlaylist(ActionEvent actionEvent) throws IOException {
 
-        Parent root = FXMLLoader.load(getClass().getResource("View/EditPlaylist.fxml"));
-        Stage stage = new Stage();
-        stage.setTitle("Add/Edit Playlist");
-        stage.setScene(new Scene(root));
-        stage.show();
+        Playlist selectedPlaylist = playlistTable.getSelectionModel().getSelectedItem();
+        FXMLLoader root = new FXMLLoader(getClass().getResource("View/EditPlaylist.fxml"));
+        Scene mainWindowScene = null;
+
+        try{
+            mainWindowScene = new Scene(root.load());
+        }
+        catch (IOException ioException){
+            ioException.printStackTrace();
+        }
+        Stage editPlaylistStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        editPlaylistStage.setScene(mainWindowScene);
+        EditPlaylistController editPlaylistController = root.getController();
+        editPlaylistController.setPlaylist(selectedPlaylist);
+        editPlaylistStage.show();
     }
 
     public void deletePlaylist(){

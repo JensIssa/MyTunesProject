@@ -116,6 +116,7 @@ public class PlaylistDAO {
             String sql = "UPDATE PLAYLIST SET Name=? WHERE Id=?;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, playlist.getPlaylistName());
+            preparedStatement.setInt(2, playlist.getId());
             if(preparedStatement.executeUpdate() != 1){
                 throw new Exception("Could not delete Song");
             }
