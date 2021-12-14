@@ -71,13 +71,15 @@ public class SongDAO {
 
     public void updateSong(Song song) throws SQLException {
         try(Connection connection = connectionPool.checkOut()){
-            String sql = "UPDATE SONG SET Title=?, ArtistName=?, SongLength=?, Category=?, Url=? WHERE Id=?;";
+            String sql = "UPDATE SONG SET Title=?, ArtistName=?, SongLength=?, Category=?, Url=?, urlImg=? WHERE Id=?;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, song.getTitle());
             preparedStatement.setString(2, song.getArtistName());
             preparedStatement.setInt(3, song.getSongLength());
             preparedStatement.setString(4, song.getCategory());
             preparedStatement.setString(5, song.getUrl());
+            preparedStatement.setString(6, song.getUrlImg());
+            preparedStatement.setInt(7, song.getId());
             if(preparedStatement.executeUpdate() != 1){
                 throw new Exception("Could not delete Song");
             }
