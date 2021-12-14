@@ -7,6 +7,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 import java.io.File;
+import java.io.IOException;
 
 public class MusicPlayer
 {
@@ -14,11 +15,13 @@ public class MusicPlayer
     private MainWindowController mainWindowController;
     private SongModel songModel;
 
-    public MusicPlayer(Song song)
+    public MusicPlayer(Song song) throws IOException
     {
         String bip = song.getUrl();
         Media hit = new Media(new File(bip).toURI().toString());
         mediaPlayer = new MediaPlayer(hit);
+        mainWindowController = new MainWindowController();
+        songModel = new SongModel();
     }
 
     public void playSong(){

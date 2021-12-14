@@ -42,9 +42,9 @@ public class SongModel {
 
     public void searchSongs(String query) throws SQLException, IOException
     {
-        List<Song> seachedSongs = songManager.search(listToObservablelist(), query);
+        List<Song> searchResults = songManager.searchSongs(query);
         songList.clear();
-        songList.addAll(seachedSongs);
+        songList.addAll(searchResults);
     }
     public String songImageUpdate(Song song){
         return songManager.updateSongImage(song);

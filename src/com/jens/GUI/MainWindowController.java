@@ -137,8 +137,8 @@ public class MainWindowController implements Initializable {
     public void setSongImage(){
         try
         {
-            File img = new File(songModel.songImageUpdate((Song) songTable.getSelectionModel().getSelectedItem()));
-            InputStream isImage = (InputStream) new FileInputStream(img);
+            File img = new File(songModel.songImageUpdate(songTable.getSelectionModel().getSelectedItem()));
+            InputStream isImage = new FileInputStream(img);
             System.out.println(isImage);
             songImage.setImage(new Image(isImage));
         } catch (Exception e){
@@ -146,7 +146,7 @@ public class MainWindowController implements Initializable {
         }
     }
 
-    public void newSong(ActionEvent actionEvent) throws IOException {
+    public void newSong() throws IOException {
 
         Parent root = FXMLLoader.load(getClass().getResource("View/AddSong.fxml"));
         Stage stage = new Stage();
@@ -155,9 +155,9 @@ public class MainWindowController implements Initializable {
         stage.show();
     }
 
-    public void editSong(ActionEvent actionEvent) throws IOException {
+    public void editSong(ActionEvent actionEvent) {
 
-        Song selectedSong = (Song) songTable.getSelectionModel().getSelectedItem();
+        Song selectedSong = songTable.getSelectionModel().getSelectedItem();
         FXMLLoader root = new FXMLLoader(getClass().getResource("View/EditSong.fxml"));
         Scene mainWindowScene = null;
 
@@ -176,13 +176,13 @@ public class MainWindowController implements Initializable {
 
     }
 
-    public void deleteSong(ActionEvent actionEvent) throws SQLException, IOException {
-        songModel.deleteSong((Song)songTable.getSelectionModel().getSelectedItem());
+    public void deleteSong() throws SQLException, IOException {
+        songModel.deleteSong(songTable.getSelectionModel().getSelectedItem());
         songTable.getItems().remove(songTable.getSelectionModel().getSelectedItem());
         refreshSongList();
     }
 
-    public void newPlaylist(ActionEvent actionEvent) throws IOException {
+    public void newPlaylist() throws IOException {
 
         Parent root = FXMLLoader.load(getClass().getResource("View/AddPlaylist.fxml"));
         Stage stage = new Stage();
@@ -191,7 +191,7 @@ public class MainWindowController implements Initializable {
         stage.show();
     }
 
-    public void editPlaylist(ActionEvent actionEvent) throws IOException {
+    public void editPlaylist() throws IOException {
 
         Parent root = FXMLLoader.load(getClass().getResource("View/EditPlaylist.fxml"));
         Stage stage = new Stage();
@@ -200,14 +200,14 @@ public class MainWindowController implements Initializable {
         stage.show();
     }
 
-    public void deletePlaylist(ActionEvent actionEvent) throws SQLException, IOException {
-        playlistModel.deletePlaylist((Playlist) playlistTable.getSelectionModel().getSelectedItem());
+    public void deletePlaylist(){
+        playlistModel.deletePlaylist(playlistTable.getSelectionModel().getSelectedItem());
         playlistTable.getItems().remove(playlistTable.getSelectionModel().getSelectedItem());
     }
 
-    public void addSongToPlaylist(ActionEvent actionEvent) {
-        Song song = (Song) songTable.getSelectionModel().getSelectedItem();
-        Playlist playlist = (Playlist) playlistTable.getSelectionModel().getSelectedItem();
+    public void addSongToPlaylist() {
+        Song song = songTable.getSelectionModel().getSelectedItem();
+        Playlist playlist = playlistTable.getSelectionModel().getSelectedItem();
         playlistModel.addSongToPlaylist(playlist.getId(), song.getId());
     }
 
@@ -217,8 +217,8 @@ public class MainWindowController implements Initializable {
     public void moveSongUp(ActionEvent actionEvent) {
     }
     
-    public void deletePlaylistSong(ActionEvent actionEvent) {
-        playlistModel.removeSong((Song)songsInPlaylistListView.getSelectionModel().getSelectedItem());
+    public void deletePlaylistSong() {
+        playlistModel.removeSong(songsInPlaylistListView.getSelectionModel().getSelectedItem());
         songsInPlaylistListView.getItems().remove(songsInPlaylistListView.getSelectionModel().getSelectedItem());
     }
     
@@ -246,12 +246,24 @@ public class MainWindowController implements Initializable {
                     musicPlayer.mediaPlayer.dispose();
                     cancelTimer();
                 }
+                if(songsInPlaylistListView.getSelectionModel().getSelectedItem() != null){
+                    System.out.println("playlist is focused");
+                    musicPlayer = new MusicPlayer(songsInPlaylistListView.getSelectionModel().getSelectedItem());
+                    currentSong = songsInPlaylistListView.getSelectionModel().getSelectedItem();
+                }
+                else if (songTable.getSelectionModel().getSelectedItem() != null){
+                    System.out.println("songs is focused");
+                    musicPlayer = new MusicPlayer(songTable.getSelectionModel().getSelectedItem());
+                    currentSong = songTable.getSelectionModel().getSelectedItem();
+                }
+                songTable.setFocusTraversable(true);
+                songsInPlaylistListView.setFocusTraversable(false);
                 musicPlayer.mediaPlayer.setOnPlaying(this::playMedia);
                 musicPlayer.mediaPlayer.setOnEndOfMedia(this::endOfMedia);
                 musicPlayer.playSong();
                 musicPlayer.mediaPlayer.setVolume(adjustVolume());
-                String actualSong = (((Song) songTable.getSelectionModel().getSelectedItem()).getTitle());
-                String currentArtist = (((Song) songTable.getSelectionModel().getSelectedItem()).getArtistName());
+                String actualSong = (songTable.getSelectionModel().getSelectedItem()).getTitle();
+                String currentArtist = (songTable.getSelectionModel().getSelectedItem()).getArtistName();
                 labelIsPlaying.setText("(" + actualSong + ")" + " Is Playing");
                 labelArtist.setText(currentArtist);
                 isPlaying = true;
@@ -297,12 +309,12 @@ public class MainWindowController implements Initializable {
         timer.cancel();
     }
 
-    public void nextSong(ActionEvent actionEvent) {
+    public void nextSong() {
         songTable.getSelectionModel().selectNext();
         playSong();
     }
 
-    public void previousSong(ActionEvent actionEvent) {
+    public void previousSong() {
         songTable.getSelectionModel().selectAboveCell();
         playSong();
     }
@@ -322,7 +334,10 @@ public class MainWindowController implements Initializable {
 
     }
 
-    public void lookAtPlaylist(MouseEvent mouseEvent) {
+
+
+
+    public void lookAtPlaylist() {
         Playlist playlist = playlistTable.getSelectionModel().getSelectedItem();
         try {
             ObservableList<Song> observableList = playlistModel.playlistSongsToObservablelist(playlist.getId());
@@ -337,7 +352,7 @@ public class MainWindowController implements Initializable {
         alert.showAndWait();
     }
 
-    public void refreshAction(ActionEvent event) throws SQLException, IOException {
+    public void refreshAction() throws SQLException, IOException {
         refreshSongList();
         refreshPlaylist();
     }

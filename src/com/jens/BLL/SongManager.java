@@ -41,12 +41,13 @@ public class SongManager{
         return songDAO.getAllSongs();
     }
 
-    public ObservableList<Song> search(ObservableList<Song> searchBase, String query )
+    public List<Song> searchSongs(String query) throws SQLException, IOException
     {
-        ObservableList<Song> songsFound = FXCollections.observableArrayList();
-        songsFound.addAll(songSearcher.search(searchBase, query));
-        return songsFound;
+        List<Song> allSongs = getAllSongs();
+        List<Song> searchResult = songSearcher.search(allSongs, query);
+        return searchResult;
     }
+
     public String updateSongImage(Song song){
         return song.getUrlImg();
     }
