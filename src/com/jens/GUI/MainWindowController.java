@@ -246,6 +246,18 @@ public class MainWindowController implements Initializable {
                     musicPlayer.mediaPlayer.dispose();
                     cancelTimer();
                 }
+                if(songsInPlaylistListView.getSelectionModel().getSelectedItem() != null){
+                    System.out.println("playlist is focused");
+                    musicPlayer = new MusicPlayer((Song) songsInPlaylistListView.getSelectionModel().getSelectedItem());
+                    currentSong = songsInPlaylistListView.getSelectionModel().getSelectedItem();
+                }
+                else if (songTable.getSelectionModel().getSelectedItem() != null){
+                    System.out.println("songs is focused");
+                    musicPlayer = new MusicPlayer((Song) songTable.getSelectionModel().getSelectedItem());
+                    currentSong = songTable.getSelectionModel().getSelectedItem();
+                }
+                songTable.setFocusTraversable(true);
+                songsInPlaylistListView.setFocusTraversable(false);
                 musicPlayer.mediaPlayer.setOnPlaying(this::playMedia);
                 musicPlayer.mediaPlayer.setOnEndOfMedia(this::endOfMedia);
                 musicPlayer.playSong();
