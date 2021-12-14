@@ -9,6 +9,7 @@ import com.jens.GUI.Model.PlaylistModel;
 import com.jens.GUI.Model.SongModel;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -212,10 +213,35 @@ public class MainWindowController implements Initializable {
     }
 
     public void moveSongDown(ActionEvent actionEvent) {
+        {
+            if(songsInPlaylistListView.getSelectionModel().getSelectedItem() != null)
+            {
+                if(songsInPlaylistListView.getSelectionModel().getSelectedIndex() != songsInPlaylistListView.getItems().size()-1) // if the row is in last so dont do nothing
+                {
+                    int index = songsInPlaylistListView.getSelectionModel().getSelectedIndex();
+                    Song x = songsInPlaylistListView.getSelectionModel().getSelectedItem();
+                    songsInPlaylistListView.getItems().set(index, songsInPlaylistListView.getItems().get(index+1));
+                    songsInPlaylistListView.getItems().set(index+1, x);
+                    songsInPlaylistListView.getSelectionModel().select(index+1);
+                }
+            }
+        }
     }
 
     public void moveSongUp(ActionEvent actionEvent) {
+        if(songsInPlaylistListView.getSelectionModel().getSelectedItem() != null) // check if the user really selected a row in the table
+        {
+            if(songsInPlaylistListView.getSelectionModel().getSelectedIndex() != 0) // if the row first one so do nothing
+            {
+                int index = songsInPlaylistListView.getSelectionModel().getSelectedIndex(); // get the selected row index
+                Song x = songsInPlaylistListView.getSelectionModel().getSelectedItem(); // get the selected item
+                songsInPlaylistListView.getItems().set(index, songsInPlaylistListView.getItems().get(index-1)); // move the selected item up
+                songsInPlaylistListView.getItems().set(index-1, x); // change the row with the item in above
+                songsInPlaylistListView.getSelectionModel().select(index-1); // select the new row position
+            }
+        }
     }
+
     
     public void deletePlaylistSong() {
         playlistModel.removeSong(songsInPlaylistListView.getSelectionModel().getSelectedItem());
@@ -317,14 +343,6 @@ public class MainWindowController implements Initializable {
     public void previousSong() {
         songTable.getSelectionModel().selectAboveCell();
         playSong();
-    }
-
-    public void moveSongUp(){
-
-    }
-
-    public void moveSongDown(){
-
     }
 
     public void refreshSongList() throws IOException, SQLException {
