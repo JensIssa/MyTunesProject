@@ -351,10 +351,7 @@ public class MainWindowController implements Initializable {
         songTable.refresh();
 
     }
-
-
-
-
+    
     public void lookAtPlaylist() {
         Playlist playlist = playlistTable.getSelectionModel().getSelectedItem();
         try {
