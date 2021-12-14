@@ -1,6 +1,7 @@
 package com.jens.BLL;
 
 import com.jens.BE.Song;
+import com.jens.BLL.util.MusicPlayer;
 import com.jens.BLL.util.SongSearcher;
 import com.jens.DAL.SongDAO;
 import javafx.collections.FXCollections;

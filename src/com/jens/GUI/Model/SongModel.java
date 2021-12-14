@@ -2,19 +2,22 @@ package com.jens.GUI.Model;
 
 import com.jens.BE.Song;
 import com.jens.BLL.SongManager;
+import com.jens.BLL.util.MusicPlayer;
 import com.jens.GUI.MainWindowController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.TableView;
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
 
 public class SongModel {
 
     private SongManager songManager = new SongManager();
-    private MainWindowController mainWindowController;
+    private MusicPlayer musicPlayer;
     private ObservableList<Song> songList;
 
     public SongModel() throws IOException {
@@ -51,20 +54,5 @@ public class SongModel {
     }
     public void updateSong (Song song) throws SQLException {
         songManager.updateSong(song);
-    }
-    public void cancelTimer(){
-        mainWindowController.cancelTimer();
-    }
-    public void beginTimer(){
-        mainWindowController.beginTimer();
-    }
-    public void isDone(boolean b){
-        mainWindowController.isDone = b;
-    }
-    public void isPlaying(boolean b){
-        mainWindowController.isPlaying = b;
-    }
-    public void selectNext(){
-        mainWindowController.songTable.getSelectionModel().selectNext();
     }
 }

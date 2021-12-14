@@ -2,7 +2,9 @@ package com.jens.BLL.util;
 
 import com.jens.BE.Song;
 import com.jens.GUI.MainWindowController;
+import com.jens.GUI.Model.MusicPlayerModel;
 import com.jens.GUI.Model.SongModel;
+import javafx.scene.control.TableView;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
@@ -12,16 +14,12 @@ import java.io.IOException;
 public class MusicPlayer
 {
     public MediaPlayer mediaPlayer;
-    private MainWindowController mainWindowController;
-    private SongModel songModel;
 
     public MusicPlayer(Song song) throws IOException
     {
         String bip = song.getUrl();
         Media hit = new Media(new File(bip).toURI().toString());
         mediaPlayer = new MediaPlayer(hit);
-        mainWindowController = new MainWindowController();
-        songModel = new SongModel();
     }
 
     public void playSong(){
@@ -34,17 +32,10 @@ public class MusicPlayer
         mediaPlayer.isAutoPlay();
     }
 
-    public void playMedia(){
-        songModel.isDone(false);
-        songModel.beginTimer();
-    }
-    public void  endOfMedia(){
-        songModel.cancelTimer();
-        songModel.isPlaying(false);
+    public void  endOfMedia(TableView<Song> tableView){
         mediaPlayer.setAutoPlay(true);
-        songModel.isDone(true);
         if (mediaPlayer.isAutoPlay()){
-            songModel.selectNext();
+            tableView.getSelectionModel().selectNext();
             playSong();
         }
     }

@@ -5,6 +5,7 @@ import com.jens.BE.Song;
 import com.jens.BLL.PlaylistManager;
 import com.jens.BLL.SongManager;
 import com.jens.BLL.util.MusicPlayer;
+import com.jens.GUI.Model.MusicPlayerModel;
 import com.jens.GUI.Model.PlaylistModel;
 import com.jens.GUI.Model.SongModel;
 import javafx.beans.InvalidationListener;
@@ -64,6 +65,7 @@ public class MainWindowController implements Initializable {
     private double volume = 0;
 
     private SongModel songModel = new SongModel();
+    private MusicPlayerModel musicPlayerModel;
     private PlaylistModel playlistModel = new PlaylistModel();
     private MusicPlayer musicPlayer;
     public boolean isPlaying = false;
@@ -233,10 +235,12 @@ public class MainWindowController implements Initializable {
     }
 
     private void endOfMedia(){
-        musicPlayer.endOfMedia();
+        musicPlayerModel.endOfMedia(songTable);
+        cancelTimer();
     }
     private void playMedia(){
-        musicPlayer.playMedia();
+        isPlaying = true;
+        beginTimer();
     }
 
     public void playSong(){
@@ -249,11 +253,13 @@ public class MainWindowController implements Initializable {
                 if(songsInPlaylistListView.getSelectionModel().getSelectedItem() != null){
                     System.out.println("playlist is focused");
                     musicPlayer = new MusicPlayer(songsInPlaylistListView.getSelectionModel().getSelectedItem());
+                    musicPlayerModel = new MusicPlayerModel(songsInPlaylistListView.getSelectionModel().getSelectedItem());
                     currentSong = songsInPlaylistListView.getSelectionModel().getSelectedItem();
                 }
                 else if (songTable.getSelectionModel().getSelectedItem() != null){
                     System.out.println("songs is focused");
                     musicPlayer = new MusicPlayer(songTable.getSelectionModel().getSelectedItem());
+                    musicPlayerModel = new MusicPlayerModel(songTable.getSelectionModel().getSelectedItem());
                     currentSong = songTable.getSelectionModel().getSelectedItem();
                 }
                 songTable.setFocusTraversable(true);
@@ -306,7 +312,7 @@ public class MainWindowController implements Initializable {
     }
 
     public void cancelTimer(){
-        timer.cancel();
+        musicPlayerModel.cancelTimer(timer);
     }
 
     public void nextSong() {
