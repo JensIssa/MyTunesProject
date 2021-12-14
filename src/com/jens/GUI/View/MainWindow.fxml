@@ -50,11 +50,12 @@
             <TableColumn fx:id="songTimeColumn" prefWidth="56.0" text="Time" />
         </columns>
       </TableView>
-      <ButtonBar layoutX="641.0" layoutY="502.0" prefHeight="40.0" prefWidth="200.0">
+      <ButtonBar layoutX="556.0" layoutY="503.0" prefHeight="40.0" prefWidth="200.0">
         <buttons>
           <Button fx:id="songNew" mnemonicParsing="false" onAction="#newSong" text="New" />
             <Button fx:id="songEdit" mnemonicParsing="false" onAction="#editSong" text="Edit" />
             <Button fx:id="songDelete" mnemonicParsing="false" onAction="#deleteSong" text="Delete" />
+            <Button mnemonicParsing="false" onAction="#refreshAction" text="Refresh" />
         </buttons>
          <padding>
             <Insets left="-20.0" />
@@ -70,7 +71,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <Button fx:id="directAddSongToPlaylist" layoutX="456.0" layoutY="130.0" mnemonicParsing="false" onAction="#addSongToPlaylist" prefHeight="40.0" prefWidth="40.0">
+      <Button fx:id="directAddSongToPlaylist" layoutX="456.0" layoutY="134.0" mnemonicParsing="false" onAction="#addSongToPlaylist" prefHeight="40.0" prefWidth="40.0">
          <graphic>
             <ImageView fitHeight="28.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -159,6 +160,5 @@
             <DropShadow />
          </effect>
       </Pane>
-      <Button layoutX="450.0" layoutY="197.0" mnemonicParsing="false" onAction="#refreshAction" text="Refresh" />
    </children>
 </AnchorPane>
