@@ -1,14 +1,12 @@
 package com.jens.GUI;
 
 import com.jens.BE.Playlist;
-import com.jens.BE.Song;
 import com.jens.GUI.Model.PlaylistModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.SelectionModel;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -22,17 +20,27 @@ public class EditPlaylistController {
     public TextField playlistIdTxt;
     PlaylistModel playlistModel;
 
-    MainWindowController mainWindowController = new MainWindowController();
-
+    /**
+     * Instantiates the playlistModel
+     * @throws IOException
+     */
     public EditPlaylistController() throws IOException {
         playlistModel = new PlaylistModel();
     }
 
-    public void cancelNewEdit(ActionEvent actionEvent) {
+    /**
+     * Exits EditPlaylistWindow
+     */
+    public void cancelNewEdit() {
         Stage stage = (Stage) cancel.getScene().getWindow();
         stage.close();
     }
 
+    /**
+     * Updates the selected playlist with its new parameters
+     * @param actionEvent
+     * @throws SQLException
+     */
     public void addPlaylist(ActionEvent actionEvent) throws SQLException {
         String updateName = playlistName.getText();
         int updateId = Integer.parseInt(playlistIdTxt.getText());
@@ -53,8 +61,11 @@ public class EditPlaylistController {
 
     }
 
+    /**
+     * Sets the current parameters to the textfield
+     * @param playlist The selected playlist
+     */
     public void setPlaylist(Playlist playlist){
         playlistName.setText(playlist.getPlaylistName());
-        playlistIdTxt.setText(Integer.toString(playlist.getId()));
     }
 }

@@ -4,6 +4,7 @@ import com.jens.BE.Song;
 import com.jens.GUI.Model.SongModel;
 import javafx.collections.MapChangeListener;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -27,19 +28,31 @@ import java.util.ResourceBundle;
 
 public class EditSongController implements Initializable {
 
-    public TextField songTitle;
-    public TextField songArtist;
-    public TextField songLength;
-    public ComboBox categoryChoice;
-    public TextField filePath;
-    public TextField filePathImage;
-    public Button cancel;
-    public TextField updateIdTxt;
+    @FXML
+    private TextField songTitle;
+    @FXML
+    private TextField songArtist;
+    @FXML
+    private TextField songLength;
+    @FXML
+    private ComboBox categoryChoice;
+    @FXML
+    private TextField filePath;
+    @FXML
+    private TextField filePathImage;
+    @FXML
+    private TextField updateIdTxt;
+
     private MediaPlayer mediaPlayer;
     private String genres[];
     MainWindowController mainWindowController;
     SongModel songModel;
 
+    /**
+     * Initializes the combobox
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         genres = new String[]{"Pop", "Hip-Hop", "Electric", "Rock", "R&B", "Latin", "K-Pop", "Country", "Classical", "Metal"};
@@ -49,11 +62,18 @@ public class EditSongController implements Initializable {
         }
     }
 
+    /**
+     * Instansiates the mainWindowController and songModel
+     * @throws IOException
+     */
     public EditSongController() throws IOException {
         mainWindowController = new MainWindowController();
         songModel = new SongModel();
     }
 
+    /**
+     * Exits the EditSongView
+     */
     public void cancelNewEdit(ActionEvent actionEvent) throws SQLException, IOException {
         mainWindowController.refreshSongList();
 
@@ -69,7 +89,13 @@ public class EditSongController implements Initializable {
         editSongStage.setScene(mainWindowScene);
     }
 
-    public void editSong(ActionEvent actionEvent) throws SQLException, IOException {
+    /**
+     * Updates the selected songs parameters
+     * @param actionEvent
+     * @throws SQLException
+     * @throws IOException
+     */
+    public void editSong(ActionEvent actionEvent) throws SQLException {
         String updateTitle = songTitle.getText();
         String updateArtist = songArtist.getText();
         String updateCategory = categoryChoice.getSelectionModel().getSelectedItem().toString();
@@ -92,6 +118,10 @@ public class EditSongController implements Initializable {
         editSongStage.setScene(mainWindowScene);
     }
 
+    /**
+     * Sets the current parameters to the textfields
+     * @param song The selected song
+     */
     public void setSong(Song song){
         songTitle.setText(song.getTitle());
         songArtist.setText(song.getArtistName());
@@ -101,7 +131,10 @@ public class EditSongController implements Initializable {
         updateIdTxt.setText(Integer.toString(song.getId()));
     }
 
-    public void chooseSongFile(ActionEvent actionEvent) {
+    /**
+     * Opens a file explorer to choose a song (*.mp3, *.wav)
+     */
+    public void chooseSongFile() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Music Files", "*.mp3", "*.wav"));
         fileChooser.setInitialDirectory(new File("Music/" ));
@@ -131,6 +164,9 @@ public class EditSongController implements Initializable {
         }
     }
 
+    /**
+     * Fetches the length of a song in minutes and seconds
+     */
     private void getSongTime() {
         mediaPlayer.setOnReady(() -> {
             String averageSeconds = String.format("%1.0f", mediaPlayer.getMedia().getDuration().toSeconds());
@@ -144,7 +180,10 @@ public class EditSongController implements Initializable {
         });
     }
 
-    public void chooseImageFile(ActionEvent actionEvent) {
+    /**
+     * Opens a file explorer to choose an image (*.png, *.jpg, *.jpeg)
+     */
+    public void chooseImageFile() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"));
         fileChooser.setInitialDirectory(new File("image/" ));
