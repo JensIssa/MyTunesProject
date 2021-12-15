@@ -14,6 +14,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -40,45 +41,56 @@ import java.util.TimerTask;
 
 public class MainWindowController implements Initializable {
 
-    private ObservableList<Song> allSongs = FXCollections.observableArrayList();
-    private ObservableList<Playlist> allPlaylist = FXCollections.observableArrayList();
+    @FXML
+    private TableColumn songTitleColumn;
+    @FXML
+    private TableColumn songArtistColumn;
+    @FXML
+    private TableColumn songCategoryColumn;
+    @FXML
+    private TableColumn songTimeColumn;
+    @FXML
+    private TableView<Song> songTable;
 
-    public TableColumn songTitleColumn;
-    public TableColumn songArtistColumn;
-    public TableColumn songCategoryColumn;
-    public TableColumn songTimeColumn;
-    public TableView<Song> songTable;
+    @FXML
+    private Slider volumeSlider;
+    @FXML
+    private ProgressBar songProgressBar;
+    @FXML
+    private ImageView songImage;
 
-    public Slider volumeSlider;
-    public ProgressBar songProgressBar;
-    public Image image;
-    public ImageView songImage;
-
-    public TableView<Playlist> playlistTable;
-    public TableColumn playlistNameColumn;
-    public TableColumn playlistSongsColumn;
-    public TableColumn playlistTimeColumn;
-    public TextField searchTextField;
-    public ListView<Song> songsInPlaylistListView;
-    public Label labelIsPlaying;
-    public Label labelArtist;
+    @FXML
+    private TableView<Playlist> playlistTable;
+    @FXML
+    private TableColumn playlistNameColumn;
+    @FXML
+    private TableColumn playlistSongsColumn;
+    @FXML
+    private TableColumn playlistTimeColumn;
+    @FXML
+    private TextField searchTextField;
+    @FXML
+    private ListView<Song> songsInPlaylistListView;
+    @FXML
+    private Label labelIsPlaying;
+    @FXML
+    private Label labelArtist;
 
     private double volume = 0;
-
     private SongModel songModel = new SongModel();
     private MusicPlayerModel musicPlayerModel;
     private PlaylistModel playlistModel = new PlaylistModel();
     private MusicPlayer musicPlayer;
-    public boolean isPlaying = false;
-    public boolean isDone = true;
+    private boolean isPlaying = false;
+    private boolean isDone = true;
     private Object currentSong = null;
-    private Button upButton;
-    private Button downButton;
     private Timer timer;
     private TimerTask timerTask;
-    public SelectionModel selectionModel;
 
-
+    /**
+     * Instantiates the tableviews
+     * @throws IOException
+     */
     public MainWindowController() throws IOException {
 
         songTitleColumn = new TableColumn<SongManager, String>();
@@ -96,7 +108,11 @@ public class MainWindowController implements Initializable {
 
     }
 
-
+    /**
+     * Initializes the tableviews and fulls them with data before startup
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -137,6 +153,9 @@ public class MainWindowController implements Initializable {
         });
     }
 
+    /**
+     * Sets an image for the song currently playing
+     */
     public void setSongImage(){
         try
         {
@@ -149,6 +168,10 @@ public class MainWindowController implements Initializable {
         }
     }
 
+    /**
+     * Changes the view to addSong
+     * @throws IOException
+     */
     public void newSong() throws IOException {
 
         Parent root = FXMLLoader.load(getClass().getResource("View/AddSong.fxml"));
@@ -158,6 +181,10 @@ public class MainWindowController implements Initializable {
         stage.show();
     }
 
+    /**
+     * Changes the View to editSong
+     * @param actionEvent
+     */
     public void editSong(ActionEvent actionEvent) {
 
         Song selectedSong = songTable.getSelectionModel().getSelectedItem();
@@ -175,16 +202,23 @@ public class MainWindowController implements Initializable {
         EditSongController editSongController = root.getController();
         editSongController.setSong(selectedSong);
         editSongStage.show();
-
-
     }
 
+    /**
+     * deletes the selected song
+     * @throws SQLException
+     * @throws IOException
+     */
     public void deleteSong() throws SQLException, IOException {
         songModel.deleteSong(songTable.getSelectionModel().getSelectedItem());
         songTable.getItems().remove(songTable.getSelectionModel().getSelectedItem());
         refreshSongList();
     }
 
+    /**
+     * Changes the view to addPlaylist
+     * @throws IOException
+     */
     public void newPlaylist() throws IOException {
 
         Parent root = FXMLLoader.load(getClass().getResource("View/AddPlaylist.fxml"));
@@ -194,6 +228,11 @@ public class MainWindowController implements Initializable {
         stage.show();
     }
 
+    /**
+     * Changes the view to editPlaylist
+     * @param actionEvent
+     * @throws IOException
+     */
     public void editPlaylist(ActionEvent actionEvent) throws IOException {
 
         Playlist selectedPlaylist = playlistTable.getSelectionModel().getSelectedItem();
@@ -213,18 +252,35 @@ public class MainWindowController implements Initializable {
         editPlaylistStage.show();
     }
 
+    /**
+     * Deletes the selected playlist
+     */
     public void deletePlaylist(){
         playlistModel.deletePlaylist(playlistTable.getSelectionModel().getSelectedItem());
         playlistTable.getItems().remove(playlistTable.getSelectionModel().getSelectedItem());
     }
 
+    /**
+     * Adds the selected song to the selected playlist
+     */
     public void addSongToPlaylist() {
         Song song = songTable.getSelectionModel().getSelectedItem();
         Playlist playlist = playlistTable.getSelectionModel().getSelectedItem();
         playlistModel.addSongToPlaylist(playlist.getId(), song.getId());
     }
 
-    public void moveSongDown(ActionEvent actionEvent) {
+    /**
+     * Deletes the selected song from a playlist
+     */
+    public void deletePlaylistSong() {
+        playlistModel.removeSong(songsInPlaylistListView.getSelectionModel().getSelectedItem());
+        songsInPlaylistListView.getItems().remove(songsInPlaylistListView.getSelectionModel().getSelectedItem());
+    }
+
+    /**
+     * Enables the user to move song in a playlist down in the list
+     */
+    public void moveSongDown() {
         {
             if(songsInPlaylistListView.getSelectionModel().getSelectedItem() != null)
             {
@@ -240,7 +296,10 @@ public class MainWindowController implements Initializable {
         }
     }
 
-    public void moveSongUp(ActionEvent actionEvent) {
+    /**
+     * Enables the user to move song in a playlist up in the list
+     */
+    public void moveSongUp() {
         if(songsInPlaylistListView.getSelectionModel().getSelectedItem() != null) // check if the user really selected a row in the table
         {
             if(songsInPlaylistListView.getSelectionModel().getSelectedIndex() != 0) // if the row first one so do nothing
@@ -254,31 +313,44 @@ public class MainWindowController implements Initializable {
         }
     }
 
-    
-    public void deletePlaylistSong() {
-        playlistModel.removeSong(songsInPlaylistListView.getSelectionModel().getSelectedItem());
-        songsInPlaylistListView.getItems().remove(songsInPlaylistListView.getSelectionModel().getSelectedItem());
-    }
-    
+    /**
+     * Adjusts the volume when the user uses the slider
+     * @return
+     */
     public double adjustVolume(){
         return volume = volumeSlider.getValue() / 100;
     }
 
+    /**
+     * Refreshes the playlist
+     * @throws SQLException
+     * @throws IOException
+     */
     public void refreshPlaylist() throws SQLException, IOException {
         playlistTable.getItems().clear();
         playlistTable.setItems(playlistModel.listToObservablelist());
         playlistTable.refresh();
     }
 
+    /**
+     * Checks if the song is done
+     */
     private void endOfMedia(){
         musicPlayerModel.endOfMedia(songTable);
         cancelTimer();
     }
+
+    /**
+     *
+     */
     private void playMedia(){
         isPlaying = true;
         beginTimer();
     }
 
+    /**
+     *
+     */
     public void playSong(){
         try{
             if (!isPlaying && isDone || !(currentSong == songTable.getSelectionModel().getSelectedItem())){
@@ -325,6 +397,9 @@ public class MainWindowController implements Initializable {
         }
     }
 
+    /**
+     * Pauses the current song
+     */
     public void pauseSong(){
         musicPlayer.pauseSong();
         isPlaying = false;
@@ -351,23 +426,37 @@ public class MainWindowController implements Initializable {
         musicPlayerModel.cancelTimer(timer);
     }
 
+    /**
+     * Skips to the next song
+     */
     public void nextSong() {
         songTable.getSelectionModel().selectNext();
         playSong();
     }
 
+    /**
+     * Returns to the previous song
+     */
     public void previousSong() {
         songTable.getSelectionModel().selectAboveCell();
         playSong();
     }
 
+    /**
+     * Refreshes the songtable
+     * @throws IOException
+     * @throws SQLException
+     */
     public void refreshSongList() throws IOException, SQLException {
         songTable.getItems().clear();
         songTable.setItems(songModel.listToObservablelist());
         songTable.refresh();
 
     }
-    
+
+    /**
+     * loads the songs in a selected playlist
+     */
     public void lookAtPlaylist() {
         Playlist playlist = playlistTable.getSelectionModel().getSelectedItem();
         try {
@@ -383,6 +472,11 @@ public class MainWindowController implements Initializable {
         alert.showAndWait();
     }
 
+    /**
+     * Refreshes the entire mainwindow
+     * @throws SQLException
+     * @throws IOException
+     */
     public void refreshAction() throws SQLException, IOException {
         refreshSongList();
         refreshPlaylist();
