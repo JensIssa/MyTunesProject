@@ -58,8 +58,8 @@ public class PlaylistModel {
         playlistManager.getAllPlaylistSongs(playlistId);
     }
 
-    public void removeSong(Song song){
-        playlistManager.removeSong(song);
+    public void deleteSongFromPlaylist(int playlistId, int songId) throws SQLException {
+        playlistManager.deleteSongFromPlaylist(playlistId, songId);
     }
 
     public void updatePlaylist(Playlist playlist) throws SQLException {
