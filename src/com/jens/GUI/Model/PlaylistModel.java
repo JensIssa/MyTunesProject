@@ -50,7 +50,6 @@ public class PlaylistModel {
         {
             songs.add(songList);
         }
-        System.out.println(tempSongList.size());
         return songs;
     }
 

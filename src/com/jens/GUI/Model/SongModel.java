@@ -65,7 +65,7 @@ public class SongModel {
     }
 
     /**
-     * 
+     *
      * @param query
      * @throws SQLException
      * @throws IOException
