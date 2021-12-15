@@ -272,8 +272,8 @@ public class MainWindowController implements Initializable {
     /**
      * Deletes the selected song from a playlist
      */
-    public void deletePlaylistSong() {
-        playlistModel.removeSong(songsInPlaylistListView.getSelectionModel().getSelectedItem());
+    public void deletePlaylistSong() throws SQLException {
+        playlistModel.deleteSongFromPlaylist(playlistTable.getSelectionModel().getSelectedItem().getId(), songsInPlaylistListView.getSelectionModel().getSelectedItem().getId());
         songsInPlaylistListView.getItems().remove(songsInPlaylistListView.getSelectionModel().getSelectedItem());
     }
 
