@@ -7,15 +7,7 @@ import java.sql.SQLException;
 
 public class JDBCConnectionPool extends ObjectPool<Connection>
 {
-    private static JDBCConnectionPool INSTANCE;
     private final DatabaseConnector connectionProvider;
-
-    public synchronized static JDBCConnectionPool getInstance() throws IOException //I make the JDBC Connection Pool a Singleton.
-    {
-        if(INSTANCE == null)
-            INSTANCE = new JDBCConnectionPool();
-        return INSTANCE;
-    }
 
     JDBCConnectionPool() throws IOException
     {

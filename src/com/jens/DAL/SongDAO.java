@@ -1,7 +1,6 @@
 package com.jens.DAL;
 
 import com.jens.BE.Song;
-
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -16,7 +15,7 @@ public class SongDAO {
     public SongDAO() throws IOException {
         connectionPool = new JDBCConnectionPool();
     }
-    public List<Song> getAllSongs() throws IOException, SQLException {
+    public List<Song> getAllSongs() {
         ArrayList<Song> songs = new ArrayList<>();
 
         try(Connection connection = connectionPool.checkOut())
@@ -44,7 +43,7 @@ public class SongDAO {
         return songs;
     }
 
-    public Song createSong(String title, String artistName, int songLength, String category, String url, String urlImg ) throws SQLException {
+    public Song createSong(String title, String artistName, int songLength, String category, String url, String urlImg ) {
         String sql = "INSERT INTO SONG(Title, ArtistName, SongLength, Category, Url, urlImg) values (?,?,?,?,?,?);";
         Connection connection = connectionPool.checkOut();
         try(PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
@@ -69,7 +68,7 @@ public class SongDAO {
         return null;
     }
 
-    public void updateSong(Song song) throws SQLException {
+    public void updateSong(Song song){
         try(Connection connection = connectionPool.checkOut()){
             String sql = "UPDATE SONG SET Title=?, ArtistName=?, SongLength=?, Category=?, Url=?, urlImg=? WHERE Id=?;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);

@@ -1,15 +1,10 @@
 package com.jens.BLL;
 
 import com.jens.BE.Song;
-import com.jens.BLL.util.MusicPlayer;
 import com.jens.BLL.util.SongSearcher;
 import com.jens.DAL.SongDAO;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class SongManager{

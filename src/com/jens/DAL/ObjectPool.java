@@ -85,15 +85,4 @@ public abstract class ObjectPool<T>
         locked.put(t, now);
         return (t); //And hand over the new object to the client
     }
-
-    /**
-     * Releases the resource t for future use.
-     *
-     * @param t The resource
-     */
-    public synchronized void checkIn(T t)
-    {
-        locked.remove(t);
-        unlocked.put(t, System.currentTimeMillis());
-    }
 }

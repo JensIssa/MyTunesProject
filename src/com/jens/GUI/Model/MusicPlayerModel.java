@@ -3,15 +3,13 @@ package com.jens.GUI.Model;
 import com.jens.BE.Song;
 import com.jens.BLL.util.MusicPlayer;
 import javafx.scene.control.TableView;
-
-import java.io.IOException;
 import java.util.Timer;
 
 public class MusicPlayerModel
 {
     private MusicPlayer musicPlayer;
 
-    public MusicPlayerModel(Song song) throws IOException
+    public MusicPlayerModel(Song song)
     {
         musicPlayer = new MusicPlayer(song);
     }

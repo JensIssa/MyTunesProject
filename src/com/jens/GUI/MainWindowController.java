@@ -10,8 +10,6 @@ import com.jens.GUI.Model.PlaylistModel;
 import com.jens.GUI.Model.SongModel;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -25,10 +23,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import java.io.File;
-
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -136,13 +131,7 @@ public class MainWindowController implements Initializable {
             e.printStackTrace();
         }
 
-        volumeSlider.valueProperty().addListener(new InvalidationListener()
-        {
-            @Override public void invalidated(Observable observable)
-            {
-                musicPlayer.mediaPlayer.setVolume(volume);
-            }
-        });
+        volumeSlider.valueProperty().addListener(observable -> musicPlayer.mediaPlayer.setVolume(volume));
         searchTextField.textProperty().addListener((observable, oldValue, newValue)->{
             try
             {
@@ -233,7 +222,7 @@ public class MainWindowController implements Initializable {
      * @param actionEvent
      * @throws IOException
      */
-    public void editPlaylist(ActionEvent actionEvent) throws IOException {
+    public void editPlaylist(ActionEvent actionEvent) {
 
         Playlist selectedPlaylist = playlistTable.getSelectionModel().getSelectedItem();
         FXMLLoader root = new FXMLLoader(getClass().getResource("View/EditPlaylist.fxml"));

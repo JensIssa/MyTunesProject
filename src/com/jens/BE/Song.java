@@ -39,19 +39,9 @@ public class Song {
         return artistName;
     }
 
-    public void setArtistName(String artistName)
-    {
-        this.artistName = artistName;
-    }
-
     public int getSongLength()
     {
         return songLength;
-    }
-
-    public void setSongLength(int songLength)
-    {
-        this.songLength = songLength;
     }
 
     public String getCategory()
@@ -59,23 +49,12 @@ public class Song {
         return category;
     }
 
-    public void setCategory(String category)
-    {
-        this.category = category;
-    }
-
     public String getUrl(){
         return url;
-    }
-    public void setUrl(String url){
-        this.url = url;
     }
 
     public String getUrlImg(){
         return urlImg;
-    }
-    public void setUrlImg(String urlImg){
-        this.urlImg = urlImg;
     }
 
     @Override public String toString()

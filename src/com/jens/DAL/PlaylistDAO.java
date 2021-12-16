@@ -4,7 +4,6 @@ import com.jens.BE.Playlist;
 import com.jens.BE.Song;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 
-import javax.xml.transform.Result;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
@@ -91,7 +90,7 @@ public class PlaylistDAO {
         return allSongs;
     }
 
-    public Playlist createPlaylist(String name) throws SQLException {
+    public Playlist createPlaylist(String name) {
         String sql = "INSERT INTO PLAYLIST(Name) values (?);";
         Connection connection = connectionPool.checkOut();
         try(PreparedStatement preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
@@ -111,7 +110,7 @@ public class PlaylistDAO {
         return null;
     }
 
-    public void updatePlaylist(Playlist playlist) throws SQLException {
+    public void updatePlaylist(Playlist playlist) {
         try(Connection connection = connectionPool.checkOut()){
             String sql = "UPDATE PLAYLIST SET Name=? WHERE Id=?;";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -188,9 +187,5 @@ public class PlaylistDAO {
         } catch (SQLException ex) {
             System.out.println(ex);
         }
-        }
-
-
     }
-
-
+}

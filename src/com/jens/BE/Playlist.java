@@ -1,7 +1,5 @@
 package com.jens.BE;
 
-import javafx.collections.ObservableList;
-
 import java.util.List;
 
 public class Playlist {
