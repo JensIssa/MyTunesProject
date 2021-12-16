@@ -8,8 +8,6 @@ import com.jens.BLL.util.MusicPlayer;
 import com.jens.GUI.Model.MusicPlayerModel;
 import com.jens.GUI.Model.PlaylistModel;
 import com.jens.GUI.Model.SongModel;
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
