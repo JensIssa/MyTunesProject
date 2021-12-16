@@ -18,6 +18,12 @@ public class PlaylistModel {
     public PlaylistModel() throws IOException {
     }
 
+    /**
+     * Converts the data from the database into an observable list
+     * @return returns the observable list
+     * @throws SQLException
+     * @throws IOException
+     */
     public ObservableList<Playlist> listToObservablelist() throws SQLException, IOException {
 
         List<Playlist> tempPlaylist;
@@ -30,6 +36,12 @@ public class PlaylistModel {
         return playlists;
     }
 
+    /**
+     * Converts the list of songs in a playlist into an observable list
+     * @param id the id of the playlist the songs are in
+     * @return returns an observable list of song in a playlist
+     * @throws SQLException
+     */
     public ObservableList<Song> playlistSongsToObservablelist(int id) throws SQLException {
         List<Song> tempSongList;
         ObservableList<Song> songs = FXCollections.observableArrayList();
@@ -38,30 +50,50 @@ public class PlaylistModel {
         {
             songs.add(songList);
         }
-        System.out.println(tempSongList.size());
         return songs;
     }
 
+    /**
+     * Creates a playlist
+     * @param name name of the playlist
+     * @throws SQLException
+     */
     public void createPlaylist(String name) throws SQLException {
         playlistManager.createPlaylist(name);
     }
 
+    /**
+     * Deletes a playlist
+     * @param playlist the selected playlist to be deleted
+     */
     public void deletePlaylist(Playlist playlist){
         playlistManager.deletePlaylist(playlist);
     }
 
+    /**
+     * Adds a song to the playlist
+     * @param playlistId Selected playlists id
+     * @param songId Selecte songs id
+     */
     public void addSongToPlaylist(int playlistId, int songId){
         playlistManager.addSong(playlistId, songId);
     }
 
-    public void getAllPlaylistSongs(int playlistId) throws SQLException {
-        playlistManager.getAllPlaylistSongs(playlistId);
+    /**
+     * Deletes the Selected song from a playlist
+     * @param playlistId The playlists id
+     * @param songId The songs id
+     * @throws SQLException
+     */
+    public void deleteSongFromPlaylist(int playlistId, int songId) throws SQLException {
+        playlistManager.deleteSongFromPlaylist(playlistId, songId);
     }
 
-    public void removeSong(Song song){
-        playlistManager.removeSong(song);
-    }
-
+    /**
+     * Updates the playlists properties
+     * @param playlist The Selected playlist
+     * @throws SQLException
+     */
     public void updatePlaylist(Playlist playlist) throws SQLException {
         playlistManager.updatePlaylists(playlist);
     }
