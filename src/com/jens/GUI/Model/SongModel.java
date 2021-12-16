@@ -17,7 +17,6 @@ import java.util.Timer;
 public class SongModel {
 
     private SongManager songManager = new SongManager();
-    private MusicPlayer musicPlayer;
     private ObservableList<Song> songList;
 
     public SongModel() throws IOException {
