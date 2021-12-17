@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="900.0" styleClass="body-background" stylesheets="@../../../../../css/style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jens.GUI.MainWindowController">
+<AnchorPane prefHeight="600.0" prefWidth="900.0" styleClass="body-background" stylesheets="@../../../../../css/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jens.GUI.MainWindowController">
    <children>
       <TableView fx:id="playlistTable" layoutX="14.0" layoutY="41.0" onMouseClicked="#lookAtPlaylist" prefHeight="249.0" prefWidth="228.0">
         <columns>
@@ -42,7 +42,7 @@
          </padding>
       </ButtonBar>
       <ListView fx:id="songsInPlaylistListView" layoutX="250.0" layoutY="42.0" prefHeight="462.0" prefWidth="200.0" />
-      <TableView fx:id="songTable" layoutX="505.0" layoutY="41.0" prefHeight="462.0" prefWidth="381.0">
+      <TableView fx:id="songTable" layoutX="505.0" layoutY="41.0" onContextMenuRequested="#playSong" prefHeight="462.0" prefWidth="381.0">
         <columns>
           <TableColumn fx:id="songTitleColumn" prefWidth="123.0" text="Title" />
           <TableColumn fx:id="songArtistColumn" prefWidth="118.0" text="Artist" />
@@ -157,7 +157,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button layoutX="49.0" layoutY="8.0" mnemonicParsing="false" onAction="#stopSong" onMouseClicked="#setSongImage" prefHeight="25.0" prefWidth="31.0" style="-fx-background-radius: 300;">
+                  <Button layoutX="49.0" layoutY="8.0" mnemonicParsing="false" onAction="#stopSong" prefHeight="25.0" prefWidth="31.0" style="-fx-background-radius: 300;">
                      <graphic>
                         <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                            <image>
