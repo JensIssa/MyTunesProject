@@ -389,6 +389,7 @@ public class MainWindowController implements Initializable {
                 String currentArtist = (songTable.getSelectionModel().getSelectedItem()).getArtistName();
                 labelIsPlaying.setText("(" + actualSong + ")" + " Is Playing");
                 labelArtist.setText(currentArtist);
+                setSongImage();
                 isPlaying = true;
                 System.out.println("Work playing");
             } else if (isPlaying){
@@ -441,6 +442,7 @@ public class MainWindowController implements Initializable {
      */
     public void nextSong() {
         songTable.getSelectionModel().selectNext();
+
         playSong();
     }
 
