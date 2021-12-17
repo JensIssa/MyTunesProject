@@ -324,6 +324,7 @@ public class MainWindowController implements Initializable {
      */
     private void endOfMedia(){
         musicPlayerModel.endOfMedia(songTable);
+        isDone = true;
         cancelTimer();
     }
 
@@ -332,6 +333,7 @@ public class MainWindowController implements Initializable {
      */
     private void playMedia(){
         isPlaying = true;
+        isDone = false;
         beginTimer();
     }
 
