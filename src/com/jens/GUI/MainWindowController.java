@@ -76,6 +76,7 @@ public class MainWindowController implements Initializable {
     private MusicPlayer musicPlayer;
     private boolean isPlaying = false;
     private boolean isDone = true;
+    private boolean playlistFocus = false;
     private Object currentSong = null;
     private Timer timer;
     private TimerTask timerTask;
@@ -98,6 +99,7 @@ public class MainWindowController implements Initializable {
         playlistTimeColumn = new TableColumn<PlaylistManager, Integer>();
         songTable = new TableView();
         playlistTable = new TableView();
+        songsInPlaylistListView = new ListView<>();
 
     }
 
@@ -342,25 +344,36 @@ public class MainWindowController implements Initializable {
      */
     public void playSong(){
         try{
+            songTable.focusedProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue) {
+                    playlistFocus = false;
+                }
+            });
+
+            songsInPlaylistListView.focusedProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue) {
+                    playlistFocus = true;
+                }
+            });
+
             if (!isPlaying && isDone || !(currentSong == songTable.getSelectionModel().getSelectedItem())){
                 if (musicPlayer != null){
                     musicPlayer.mediaPlayer.dispose();
                     cancelTimer();
                 }
-                if(songsInPlaylistListView.getSelectionModel().getSelectedItem() != null){
+
+                if(songsInPlaylistListView.getSelectionModel().getSelectedItem() != null && playlistFocus == true){
                     System.out.println("playlist is focused");
                     musicPlayer = new MusicPlayer(songsInPlaylistListView.getSelectionModel().getSelectedItem());
                     musicPlayerModel = new MusicPlayerModel(songsInPlaylistListView.getSelectionModel().getSelectedItem());
                     currentSong = songsInPlaylistListView.getSelectionModel().getSelectedItem();
                 }
-                else if (songTable.getSelectionModel().getSelectedItem() != null){
+                else if (songTable.getSelectionModel().getSelectedItem() != null && playlistFocus == false){
                     System.out.println("songs is focused");
                     musicPlayer = new MusicPlayer(songTable.getSelectionModel().getSelectedItem());
                     musicPlayerModel = new MusicPlayerModel(songTable.getSelectionModel().getSelectedItem());
                     currentSong = songTable.getSelectionModel().getSelectedItem();
                 }
-                songTable.setFocusTraversable(true);
-                songsInPlaylistListView.setFocusTraversable(false);
                 musicPlayer.mediaPlayer.setOnPlaying(this::playMedia);
                 musicPlayer.mediaPlayer.setOnEndOfMedia(this::endOfMedia);
                 musicPlayer.playSong();
@@ -374,7 +387,7 @@ public class MainWindowController implements Initializable {
             } else if (isPlaying){
                 pauseSong();
                 System.out.println("Paused");
-            } else {
+            } else if(currentSong != songsInPlaylistListView.getSelectionModel().getSelectedItem()){
                 musicPlayer.playSong();
                 isPlaying = true;
                 System.out.println("Should play again");
