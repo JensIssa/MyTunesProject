@@ -339,6 +339,13 @@ public class MainWindowController implements Initializable {
         beginTimer();
     }
 
+    public void stopSong(){
+        musicPlayer.mediaPlayer.dispose();
+        cancelTimer();
+        isDone = true;
+        isPlaying = false;
+    }
+
     /**
      *
      */
@@ -387,7 +394,8 @@ public class MainWindowController implements Initializable {
             } else if (isPlaying){
                 pauseSong();
                 System.out.println("Paused");
-            } else if(currentSong != songsInPlaylistListView.getSelectionModel().getSelectedItem()){
+            } else
+            {
                 musicPlayer.playSong();
                 isPlaying = true;
                 System.out.println("Should play again");
