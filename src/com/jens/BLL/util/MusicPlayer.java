@@ -18,13 +18,24 @@ public class MusicPlayer
         mediaPlayer = new MediaPlayer(hit);
     }
 
+    /**
+     * Calls a function on the mediaplayer to play the song it has been givin
+     */
     public void playSong(){
         mediaPlayer.play();
     }
+
+    /**
+     * Calls a function on the mediaplayer to pause the song it is playing
+     */
     public void pauseSong(){
         mediaPlayer.pause();
     }
 
+    /**
+     * a function when runned will set autoplay to true and select the next ellement in the tableview giving with songs.
+     * @param tableView
+     */
     public void  endOfMedia(TableView<Song> tableView){
         mediaPlayer.setAutoPlay(true);
         if (mediaPlayer.isAutoPlay()){

@@ -335,7 +335,7 @@ public class MainWindowController implements Initializable {
     }
 
     /**
-     *
+     * Begin the timer for the progressbar.
      */
     private void playMedia(){
         isPlaying = true;
@@ -343,6 +343,9 @@ public class MainWindowController implements Initializable {
         beginTimer();
     }
 
+    /**
+     * Stops everthing with the mediaplayer, cancel the timer for progressbar and changes the image of the playbutton.
+     */
     public void stopSong(){
         musicPlayer.mediaPlayer.dispose();
         cancelTimer();
@@ -352,65 +355,84 @@ public class MainWindowController implements Initializable {
     }
 
     /**
-     *
+     * plays a song if no song is playing or pauses if a song is already playing.
      */
     public void playSong(){
         try{
+            //Checks if the song list is in focus
             songTable.focusedProperty().addListener((observable, oldValue, newValue) -> {
                 if (newValue) {
                     playlistFocus = false;
                 }
             });
-
+            //Checks if the playlist songs is in focus
             songsInPlaylistListView.focusedProperty().addListener((observable, oldValue, newValue) -> {
                 if (newValue) {
                     playlistFocus = true;
                 }
             });
-
+            //Checks if there is a song already playing and if it is the same song selected,
+            //if not it will stop the song and start playing a the new selected song
             if (!isPlaying && isDone || !(currentSong == songTable.getSelectionModel().getSelectedItem())){
                 if (musicPlayer != null){
                     musicPlayer.mediaPlayer.dispose();
                     cancelTimer();
                 }
-
+                //gets the info of the selected song in playlist
                 if(songsInPlaylistListView.getSelectionModel().getSelectedItem() != null && playlistFocus == true){
                     System.out.println("playlist is focused");
                     musicPlayer = new MusicPlayer(songsInPlaylistListView.getSelectionModel().getSelectedItem());
                     musicPlayerModel = new MusicPlayerModel(songsInPlaylistListView.getSelectionModel().getSelectedItem());
                     currentSong = songsInPlaylistListView.getSelectionModel().getSelectedItem();
                 }
+                //gets the info of the selected song in list
                 else if (songTable.getSelectionModel().getSelectedItem() != null && playlistFocus == false){
                     System.out.println("songs is focused");
                     musicPlayer = new MusicPlayer(songTable.getSelectionModel().getSelectedItem());
                     musicPlayerModel = new MusicPlayerModel(songTable.getSelectionModel().getSelectedItem());
                     currentSong = songTable.getSelectionModel().getSelectedItem();
                 }
+                //sets a function for when the mediaplayer starts playing
                 musicPlayer.mediaPlayer.setOnPlaying(this::playMedia);
+                //sets a function for when the mediaplayer song has finished
                 musicPlayer.mediaPlayer.setOnEndOfMedia(this::endOfMedia);
+                //plays the selected song
                 musicPlayer.playSong();
+                //sets the volume slider for volume
                 musicPlayer.mediaPlayer.setVolume(adjustVolume());
+                //gets info about the song
                 String actualSong = (songTable.getSelectionModel().getSelectedItem()).getTitle();
                 String currentArtist = (songTable.getSelectionModel().getSelectedItem()).getArtistName();
+                //sets the info to the user.
                 labelIsPlaying.setText("(" + actualSong + ")" + " Is Playing");
                 labelArtist.setText(currentArtist);
+                //gets the cover for the selected song
                 setSongImage();
                 isPlaying = true;
+                //sets the image for the playButton
                 shiftImage();
                 System.out.println("Work playing");
+              //Checks if a song is allready playing.
             } else if (isPlaying){
+                //Pauses the song playing
                 pauseSong();
+                //sets the image for the playButton
                 shiftImage();
                 System.out.println("Paused");
-            } else
-            {
+              //if a song is in the mediaplayer and is not done and is not playing it will resume that song
+            } else {
+                //Resume the song
                 musicPlayer.playSong();
                 isPlaying = true;
+                //sets the image for the playButton
                 shiftImage();
                 System.out.println("Should play again");
             }
+            //if a error happens
         } catch (Exception e){
+            //prints the error
             e.printStackTrace();
+            //sets the booleans to false and true so another can be played agian.
             isPlaying = false;
             isDone = true;
         }
@@ -428,41 +450,56 @@ public class MainWindowController implements Initializable {
     {
         try
         {
+            //Checks if a song is not playing
             if (!isPlaying){
+                //gets the link for the image
                 File img = new File("src/Icons/play.png");
                 InputStream isImage = new FileInputStream(img);
                 System.out.println(isImage);
+                //sets the image
                 playButtonImage.setImage(new Image(isImage));
             }
+            //Checks if a song is playing
             else if (isPlaying){
+                //gets the link for the image
                 File img = new File("src/Icons/pause.png");
                 InputStream isImage = new FileInputStream(img);
                 System.out.println(isImage);
+                //sets the image
                 playButtonImage.setImage(new Image(isImage));
             }
+          //error if the icons could not be found
         } catch (FileNotFoundException e){
             e.printStackTrace();
         }
     }
 
     public void beginTimer(){
+        //creates a new timer
         timer = new Timer();
+        //starts a timertask that runs on another thread.
         timerTask = new TimerTask() {
             @Override
             public void run() {
+                //gets the current time of the song
                 double current = musicPlayer.mediaPlayer.getCurrentTime().toSeconds();
+                //gets the total amount of the song
                 double end = musicPlayer.mediaPlayer.getMedia().getDuration().toSeconds();
+                //takes the two info and devides to get the progressbar to show how long in the song is has made it.
                 songProgressBar.setProgress(current/end);
-
+                //progressbar goes from 0 - 1 and if it reach 1 we stop the timer.
                 if(current/end == 1){
                     cancelTimer();
                 }
             }
         };
+        //sets how many times the progressbar should update the progress.
         timer.scheduleAtFixedRate(timerTask, 100, 100);
     }
 
+    //stops the timer so no resuachers are wasted.
     public void cancelTimer(){
+        //cancels the timer
         musicPlayerModel.cancelTimer(timer);
     }
 
@@ -471,7 +508,6 @@ public class MainWindowController implements Initializable {
      */
     public void nextSong() {
         songTable.getSelectionModel().selectNext();
-
         playSong();
     }
 

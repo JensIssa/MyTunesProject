@@ -27,32 +27,66 @@ public class PlaylistManager{
         return totaltime;
     }
 
+    /**
+     * asks the dao to add this song to this playlist
+     * @param playlistID
+     * @param songID
+     */
     public void addSong(int playlistID, int songID){
         playlistDAO.addSongToPlaylist(playlistID, songID);
     }
 
+    /**
+     * asks the dao to remove this song from this playlist
+     * @param playlistId
+     * @param songId
+     * @throws SQLException
+     */
     public void deleteSongFromPlaylist(int playlistId, int songId) throws SQLException {
         playlistDAO.deleteSongFromPlaylist(playlistId, songId);
     }
 
-    public void updatePlaylists(Playlist playlist) throws SQLException
+    /**
+     * ask the dao to update the playlist
+     * @param playlist
+     */
+    public void updatePlaylists(Playlist playlist)
     {
         playlistDAO.updatePlaylist(playlist);
     }
 
-    public void createPlaylist(String playlistName) throws SQLException
+    /**
+     * sends a string down to dao to create a song with that string as its name
+     * @param playlistName
+     */
+    public void createPlaylist(String playlistName)
     {
         playlistDAO.createPlaylist(playlistName);
     }
 
+    /**
+     * ask the dao to delete this playlist
+     * @param playlist
+     */
     public void deletePlaylist(Playlist playlist){
         playlistDAO.deletePlaylist(playlist);
     }
 
-    public List<Playlist> getAllPlaylist() throws SQLException, IOException
+    /**
+     * asks dao to get a list of all the playlist to return
+     * @return
+     */
+    public List<Playlist> getAllPlaylist()
     {
         return playlistDAO.getAllPlaylists();
     }
+
+    /**
+     * asks the dao to get all the songs in the given playlist with this ID
+     * @param playlistId
+     * @return
+     * @throws SQLException
+     */
     public List<Song> getAllPlaylistSongs(int playlistId) throws SQLException {
         return playlistDAO.getAllPlaylistSongs(playlistId);
     }
