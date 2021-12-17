@@ -20,11 +20,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import java.io.File;
+
+import java.io.*;
+
 import javafx.stage.Stage;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -44,6 +44,9 @@ public class MainWindowController implements Initializable {
     private TableColumn songTimeColumn;
     @FXML
     private TableView<Song> songTable;
+
+    @FXML
+    private ImageView playButtonImage;
 
     @FXML
     private Slider volumeSlider;
@@ -100,6 +103,7 @@ public class MainWindowController implements Initializable {
         songTable = new TableView();
         playlistTable = new TableView();
         songsInPlaylistListView = new ListView<>();
+        playButtonImage = new ImageView();
 
     }
 
@@ -344,6 +348,7 @@ public class MainWindowController implements Initializable {
         cancelTimer();
         isDone = true;
         isPlaying = false;
+        shiftImage();
     }
 
     /**
@@ -391,14 +396,17 @@ public class MainWindowController implements Initializable {
                 labelArtist.setText(currentArtist);
                 setSongImage();
                 isPlaying = true;
+                shiftImage();
                 System.out.println("Work playing");
             } else if (isPlaying){
                 pauseSong();
+                shiftImage();
                 System.out.println("Paused");
             } else
             {
                 musicPlayer.playSong();
                 isPlaying = true;
+                shiftImage();
                 System.out.println("Should play again");
             }
         } catch (Exception e){
@@ -414,6 +422,27 @@ public class MainWindowController implements Initializable {
     public void pauseSong(){
         musicPlayer.pauseSong();
         isPlaying = false;
+    }
+
+    private void shiftImage()
+    {
+        try
+        {
+            if (!isPlaying){
+                File img = new File("src/Icons/play.png");
+                InputStream isImage = new FileInputStream(img);
+                System.out.println(isImage);
+                playButtonImage.setImage(new Image(isImage));
+            }
+            else if (isPlaying){
+                File img = new File("src/Icons/pause.png");
+                InputStream isImage = new FileInputStream(img);
+                System.out.println(isImage);
+                playButtonImage.setImage(new Image(isImage));
+            }
+        } catch (FileNotFoundException e){
+            e.printStackTrace();
+        }
     }
 
     public void beginTimer(){

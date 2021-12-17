@@ -141,7 +141,7 @@
                   </Button>
                   <Button fx:id="playButton" layoutX="80.0" layoutY="8.0" mnemonicParsing="false" onAction="#playSong" onMouseClicked="#setSongImage" prefHeight="25.0" prefWidth="31.0" style="-fx-background-radius: 300;">
                      <graphic>
-                        <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="playButtonImage" fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../../Icons/play.png" />
                            </image>
