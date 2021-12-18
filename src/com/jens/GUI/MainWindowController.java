@@ -181,20 +181,26 @@ public class MainWindowController implements Initializable {
     public void editSong(ActionEvent actionEvent) {
 
         Song selectedSong = songTable.getSelectionModel().getSelectedItem();
-        FXMLLoader root = new FXMLLoader(getClass().getResource("View/EditSong.fxml"));
-        Scene mainWindowScene = null;
+        if(selectedSong == null){
+            error("Please choose a song to edit");
+        }
+        else {
+            FXMLLoader root = new FXMLLoader(getClass().getResource("View/EditSong.fxml"));
+            Scene mainWindowScene = null;
 
-        try{
-            mainWindowScene = new Scene(root.load());
+            try{
+                mainWindowScene = new Scene(root.load());
+            }
+            catch (IOException ioException){
+                ioException.printStackTrace();
+            }
+            Stage editSongStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            editSongStage.setScene(mainWindowScene);
+            EditSongController editSongController = root.getController();
+            editSongController.setSong(selectedSong);
+            editSongStage.show();
         }
-        catch (IOException ioException){
-            ioException.printStackTrace();
-        }
-        Stage editSongStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        editSongStage.setScene(mainWindowScene);
-        EditSongController editSongController = root.getController();
-        editSongController.setSong(selectedSong);
-        editSongStage.show();
+
     }
 
     /**
@@ -203,9 +209,14 @@ public class MainWindowController implements Initializable {
      * @throws IOException
      */
     public void deleteSong() throws SQLException, IOException {
-        songModel.deleteSong(songTable.getSelectionModel().getSelectedItem());
-        songTable.getItems().remove(songTable.getSelectionModel().getSelectedItem());
-        refreshSongList();
+        if (songTable.getSelectionModel().getSelectedItem() == null){
+            error("Please choose a song to delete");
+        }
+        else {
+            songModel.deleteSong(songTable.getSelectionModel().getSelectedItem());
+            songTable.getItems().remove(songTable.getSelectionModel().getSelectedItem());
+            refreshSongList();
+        }
     }
 
     /**
@@ -229,37 +240,52 @@ public class MainWindowController implements Initializable {
     public void editPlaylist(ActionEvent actionEvent) {
 
         Playlist selectedPlaylist = playlistTable.getSelectionModel().getSelectedItem();
-        FXMLLoader root = new FXMLLoader(getClass().getResource("View/EditPlaylist.fxml"));
-        Scene mainWindowScene = null;
+        if(selectedPlaylist == null){
+            error("Please choose a playlist to edit");
+        }
+        else {
+            FXMLLoader root = new FXMLLoader(getClass().getResource("View/EditPlaylist.fxml"));
+            Scene mainWindowScene = null;
 
-        try{
-            mainWindowScene = new Scene(root.load());
+            try {
+                mainWindowScene = new Scene(root.load());
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+            Stage editPlaylistStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            editPlaylistStage.setScene(mainWindowScene);
+            EditPlaylistController editPlaylistController = root.getController();
+            editPlaylistController.setPlaylist(selectedPlaylist);
+            editPlaylistStage.show();
         }
-        catch (IOException ioException){
-            ioException.printStackTrace();
-        }
-        Stage editPlaylistStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        editPlaylistStage.setScene(mainWindowScene);
-        EditPlaylistController editPlaylistController = root.getController();
-        editPlaylistController.setPlaylist(selectedPlaylist);
-        editPlaylistStage.show();
     }
 
     /**
      * Deletes the selected playlist
      */
     public void deletePlaylist(){
-        playlistModel.deletePlaylist(playlistTable.getSelectionModel().getSelectedItem());
-        playlistTable.getItems().remove(playlistTable.getSelectionModel().getSelectedItem());
+        if (playlistTable.getSelectionModel().getSelectedItem() == null){
+            error("Please select a playlist to remove");
+        }
+        else {
+            playlistModel.deletePlaylist(playlistTable.getSelectionModel().getSelectedItem());
+            playlistTable.getItems().remove(playlistTable.getSelectionModel().getSelectedItem());
+        }
     }
 
     /**
      * Adds the selected song to the selected playlist
      */
     public void addSongToPlaylist() {
+
         Song song = songTable.getSelectionModel().getSelectedItem();
         Playlist playlist = playlistTable.getSelectionModel().getSelectedItem();
-        playlistModel.addSongToPlaylist(playlist.getId(), song.getId());
+        if (song == null || playlist == null){
+            error("You have forgotten to select either a playlist to add to or a song to be added");
+        }
+        else {
+            playlistModel.addSongToPlaylist(playlist.getId(), song.getId());
+        }
     }
 
     /**
@@ -267,7 +293,13 @@ public class MainWindowController implements Initializable {
      */
     public void deletePlaylistSong() throws SQLException {
         playlistModel.deleteSongFromPlaylist(playlistTable.getSelectionModel().getSelectedItem().getId(), songsInPlaylistListView.getSelectionModel().getSelectedItem().getId());
-        songsInPlaylistListView.getItems().remove(songsInPlaylistListView.getSelectionModel().getSelectedItem());
+        if(playlistTable.getSelectionModel().getSelectedItem() == null || songsInPlaylistListView.getSelectionModel().getSelectedItem() == null)
+        {
+            error("Please select a playlist to be deleted from or a song to delete");
+        }
+        else {
+            songsInPlaylistListView.getItems().remove(songsInPlaylistListView.getSelectionModel().getSelectedItem());
+        }
     }
 
     /**
@@ -553,7 +585,7 @@ public class MainWindowController implements Initializable {
     }
 
     private void error(String text){
-        Alert alert = new Alert(Alert.AlertType.ERROR, text, ButtonType.YES);
+        Alert alert = new Alert(Alert.AlertType.ERROR, text, ButtonType.OK);
         alert.showAndWait();
     }
 
