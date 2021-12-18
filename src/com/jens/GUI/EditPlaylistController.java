@@ -66,5 +66,6 @@ public class EditPlaylistController {
      */
     public void setPlaylist(Playlist playlist){
         playlistName.setText(playlist.getPlaylistName());
+        playlistIdTxt.setText(Integer.toString(playlist.getId()));
     }
 }
