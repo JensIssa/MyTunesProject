@@ -446,6 +446,9 @@ public class MainWindowController implements Initializable {
         isPlaying = false;
     }
 
+    /**
+     * Changes the image on the play button to a pause image and reverse
+     */
     private void shiftImage()
     {
         try
@@ -474,6 +477,9 @@ public class MainWindowController implements Initializable {
         }
     }
 
+    /**
+     * Sets the progress on the progress bar
+     */
     public void beginTimer(){
         //creates a new timer
         timer = new Timer();
@@ -497,7 +503,9 @@ public class MainWindowController implements Initializable {
         timer.scheduleAtFixedRate(timerTask, 100, 100);
     }
 
-    //stops the timer so no resuachers are wasted.
+    /**
+     * Stops the timer so no resources are wasted.
+     */
     public void cancelTimer(){
         //cancels the timer
         musicPlayerModel.cancelTimer(timer);
