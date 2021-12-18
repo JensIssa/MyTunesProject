@@ -17,6 +17,11 @@ public class PlaylistManager{
     {
     }
 
+    /**
+     * @Jens HUSK AT FJERNE DET HER HVIS VI IKKE NÅR AT LAVE DET.
+     * @param time
+     * @return
+     */
     public int time(float time)
     {
         int totaltime = 0;
