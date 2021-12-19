@@ -584,6 +584,10 @@ public class MainWindowController implements Initializable {
         }
     }
 
+    /**
+     * a method to error handle when a user doesn't do the intended operation
+     * @param text text that gets shown to the user
+     */
     private void error(String text){
         Alert alert = new Alert(Alert.AlertType.ERROR, text, ButtonType.OK);
         alert.showAndWait();
