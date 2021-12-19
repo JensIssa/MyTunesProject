@@ -2,6 +2,10 @@ package com.jens.BE;
 
 import java.util.List;
 
+/**
+ * Playlist object that has all the parameters getting used through the project
+ * Also has all the getters and setters for all the stuff
+ */
 public class Playlist {
     private int id;
     private String playlistName;

@@ -15,6 +15,11 @@ public class SongDAO {
     public SongDAO() throws IOException {
         connectionPool = new JDBCConnectionPool();
     }
+
+    /**
+     *In this method we extract all songs from the songTable in the database to the program with the help of the SQL command SELECT*
+     * @return an arraylist of all songs
+     */
     public List<Song> getAllSongs() {
         ArrayList<Song> songs = new ArrayList<>();
 
@@ -43,6 +48,16 @@ public class SongDAO {
         return songs;
     }
 
+    /**
+     * Uses the SQL command INSERT INTO to create a new song in the database table song
+     * @param title of the specific song
+     * @param artistName the artist who created the song
+     * @param songLength the length of the song in seconds
+     * @param category the category the song
+     * @param url the filepath to the song .mp3 or .wav file
+     * @param urlImg the filepath to the url img
+     * @return
+     */
     public Song createSong(String title, String artistName, int songLength, String category, String url, String urlImg ) {
         String sql = "INSERT INTO SONG(Title, ArtistName, SongLength, Category, Url, urlImg) values (?,?,?,?,?,?);";
         Connection connection = connectionPool.checkOut();
@@ -68,6 +83,10 @@ public class SongDAO {
         return null;
     }
 
+    /**
+     * takes every parameter of an already existing song object and then sets the new values into an updated song
+     * @param song returns the value of the updated song
+     */
     public void updateSong(Song song){
         try(Connection connection = connectionPool.checkOut()){
             String sql = "UPDATE SONG SET Title=?, ArtistName=?, SongLength=?, Category=?, Url=?, urlImg=? WHERE Id=?;";
@@ -87,6 +106,10 @@ public class SongDAO {
         }
     }
 
+    /**
+     * checks where the ID of a specific song is and then deletes the song from the song table
+     * @param song song to be deleted
+     */
     public void deleteSong(Song song){
         try(Connection connection = connectionPool.checkOut()){
             String sql = "DELETE FROM SONG WHERE Id =?;";

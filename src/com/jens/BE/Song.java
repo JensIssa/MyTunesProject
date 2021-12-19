@@ -1,5 +1,8 @@
 package com.jens.BE;
-
+/**
+ * Song object that has all the parameters getting used through the project
+ * Also has all the getters and setters for all the stuff
+ */
 public class Song {
     private int id;
     private String title;

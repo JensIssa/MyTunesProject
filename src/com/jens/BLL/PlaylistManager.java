@@ -18,21 +18,6 @@ public class PlaylistManager{
     }
 
     /**
-     * @Jens HUSK AT FJERNE DET HER HVIS VI IKKE NÅR AT LAVE DET.
-     * @param time
-     * @return
-     */
-    public int time(float time)
-    {
-        int totaltime = 0;
-        //for loop for songs in database JENS PLEASE FIX
-        for(Song song : songList){
-            totaltime = totaltime + song.getSongLength();
-        }
-        return totaltime;
-    }
-
-    /**
      * asks the dao to add this song to this playlist
      * @param playlistID
      * @param songID
